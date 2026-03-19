@@ -94,7 +94,7 @@ function getBlockTransition(isPlaced: boolean, isShaking: boolean, index: number
     return { duration: 0.45, ease: "easeInOut" as const };
   }
   if (isPlaced) {
-    return { duration: 0.7, ease: [0.16, 1, 0.3, 1] };
+    return { duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] };
   }
   return {
     y: {
