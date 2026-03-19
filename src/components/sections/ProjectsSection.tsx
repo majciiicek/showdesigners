@@ -13,37 +13,37 @@ const projects = [
   {
     title: "Partnerská akrobacie",
     category: "Artistika",
-    image: "/images/akrobacie/20250226-IMG_7112-2.jpg",
+    image: "/images/akrobacie/20250226-IMG_7112-2.webp",
     size: "large",
   },
   {
     title: "Fire show",
     category: "Oheň & světlo",
-    image: "/images/fireshow/0IMG0244-1.jpg",
+    image: "/images/fireshow/0IMG0244-1.webp",
     size: "small",
   },
   {
     title: "Geisha",
     category: "Walking act",
-    image: "/images/geisha/Geisha_by matess.jpg",
+    image: "/images/geisha/Geisha_by matess.webp",
     size: "small",
   },
   {
     title: "Light show",
     category: "Oheň & světlo",
-    image: "/images/lightshow/5209_REPORTAZ_2025_10_09_UNIS_COMPUTER_BESEDNI_DUM_BRNO_OSLAVA_VYROCI_30LET_UNIS_COMPUTER_A_AXENTA_SA901928.jpg",
+    image: "/images/lightshow/5209_REPORTAZ_2025_10_09_UNIS_COMPUTER_BESEDNI_DUM_BRNO_OSLAVA_VYROCI_30LET_UNIS_COMPUTER_A_AXENTA_SA901928.webp",
     size: "large",
   },
   {
     title: "Lollipop show",
     category: "Artistika",
-    image: "/images/lollipop/Foto-03499.jpg",
+    image: "/images/lollipop/Foto-03499.webp",
     size: "small",
   },
   {
     title: "Plesová show",
     category: "Taneční vystoupení",
-    image: "/images/plesovashow/IMG_6317_foto_Jiří_Balát_edit.jpg",
+    image: "/images/plesovashow/IMG_6317_foto_Jiří_Balát_edit.webp",
     size: "large",
   },
 ];

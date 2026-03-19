@@ -33,7 +33,7 @@ export default function ONasPage() {
       {/* Hero — foto na pozadí */}
       <section className="relative min-h-[80vh] lg:min-h-[90vh] flex items-end overflow-hidden">
         <Image
-          src="/images/plesovashow/IMG_6317_foto_Jiří_Balát_edit.jpg"
+          src="/images/plesovashow/IMG_6317_foto_Jiří_Balát_edit.webp"
           alt=""
           fill
           className="object-cover object-center"
@@ -137,19 +137,19 @@ export default function ONasPage() {
               {
                 name: "Michal Halačka",
                 role: "Founder",
-                image: "/images/obchod/michalhalacka.jpg",
+                image: "/images/obchod/michalhalacka.webp",
                 phone: "+420 774 297 349",
               },
               {
                 name: "Alžběta Grée",
                 role: "Obchodní mág",
-                image: "/images/obchod/Alžběta Gree.jpg",
+                image: "/images/obchod/Alžběta Gree.webp",
                 phone: "+420 777 668 694",
               },
               {
                 name: "Tereza Adamusová",
                 role: "Kreativní ředitelka",
-                image: "/images/obchod/terezaadamusova.jpg",
+                image: "/images/obchod/terezaadamusova.webp",
                 phone: null,
               },
             ].map((person) => (

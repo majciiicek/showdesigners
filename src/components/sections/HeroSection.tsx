@@ -155,7 +155,7 @@ export default function HeroSection() {
         transition={{ duration: 1 }}
       >
         <Image
-          src="/images/fireshow/0IMG0280-Enhanced-NR.jpg"
+          src="/images/fireshow/0IMG0280-Enhanced-NR.webp"
           alt=""
           fill
           className="object-cover"

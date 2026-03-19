@@ -15,7 +15,7 @@ export default function ReferencePage() {
       {/* Hero — foto pozadí */}
       <section className="relative min-h-[80vh] lg:min-h-[90vh] flex items-end overflow-hidden">
         <Image
-          src="/images/kvetiny/GCAs_RedNight_Show_004.jpg"
+          src="/images/kvetiny/GCAs_RedNight_Show_004.webp"
           alt=""
           fill
           className="object-cover object-center"

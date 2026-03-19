@@ -13,25 +13,25 @@ const eventTypes = [
     title: "Korporátní akce",
     description:
       "Gala večeře, firemní večírky, team buildingy, produktové launche. Program, který odpovídá firemní kultuře a zanechá dojem.",
-    image: "/images/parovaakrobacie/ALLWYN_by_art4people_101225_2048px_JanHromadko-1119.jpg",
+    image: "/images/parovaakrobacie/ALLWYN_by_art4people_101225_2048px_JanHromadko-1119.webp",
   },
   {
     title: "Luxusní soukromé akce",
     description:
       "Svatby, VIP narozeniny, soukromé oslavy. Každý detail choreografován pro ten správný moment.",
-    image: "/images/plesovashow/IMG_6329_foto_Jiří_Balát_edit.jpg",
+    image: "/images/plesovashow/IMG_6329_foto_Jiří_Balát_edit.webp",
   },
   {
     title: "Festivaly a kulturní akce",
     description:
       "Doprovodné programy, dramaturgická spolupráce, scénografie prostoru. Víme, co drží pozornost velkého publika.",
-    image: "/images/dennishow/DSC05912.jpg",
+    image: "/images/dennishow/DSC05912.webp",
   },
   {
     title: "Hotely a resorty",
     description:
       "Pravidelný nebo jednorázový entertainment pro hosty. Show, která se stane součástí zážitku pobytu. Zvládneme i doprovodný program pro konference a firemní setkání.",
-    image: "/images/cyrwheel/GCAs_RedNight_Show_088.jpg",
+    image: "/images/cyrwheel/GCAs_RedNight_Show_088.webp",
   },
 ];
 
@@ -59,7 +59,7 @@ export default function SluzbaPage() {
       {/* Hero — foto na pozadí */}
       <section className="relative min-h-[80vh] lg:min-h-[90vh] flex items-end overflow-hidden">
         <Image
-          src="/images/zavesnaakrobacie/salo-kruh16.jpg"
+          src="/images/zavesnaakrobacie/salo-kruh16.webp"
           alt=""
           fill
           className="object-cover object-center"
