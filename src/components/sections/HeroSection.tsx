@@ -161,6 +161,8 @@ export default function HeroSection() {
           className="object-cover"
           style={{ filter: "blur(2px)" }}
           priority
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABwYFCP/EACAQAAIBBAMBAAAAAAAAAAAAAAECAAMEERIhMUFh/8QAFAEBAAAAAAAAAAAAAAAAAAAAAf/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AMoW+wj1KOx5k9tPiVKvuNvZyRcpDsxJJPlk7SxzljX2iIAiIgCIiAP/2Q=="
         />
         {/* Overlay — dark enough to keep blocks readable */}
         <div className="absolute inset-0 bg-black/60" />

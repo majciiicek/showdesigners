@@ -83,6 +83,8 @@ export default async function ReferenceDetailPage({ params }: Props) {
           fill
           className="object-cover object-center"
           priority
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABwYFCP/EACAQAAIBBAMBAAAAAAAAAAAAAAECAAMEERIhMUFh/8QAFAEBAAAAAAAAAAAAAAAAAAAAAf/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AMoW+wj1KOx5k9tPiVKvuNvZyRcpDsxJJPlk7SxzljX2iIAiIgCIiAP/2Q=="
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent" />
