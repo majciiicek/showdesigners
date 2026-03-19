@@ -18,7 +18,7 @@ export default function ReferencePage() {
           src="/images/kvetiny/GCAs_RedNight_Show_004.webp"
           alt=""
           fill
-          className="object-cover object-center"
+          className="object-cover object-top"
           priority
           placeholder="blur"
           blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABwYFCP/EACAQAAIBBAMBAAAAAAAAAAAAAAECAAMEERIhMUFh/8QAFAEBAAAAAAAAAAAAAAAAAAAAAf/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AMoW+wj1KOx5k9tPiVKvuNvZyRcpDsxJJPlk7SxzljX2iIAiIgCIiAP/2Q=="
