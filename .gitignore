@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# public/images — commit only WebP, ignore originals
+public/images/**/*.jpg
+public/images/**/*.JPG
+public/images/**/*.jpeg
+public/images/**/*.JPEG
+public/images/**/*.png
+public/images/**/*.PNG
+public/images/**/*.mp4
+public/images/**/*.MOV
+public/images/**/*.mov
+public/images/**/*.heic
+public/images/**/*.HEIC

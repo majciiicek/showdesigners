@@ -1,26 +1,117 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* =============================================
+   DESIGN TOKENS — Showdesigners brand system
+   ============================================= */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Brand colors */
+  --color-black: #000000;
+  --color-lime: #c8d400;
+  --color-white: #ffffff;
+  --color-gray-dark: #1a1a1a;
+  --color-gray-subtle: #2a2a2a;
+  --color-gray-muted: #666666;
+
+  /* Semantic aliases */
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+  --color-accent: #c8d400;
+
+  /* Typography */
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-sans: var(--font-body);
+
+  /* Spacing */
+  --spacing-section: 6rem;
+
+  /* Border radius */
+  --radius-card: 0.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* =============================================
+   BASE STYLES
+   ============================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* =============================================
+   TYPOGRAPHY UTILITIES
+   ============================================= */
+
+/* Display/headline font — Bebas Neue */
+.font-display {
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: 0.02em;
+}
+
+/* Fluid hero headline */
+.text-hero {
+  font-size: clamp(4rem, 12vw, 14rem);
+  line-height: 1.1;
+}
+
+/* Fluid display headline */
+.text-display {
+  font-size: clamp(2.5rem, 6vw, 7rem);
+  line-height: 1.1;
+}
+
+/* =============================================
+   SELECTION COLOR
+   ============================================= */
+
+::selection {
+  background-color: #c8d400;
+  color: #000000;
+}
+
+/* =============================================
+   BUTTON STYLES
+   ============================================= */
+
+/* Hover effect — lime button (add alongside existing Tailwind classes) */
+.btn-hover-lime {
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+.btn-hover-lime:hover {
+  background-color: #d9e600 !important;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 35px rgba(200, 212, 0, 0.4);
+}
+.btn-hover-lime:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: none;
+}
+
+/* Hover effect — dark button on lime background */
+.btn-hover-dark {
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+.btn-hover-dark:hover {
+  background-color: #1a1a1a !important;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+}
+.btn-hover-dark:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: none;
 }

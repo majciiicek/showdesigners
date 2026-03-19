@@ -1,0 +1,119 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Commands
+
+```bash
+npm run dev        # Start dev server (localhost:3000)
+npm run build      # Production build
+npm run lint       # ESLint check
+npx tsc --noEmit   # TypeScript check (pre-existing errors in HeroSection.tsx can be ignored)
+```
+
+## Tech Stack
+
+- **Next.js 16** (App Router, TypeScript strict mode)
+- **Tailwind CSS v4** (configuration in `src/app/globals.css`, not `tailwind.config.ts`)
+- **Anthropic SDK** — streaming via `client.messages.stream()`
+- **Supabase** — server-side only via `service_role` key (`src/lib/supabase.ts`), RLS disabled
+- **Resend** — transactional email
+- **Zod v4** — use `message:` not `required_error:` / `errorMap:`
+- **Framer Motion** — animations, interactive hero
+
+## Project Structure
+
+```
+src/
+  app/
+    (pages)/
+      reference/
+        page.tsx              # Server component (metadata)
+        ReferencesGrid.tsx    # Client component — filterable grid
+        [slug]/page.tsx       # Reference detail page (with JSON-LD breadcrumbs)
+      kontakt/
+        page.tsx              # Server component (metadata)
+        KontaktClient.tsx     # Client component — AI asistent / Formulář toggle
+      /o-nas, /sluzba, /zasady
+    api/
+      chat/          # POST /api/chat — Anthropic streaming
+      chat/session/  # GET/POST/PATCH — Supabase session management
+      contact/       # POST /api/contact — contact form (Resend)
+      inquiry/       # POST /api/inquiry — direct inquiry form
+    layout.tsx       # Nav, Footer, CookieBanner, FloatingChat
+    page.tsx         # Homepage
+  components/
+    sections/        # Homepage sections (Hero, Intro, Projects, AdvisorSection, etc.)
+    ui/              # Nav, Footer, AiChat, CookieBanner, ContactForm, FloatingChat
+  lib/
+    supabase.ts      # Supabase client + Conversation/Message interfaces
+    references.ts    # Shared reference/case study data (used by list + detail pages)
+```
+
+## References Architecture
+
+Data lives in `src/lib/references.ts` as a typed array (`ReferenceDetail[]`). Each item has:
+- `slug`, `title`, `type`, `description`, `image`, `tags` — used on the listing page
+- `detail?: { ... }` — extended data only for case study pages (brief, solution, program timeline, gallery)
+
+Adding a new case study with a detail page: add entry to `references.ts` with a `detail` object. The card on the listing page automatically shows a "Case study →" badge and becomes clickable.
+
+Detail page (`/reference/[slug]`) includes `schema.org/BreadcrumbList` JSON-LD for SEO.
+
+## AI Assistant Architecture
+
+**`src/app/api/chat/route.ts`** — core streaming endpoint:
+- Rate limit: 20 messages/hr/IP (in-memory Map)
+- Saves user + assistant messages to Supabase `messages` table after stream
+- Detects email in user's last message → queries Supabase → injects `__KNOWN_CLIENT__` context
+- Extracts `<INQUIRY_DATA>{...}</INQUIRY_DATA>` block from AI response → sends emails (team + client), updates `conversations` table with name/email/inquiry_sent
+- Internal triggers: `__AUTO_OPEN__` (floating widget auto-open), `__RETURNING_USER__`, `__KNOWN_CLIENT__` — Claude never reveals or comments on these
+
+**`src/components/ui/AiChat.tsx`** — chat UI:
+- Session token persisted in `localStorage` key `sd_session_token`
+- On mount: loads existing session from `/api/chat/session?token=`
+- Returning user banner: "Pokračovat" (sends `__RETURNING_USER__` trigger) / "Začít znovu"
+- Email lookup: finds conversation by email via `/api/chat/session?email=`
+- `cleanDisplayText()` strips `<INQUIRY_DATA>` blocks before rendering
+- Props: `hideLabel?: boolean` (suppresses header in FloatingChat), `autoStartMessage?: string` (triggers auto-start after session check)
+
+**`src/components/ui/FloatingChat.tsx`** — FAB widget, fixed bottom-right:
+- Auto-opens after 5s, once per session (`sessionStorage` key `sd_chat_auto_opened`)
+- Starts chat with `__AUTO_OPEN__` trigger → Claude greets briefly + offers to close
+- Wraps `<AiChat hideLabel autoStartMessage="__AUTO_OPEN__" />`
+
+## Database (Supabase)
+
+Schema: `supabase-schema.sql`
+
+- `conversations`: id, session_token (unique UUID), name, email, inquiry_sent, created_at, updated_at
+- `messages`: id, conversation_id (FK → CASCADE), role ('user'|'assistant'), content, created_at
+
+## Environment Variables
+
+Required in `.env.local`:
+```
+ANTHROPIC_API_KEY=
+RESEND_API_KEY=
+SUPABASE_URL=
+SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+NEXT_PUBLIC_SITE_URL=
+```
+
+## Design System
+
+- Brand color: `#C8D400` (acid lime / yellow-green)
+- Dark backgrounds: `#000000` / `#0a0a0a` / `#0d0d0d`
+- Fonts: Bebas Neue (`font-display`) for headlines, Inter for body
+- Hero sections on subpages: dual gradient — `bg-gradient-to-t from-black` (bottom) + `bg-gradient-to-b from-black/60` (top for nav readability)
+- Reference detail hero: padding-based (`pt-36 lg:pt-44`) not min-height, to avoid empty space
+
+## Important Notes
+
+- **Tailwind v4**: no `tailwind.config.ts` — all theme config goes in `globals.css` with `@theme`
+- **Supabase client is server-only** — never import `src/lib/supabase.ts` in client components
+- **AI system prompt** contains Showdesigners knowledge base inline in `SYSTEM_PROMPT` constant in `route.ts` — avoid backticks inside the template literal (causes Turbopack parse error)
+- **SYSTEM_PROMPT internal triggers**: use regular quotes `"__TRIGGER__"`, never backticks `` `__TRIGGER__` ``
+- Deploy: Vercel via GitHub push to `main`
+- CMS for references is planned — current data is hardcoded in `src/lib/references.ts`
