@@ -33,7 +33,7 @@ export default function CookieBanner() {
     <div
       role="dialog"
       aria-label="Souhlas s cookies"
-      className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 md:max-w-md z-50"
+      className="fixed bottom-4 left-4 right-4 md:left-1/2 md:-translate-x-1/2 md:bottom-6 md:max-w-md z-50"
     >
       <div className="bg-[#111111] border border-white/10 rounded-lg p-5 shadow-2xl">
         <p className="text-white/80 text-sm leading-relaxed mb-4">

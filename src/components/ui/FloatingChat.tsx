@@ -18,7 +18,7 @@ export default function FloatingChat() {
     const t = setTimeout(() => {
       setIsOpen(true);
       try { sessionStorage.setItem(AUTO_OPEN_KEY, "1"); } catch { /* ignore */ }
-    }, 5000);
+    }, 20000);
 
     return () => clearTimeout(t);
   }, []);
