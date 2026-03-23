@@ -30,10 +30,10 @@ export const references: ReferenceDetail[] = [
     title: "30. výročí UNIS Computer",
     type: "Korporátní akce",
     description:
-      "Program pro 30. výročí firmy — světelná show jako hlavní číslo, doplněná dekorativními walking acts po celou dobu večeře.",
+      "Program pro 30. výročí firmy — světelná a laserová show s projekcemi na míru, zrcadlový pár a walking acts pro 120 hostů v Besedním domě v Brně.",
     image:
       "/images/lightshow/5250_REPORTAZ_2025_10_09_UNIS_COMPUTER_BESEDNI_DUM_BRNO_OSLAVA_VYROCI_30LET_UNIS_COMPUTER_A_AXENTA_S9203495.webp",
-    tags: ["Lightshow", "Walking acts"],
+    tags: ["Lightshow", "Laser show", "Walking acts", "Projekce na kostýmy"],
     detail: {
       subtitle: "Galavečer pro 120 hostů v Besedním domě v Brně",
       date: "Říjen 2025",
@@ -42,8 +42,8 @@ export const references: ReferenceDetail[] = [
       brief:
         "Klient slavil 30 let existence — výjimečné jubileum, které si zasluhovalo víc než standardní večírek. Chtěli program, který bude skutečně reprezentativní, vstřičný vůči smíšenému publiku (management i technické týmy) a zakončí večer silným emocionálním momentem. Zároveň bylo důležité, aby entertainment nebyl v konfliktu se slavnostní atmosférou a proslovy.",
       solution:
-        "Navrhli jsme dramaturgii, která respektuje tok večera. V první části večeře jsme nasadili elegantní dekorativní walking acts — hosté je mohli volně sledovat mezi stoly, aniž by přerušovaly konverzace. Hlavní číslo večera — světelná show synchronizovaná na vlastní soundtrack — bylo zařazeno přesně po poslední zdravici, jako přirozené vyvrcholení. Celý program jsme koordinovali s cateringem a AV technikou, takže večer plynul bez záseků.",
-      quote: "Světelná show jako hlavní číslo večera — synchronizovaná na vlastní soundtrack, přesně ve chvíli, kdy ji hosté čekali nejvíc.",
+        "Walking acts provázeli hosty od prvního momentu — vítali je u vstupu, korzovali mezi nimi, bavili a fotili se s nimi ve fotokoutku. Vrcholem večera byla světelná a laserová show s projekcemi na míru: milníky 30leté historie firmy, rebranding loga i projekce přímo na kostýmy umělců. Celou show provázel speciální voice over, který příběh firmy vyprávěl. Na závěr zrcadlový pár roztančil sál krátkým tanečním výstupem — a párty mohla začít.",
+      quote: "30 let historie firmy promítnuté na kostýmy umělců — show, která propojila minulost značky s energií párty.",
       program: [],
       showDesigner: {
         name: "Michal Halačka",
@@ -73,7 +73,7 @@ export const references: ReferenceDetail[] = [
     description:
       "Celodenní program s vesmírným tématem pro 400 hostů na Pražské náplavce — walking acts, brass band, akrobacie, fire show a LED Cryoman.",
     image: "/images/second-foundation/DSCF4662.webp",
-    tags: ["Walking acts", "Brass band", "Fire show", "Akrobacie", "Family day"],
+    tags: ["Walking acts", "Brass band", "Fire show", "Akrobacie", "Moderátor", "360° video"],
     detail: {
       subtitle: "Firemní family day pro 400 hostů na Pražské náplavce",
       date: "Září 2023",
@@ -82,19 +82,34 @@ export const references: ReferenceDetail[] = [
       brief:
         "Klient chtěl zorganizovat celodenní family day s vesmírným tématem — akci, která zabaví děti i dospělé zároveň a vytvoří nezapomenutelnou atmosféru pod otevřeným nebem.",
       solution:
-        "Navrhli jsme celodenní dramaturgii s vesmírným leitmotivem. Přes den procházely areálem vesmírné walking acts a hostesky, brass band Groove Army roztančil celé místo, pro děti byl připraven žonglér s balónky a face painting. Večer gradoval LED Cryomanem a fire show jako finálním vrcholem celé akce.",
+        "Celý den prostupovalo jedno téma — vesmír. Vesmírné walking acts a hostesky v kostýmech korzovaly areálem, žonglér modeloval vesmírné rakety z balónků, face painting maloval planety a galaxie. Brass band Groove Army roztančil celé místo. Moderátor držel dramaturgický oblouk celého dne a 360° video point byl jednou z velmi vytížených atrakcí. Večer gradoval LED Cryomanem a fire show jako finálním vrcholem. Nad rámec programu jsme přes naše partnery zajistili i ozvučení akce — protože pro naše klienty uděláme prostě o krok víc.",
       quote: "400 hostů, celý den, vesmírné téma — a fire show jako finále, na které se nezapomíná.",
       program: [],
       gallery: [
-        "/images/second-foundation/DSCF4241.webp",
-        "/images/second-foundation/2023-09-24_6-uprava.webp",
         "/images/second-foundation/DSCF4662.webp",
         "/images/second-foundation/DSCF4704.webp",
+        "/images/second-foundation/2023-09-24_1.webp",
+        "/images/second-foundation/DSCF4241.webp",
         "/images/second-foundation/DSCF4496.webp",
+        "/images/second-foundation/2023-09-24_2.webp",
         "/images/second-foundation/DSCF4569.webp",
         "/images/second-foundation/DSCF4317.webp",
+        "/images/second-foundation/2023-09-24_3.webp",
         "/images/second-foundation/DSCF2147.webp",
         "/images/second-foundation/DSCF4874.webp",
+        "/images/second-foundation/2023-09-24_4.webp",
+        "/images/second-foundation/DSCF4380.webp",
+        "/images/second-foundation/DSCF4449.webp",
+        "/images/second-foundation/2023-09-24_5.webp",
+        "/images/second-foundation/DSCF4643.webp",
+        "/images/second-foundation/DSCF4685.webp",
+        "/images/second-foundation/2023-09-24_7.webp",
+        "/images/second-foundation/DSCF4711.webp",
+        "/images/second-foundation/DSCF2371.webp",
+        "/images/second-foundation/2023-09-24_8.webp",
+        "/images/second-foundation/DSCF4854.webp",
+        "/images/second-foundation/DSCF2186.webp",
+        "/images/second-foundation/2023-09-24_9.webp",
       ],
       showDesigner: {
         name: "Bára Adamušová",
@@ -108,9 +123,9 @@ export const references: ReferenceDetail[] = [
     title: "Beats for Love",
     type: "Festival",
     description:
-      "Doprovodný program pro jeden z největších českých elektronických festivalů — fire show a tribal walking acts pro 20 000 návštěvníků.",
+      "Doprovodný program pro jeden z největších českých elektronických festivalů — ohnivé, květinové a alien walking acts pro 20 000 návštěvníků.",
     image: "/images/beats4love/514323960_1280871783405571_4616947194946571481_n.webp",
-    tags: ["Fire show", "Walking acts", "Festival"],
+    tags: ["Fire walking acts", "Květinové walking acts", "Alien walking acts"],
     detail: {
       subtitle: "Doprovodný program pro 20 000 návštěvníků v Ostravě",
       date: "2025",
@@ -119,18 +134,35 @@ export const references: ReferenceDetail[] = [
       brief:
         "Organizátoři festivalu hledali doprovodný program, který doplní elektronickou hudbu a vytvoří vizuálně silné momenty mezi pódiemi. Program musel fungovat v exteriéru, ve dne i v noci, a oslovit široké publikum.",
       solution:
-        "Nasadili jsme fire show s tribal tematikou — silné vizuální číslo ideální pro festivalové prostředí. Walking acts v originálních kostýmech procházely mezi návštěvníky a vytvářely organické, neskriptované momenty po celý den.",
-      quote: "20 000 lidí, jeden festival — a tribal fire show, která zastavila dav.",
+        "Na Beats4Love nebyly žádné klasické show — vše stálo na walking acts a jejich herecké přítomnosti. Ohnivé walking acts procházely festivalem a všude kolem sebe přitahovaly pozornost. Květinové ženy s LED růžemi obcházely VIP zónu a živé růže rozdávaly přítomným ženám — reakce předčily očekávání. Alien walking acts obývali space zónu a po setmění bavili návštěvníky svými světelnými efekty. Klíč k úspěchu byl charakter: každá role byla čistě herecká a nesměla se ani na chvilku stát civilní. Celkem 9 umělců doplňovalo atmosféru festivalu — nenápadně, ale nezaměnitelně.",
+      quote: "20 000 lidí, tři světy — oheň, květiny a vesmír. Všechno walking acts, žádná show. A přesto nezapomenutelné.",
       program: [],
+      showDesigner: {
+        name: "Michal Halačka",
+        photo: "/images/obchod/michalhalacka.webp",
+        bio: "Michal byl show designerem na místě — koordinoval 9 umělců napříč festivalem a dohlížel na to, aby každý charakter zůstal v roli po celou dobu akce.",
+      },
       gallery: [
+        "/images/beats4love/518228813_1289115189247897_9001348068671658612_n.webp",
+        "/images/beats4love/518346991_1289637875862295_5149584555201831834_n.webp",
         "/images/beats4love/514323960_1280871783405571_4616947194946571481_n.webp",
-        "/images/beats4love/514533974_1280873206738762_2765605584119081362_n.webp",
+        "/images/beats4love/517062740_1287315082761241_1794878994026850395_n.webp",
+        "/images/beats4love/521383584_1295789908580425_3743370139646895029_n.webp",
         "/images/beats4love/515066035_1280872003405549_7023314359884496701_n.webp",
-        "/images/beats4love/515092361_1147352534096587_4320891036437574728_n.webp",
+        "/images/beats4love/517160172_1287313889428027_865632768298332395_n.webp",
+        "/images/beats4love/522638628_1295785341914215_8445266688160647552_n.webp",
         "/images/beats4love/515248490_1281846076641475_3545357660649189530_n.webp",
-        "/images/beats4love/515273131_1147352510763256_4167051802346195294_n.webp",
-        "/images/beats4love/515299455_1281844249974991_9089787568378980497_n.webp",
+        "/images/beats4love/518137249_1289630285863054_1841570846223595874_n.webp",
+        "/images/beats4love/521638891_1295790831913666_468567995605328117_n.webp",
         "/images/beats4love/515405640_1147352700763237_8243366955638978700_n.webp",
+        "/images/beats4love/518314112_1291990868960329_8994433300064659951_n.webp",
+        "/images/beats4love/522720052_1295822821910467_6193967126862211223_n.webp",
+        "/images/beats4love/515743289_1283464646479618_3543072411667212634_n.webp",
+        "/images/beats4love/519099548_1291977892294960_6067855359277094902_n.webp",
+        "/images/beats4love/523786449_1295790578580358_4112649924785802574_n.webp",
+        "/images/beats4love/516098530_1147352474096593_6329556014708418711_n.webp",
+        "/images/beats4love/520574965_1290558052436944_8308382296754324717_n.webp",
+        "/images/beats4love/IMG_4355.webp",
       ],
     },
   },
@@ -141,7 +173,7 @@ export const references: ReferenceDetail[] = [
     description:
       "Program pro městskou slavnost v historickém centru Kašperských Hor — mirror couple walking acts a doprovodný program pro 1 000 návštěvníků.",
     image: "/images/kasperskehory/2025 09 13 - 14 48 17 - 133.webp",
-    tags: ["Walking acts", "Mirror couple", "Venkovní akce"],
+    tags: ["Walking acts", "Mirror couple"],
     detail: {
       subtitle: "Doprovodný program pro 1 000 návštěvníků v historickém centru",
       date: "Září 2025",
@@ -172,7 +204,7 @@ export const references: ReferenceDetail[] = [
     description:
       "Celovečerní program pro mezinárodní gala večeři 300 hostů v Praze — vzdušná akrobacie a taneční vystoupení v luxusním sálu.",
     image: "/images/wano/BMG_Prague_Day-4-Tue-Galadinner_by-adam-costey-O-101.webp",
-    tags: ["Akrobacie", "Taneční show", "Gala večeře"],
+    tags: ["Akrobacie", "Taneční show"],
     detail: {
       subtitle: "Mezinárodní gala večeře pro 300 hostů v Praze",
       date: "2024",
@@ -203,7 +235,7 @@ export const references: ReferenceDetail[] = [
     description:
       "Program pro firemní akci 800 hostů v Trojském zámku — historické walking acts v barokních kostýmech ladící s prostředím.",
     image: "/images/watroja/15062024_JTPrag24_559.webp",
-    tags: ["Walking acts", "Historické kostýmy", "Zámek"],
+    tags: ["Walking acts", "Historické kostýmy"],
     detail: {
       subtitle: "Firemní akce pro 800 hostů v Trojském zámku",
       date: "Červen 2024",
@@ -234,7 +266,7 @@ export const references: ReferenceDetail[] = [
     description:
       "Celodenní program pro 2 000 hostů v Opavě — dětský program, bubliny, brass band a artistika pro firemní family day.",
     image: "/images/witzenmann/witzenmann-tribalka-1.webp",
-    tags: ["Family day", "Dětský program", "Brass band", "Artistika"],
+    tags: ["Dětský program", "Brass band", "Artistika"],
     detail: {
       subtitle: "Firemní family day pro 2 000 hostů v Opavě",
       date: "Červen 2023",

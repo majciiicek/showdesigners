@@ -251,17 +251,20 @@ export default async function ReferenceDetailPage({ params }: Props) {
       {d.showDesigner && (
         <section className="py-16 lg:py-20 bg-[#0a0a0a] border-t border-white/5">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-8">
+            <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-2">
               Show designer na místě
             </p>
-            <div className="flex items-center gap-6">
+            <p className="text-white/30 text-sm mb-8">
+              Každá akce má přiděleného show designera — poprvé se potkáte po podpisu, a od té chvíle je to váš člověk na místě.
+            </p>
+            <div className="flex items-start gap-6">
               {d.showDesigner.photo ? (
                 <Image
                   src={d.showDesigner.photo}
                   alt={d.showDesigner.name}
                   width={80}
                   height={80}
-                  className="w-20 h-20 rounded-full object-cover flex-shrink-0"
+                  className="w-20 h-20 rounded-full object-cover object-top flex-shrink-0 mt-6"
                 />
               ) : (
                 <div className="w-20 h-20 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">

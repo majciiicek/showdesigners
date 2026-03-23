@@ -61,7 +61,7 @@ export default function Nav() {
               alt="Showdesigners"
               width={220}
               height={56}
-              className="h-9 lg:h-10 w-auto"
+              className="h-11 lg:h-13 w-auto"
               priority
             />
           </Link>

@@ -6,7 +6,7 @@ import { motion, useInView } from "framer-motion";
 const statements = [
   { line1: "NÁVRH", line2: "NA MÍRU." },
   { line1: "PŘÍBĚH,", line2: "NE PROGRAM." },
-  { line1: "JEDEN ČLOVĚK.", line2: "CELÝ PROJEKT." },
+  { line1: "VÁŠ SHOW DESIGNER.", line2: "CELÁ AKCE." },
   { line1: "SHOW", line2: "V KONTEXTU." },
 ];
 

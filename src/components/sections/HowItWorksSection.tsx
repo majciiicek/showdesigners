@@ -10,19 +10,19 @@ const steps = [
     number: "01",
     title: "Vize",
     description:
-      "Řeknete nám, co chcete, aby hosté cítili. Jaká má být atmosféra, co se má stát. Nepotřebujeme specifikaci — stačí nám záměr.",
+      "Řeknete nám, co chcete, aby hosté cítili. Náš obchodní tým vás provede od prvního hovoru až po podpis — žádné formuláře, žádné katalogy.",
   },
   {
     number: "02",
     title: "Příběh",
     description:
-      "Náš kreativní tým sestaví dramaturgii celého večera — ne jen program za programem, ale příběh celé akce s napětím a vrcholy, které společně ladí.",
+      "Kreativní tým sestaví dramaturgii celé akce — ne jen program za programem, ale příběh s napětím a vrcholy, které společně ladí.",
   },
   {
     number: "03",
     title: "Den D",
     description:
-      "Show designer je fyzicky na místě a řídí celý program. Vy si užíváte akci — přesně tak, jak jsme si to naplánovali.",
+      "Poprvé se potkáte se svým show designerem. Je fyzicky na místě, řídí celý program a řeší vše operativně. Vy si užíváte akci.",
   },
 ];
 
@@ -109,7 +109,7 @@ export default function HowItWorksSection() {
             Začít první krok
           </Link>
           <span className="text-white/40 text-sm">
-            Váš show designer se ozve do 24 hodin.
+            Náš obchodní tým se ozve do 24 hodin.
           </span>
         </motion.div>
 

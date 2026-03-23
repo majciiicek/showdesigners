@@ -303,9 +303,9 @@ export default function HeroSection() {
                 transition={{ delay: 0.25, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 className="font-display text-display text-white mb-3"
               >
-                TOHLE STAVÍME
+                SHOWDESIGNERS TO
                 <br />
-                <span className="text-[#C8D400]">ZA VÁS</span>
+                <span className="text-[#C8D400]">POSTAVÍ ZA VÁS</span>
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0 }}

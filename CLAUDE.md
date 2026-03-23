@@ -116,6 +116,19 @@ NEXT_PUBLIC_SITE_URL=
 - Hero sections on subpages: dual gradient — `bg-gradient-to-t from-black` (bottom) + `bg-gradient-to-b from-black/60` (top for nav readability)
 - Reference detail hero: padding-based (`pt-36 lg:pt-44`) not min-height, to avoid empty space
 
+## Organizační struktura Showdesigners
+
+Showdesigners je zastřešující projekt s těmito týmy:
+
+- **Obchodní tým** — první kontakt s klientem, prodej, poptávky
+- **CMO** — vede celý projekt, strategie
+- **Kreativní tým** — navrhuje koncepty a dramaturgii *před* akcí, připravuje program
+- **Tým show designerů** — fyzicky přítomni *na akci*, koordinují průběh, komunikují s umělci
+
+**Klíčové pravidlo:** Klient se poprvé potká se svým show designerem až **po podpisu objednávky**. Do té doby komunikuje výhradně s obchodním týmem. Show designer nikdy nepřipravuje dramaturgii — to dělá kreativní tým.
+
+Toto rozlišení je důležité pro texty na webu, v referencích i v AI asistentovi — nikdy nepsat, že show designer "navrhl program" nebo "připravil dramaturgii".
+
 ## Important Notes
 
 - **Tailwind v4**: no `tailwind.config.ts` — all theme config goes in `globals.css` with `@theme`
