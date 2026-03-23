@@ -19,9 +19,9 @@ const securityHeaders = [
       "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // unsafe-eval potřebuje Next.js/Framer Motion
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: blob:",
+      "img-src 'self' data: blob: https://cdn.sanity.io",
       "media-src 'self'",
-      "connect-src 'self'",
+      "connect-src 'self' https://api.sanity.io https://*.apicdn.sanity.io wss://*.sanity.io",
       "frame-src 'none'",
       "frame-ancestors 'none'",
       "base-uri 'self'",
@@ -31,11 +31,27 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
+    ],
+  },
   async headers() {
     return [
       {
-        // Hlavičky platí pro všechny stránky
-        source: "/(.*)",
+        // Studio route — bez CSP omezení (Sanity Studio potřebuje volný přístup)
+        source: "/studio/:path*",
+        headers: [
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+        ],
+      },
+      {
+        // Hlavičky platí pro všechny ostatní stránky
+        source: "/((?!studio).*)",
         headers: securityHeaders,
       },
     ];

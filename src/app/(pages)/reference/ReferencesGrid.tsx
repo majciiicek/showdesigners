@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { references } from "@/lib/references";
+import type { SanityReference } from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
 
 const typeColors: Record<string, string> = {
   "Korporátní akce": "bg-blue-700/75 text-white backdrop-blur-sm",
@@ -15,17 +16,18 @@ const typeColors: Record<string, string> = {
   "Městská akce": "bg-yellow-700/75 text-white backdrop-blur-sm",
 };
 
-const allTypes = ["Vše", ...Array.from(new Set(references.map((r) => r.type)))];
-
 const INITIAL_COUNT = 6;
 
-export default function ReferencesGrid() {
+interface Props {
+  references: SanityReference[];
+}
+
+export default function ReferencesGrid({ references }: Props) {
+  const allTypes = ["Vše", ...Array.from(new Set(references.map((r) => r.type)))];
   const [active, setActive] = useState("Vše");
   const [showAll, setShowAll] = useState(false);
 
   const filtered = active === "Vše" ? references : references.filter((r) => r.type === active);
-
-  // When a specific filter is active, show all matches. Otherwise limit to INITIAL_COUNT.
   const visible = active !== "Vše" || showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
   const hasMore = active === "Vše" && !showAll && filtered.length > INITIAL_COUNT;
 
@@ -51,11 +53,13 @@ export default function ReferencesGrid() {
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {visible.map((cs) => {
+          const imageUrl = urlFor(cs.image).width(800).height(500).format("webp").url();
+
           const card = (
             <article className="group flex flex-col bg-[#0a0a0a] border border-white/5 rounded-sm overflow-hidden hover:border-white/10 transition-colors duration-300 h-full">
               <div className="relative overflow-hidden" style={{ aspectRatio: "16/10" }}>
                 <Image
-                  src={cs.image}
+                  src={imageUrl}
                   alt={cs.title}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -70,7 +74,7 @@ export default function ReferencesGrid() {
                     {cs.type}
                   </span>
                 </div>
-                {cs.detail && (
+                {cs.hasDetail && (
                   <div className="absolute bottom-4 right-4">
                     <span className="text-xs font-semibold px-3 py-1 rounded-full bg-black/70 text-white/70 border border-white/20">
                       Case study →
@@ -82,7 +86,7 @@ export default function ReferencesGrid() {
                 <h2 className="font-display text-2xl text-white leading-tight">{cs.title}</h2>
                 <p className="text-white/50 text-sm leading-relaxed flex-1">{cs.description}</p>
                 <div className="flex flex-wrap gap-2 pt-2 border-t border-white/5">
-                  {cs.tags.map((tag) => (
+                  {cs.tags?.map((tag) => (
                     <span
                       key={tag}
                       className="text-[#C8D400]/70 text-xs border border-[#C8D400]/20 px-2.5 py-1 rounded-full"
@@ -95,12 +99,12 @@ export default function ReferencesGrid() {
             </article>
           );
 
-          return cs.detail ? (
-            <Link key={cs.slug} href={`/reference/${cs.slug}`} className="block">
+          return cs.hasDetail ? (
+            <Link key={cs._id} href={`/reference/${cs.slug.current}`} className="block">
               {card}
             </Link>
           ) : (
-            <div key={cs.slug}>{card}</div>
+            <div key={cs._id}>{card}</div>
           );
         })}
       </div>

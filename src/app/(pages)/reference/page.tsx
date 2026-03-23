@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import ReferencesGrid from "./ReferencesGrid";
+import { getAllReferences } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Reference — Showdesigners",
@@ -9,7 +10,8 @@ export const metadata: Metadata = {
     "Case studies a reference klientů. Ukázky reálných realizací — korporátní gala, soukromé oslavy, festivaly.",
 };
 
-export default function ReferencePage() {
+export default async function ReferencePage() {
+  const references = await getAllReferences();
   return (
     <>
       {/* Hero — foto pozadí */}
@@ -42,7 +44,7 @@ export default function ReferencePage() {
       {/* Case studies grid */}
       <section className="py-16 bg-black">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <ReferencesGrid />
+          <ReferencesGrid references={references} />
         </div>
       </section>
 
