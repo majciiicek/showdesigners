@@ -8,8 +8,17 @@ const AUTO_OPEN_KEY = "sd_chat_auto_opened";
 
 export default function FloatingChat() {
   const [isOpen, setIsOpen] = useState(false);
+  const [cookieBannerVisible, setCookieBannerVisible] = useState(false);
 
-  // Auto-open once per session after 5 seconds
+  // Track cookie banner visibility to avoid overlapping it
+  useEffect(() => {
+    if (!localStorage.getItem("sd-cookie-consent")) setCookieBannerVisible(true);
+    const handler = (e: Event) => setCookieBannerVisible((e as CustomEvent<boolean>).detail);
+    window.addEventListener("sd-cookie-banner", handler);
+    return () => window.removeEventListener("sd-cookie-banner", handler);
+  }, []);
+
+  // Auto-open once per session after 20 seconds
   useEffect(() => {
     try {
       if (sessionStorage.getItem(AUTO_OPEN_KEY)) return;
@@ -23,8 +32,11 @@ export default function FloatingChat() {
     return () => clearTimeout(t);
   }, []);
 
+  // Cookie banner is ~130px tall + 16px bottom offset = ~146px from bottom
+  const bottomOffset = cookieBannerVisible ? "bottom-44" : "bottom-6";
+
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div className={`fixed ${bottomOffset} right-4 sm:right-6 sm:bottom-6 z-50 flex flex-col items-end gap-3 transition-all duration-300`}>
 
       {/* Chat panel — slides up from button */}
       <AnimatePresence>

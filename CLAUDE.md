@@ -60,6 +60,13 @@ Adding a new case study with a detail page: add entry to `references.ts` with a 
 
 Detail page (`/reference/[slug]`) includes `schema.org/BreadcrumbList` JSON-LD for SEO.
 
+### Pravidla pro obsah referencí
+
+- **`showDesigner`** = člověk fyzicky přítomný na akci (koordinuje umělce, průběh večera na místě). Bio popisuje jeho roli *na akci*, ne v přípravě.
+- **Program a dramaturgie** připravuje interní kreativní tým — show designer je přiřazen až na samotnou akci. Nikdy nepsat v bio show designera, že "připravil program" nebo "navrhl dramaturgii".
+- **`program: []`** — harmonogram večera vyplňovat jen pokud máme reálná data. Prázdné pole sekci skryje.
+- **`quote`** — jedna silná věta, ideálně s číslem nebo konkrétním momentem. Slouží jako vizuální "hrdina" stránky mezi Brief/Řešením a galerií.
+
 ## AI Assistant Architecture
 
 **`src/app/api/chat/route.ts`** — core streaming endpoint:

@@ -46,7 +46,16 @@ export default function Nav() {
       >
         <nav className="mx-auto max-w-7xl px-6 lg:px-8 flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0 py-3 pr-4">
+          <Link
+            href="/"
+            className="flex-shrink-0 py-3 pr-4"
+            onClick={(e) => {
+              if (pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+          >
             <Image
               src="/logo/Show-designers_final-04.png"
               alt="Showdesigners"

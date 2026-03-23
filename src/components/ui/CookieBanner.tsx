@@ -13,19 +13,18 @@ export default function CookieBanner() {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (!stored) {
       setVisible(true);
+      window.dispatchEvent(new CustomEvent("sd-cookie-banner", { detail: true }));
     }
   }, []);
 
-  const accept = () => {
-    localStorage.setItem(STORAGE_KEY, "accepted");
+  const dismiss = (value: "accepted" | "rejected") => {
+    localStorage.setItem(STORAGE_KEY, value);
     setVisible(false);
-    // TODO: Enable Google Analytics or other tracking here
+    window.dispatchEvent(new CustomEvent("sd-cookie-banner", { detail: false }));
   };
 
-  const reject = () => {
-    localStorage.setItem(STORAGE_KEY, "rejected");
-    setVisible(false);
-  };
+  const accept = () => dismiss("accepted");
+  const reject = () => dismiss("rejected");
 
   if (!visible) return null;
 

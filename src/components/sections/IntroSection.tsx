@@ -50,8 +50,8 @@ export default function IntroSection() {
             <ul className="flex flex-col gap-3 mt-4 border-t border-white/10 pt-6">
               {[
                 "Jeden kontakt pro celý projekt — nemusíte nic vysvětlovat dvakrát.",
-                "Neprodáváme show. Navrhujeme komplexní program — s veškerým naším know-how na míru vaší akce.",
-                "Neposkládáme jen čísla za sebou. Postavíme večer, který má spád.",
+                "Navrhujeme komplexní program na míru — s veškerým know-how přímo pro vaši akci.",
+                "Stavíme večer s příběhem a spádem — každé číslo sedí přesně tam, kde má.",
                 "Jen umělci, které jsme sami prověřili a s nimiž máme zkušenost.",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-white/70 text-sm">

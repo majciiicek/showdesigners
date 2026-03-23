@@ -54,8 +54,8 @@ export default function AdvisorSection() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="font-display text-display text-white leading-none mb-8"
           >
-            VÍME, KDE AKCE{" "}
-            <span className="text-[#C8D400]">SELHÁVAJÍ.</span>
+            VÍME, CO DĚLÁ VEČER{" "}
+            <span className="text-[#C8D400]">VÝJIMEČNÝM.</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}

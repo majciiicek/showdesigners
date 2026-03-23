@@ -14,7 +14,9 @@ interface Block {
   label: string;
   desc: string;
   initX: string;
+  initXMobile: string;
   initY: number;
+  initYMobile: number;
 }
 
 const BLOCKS: Block[] = [
@@ -23,28 +25,36 @@ const BLOCKS: Block[] = [
     label: "Dramaturgie",
     desc: "Příběh a rytmus celého večera",
     initX: "-30vw",
+    initXMobile: "-88px",
     initY: -130,
+    initYMobile: -195,
   },
   {
     id: 1,
     label: "Umělci & Show",
     desc: "Výběr, booking a koordinace",
     initX: "28vw",
+    initXMobile: "88px",
     initY: -150,
+    initYMobile: -195,
   },
   {
     id: 2,
     label: "Atmosféra",
     desc: "Energie — zvuk, světla, flow",
     initX: "-27vw",
+    initXMobile: "-88px",
     initY: 150,
+    initYMobile: 195,
   },
   {
     id: 3,
     label: "Scénografie",
     desc: "Prostor jako součást příběhu",
     initX: "28vw",
+    initXMobile: "88px",
     initY: 130,
+    initYMobile: 195,
   },
 ];
 
@@ -63,12 +73,16 @@ function getBlockAnimate(
   isPlaced: boolean,
   stackIndex: number,
   showCompletion: boolean,
-  isShaking: boolean
+  isShaking: boolean,
+  isMobile: boolean
 ) {
+  const x = isMobile ? block.initXMobile : block.initX;
+  const y = isMobile ? block.initYMobile : block.initY;
+
   if (isShaking) {
     return {
-      x: [block.initX, `calc(${block.initX} - 12px)`, `calc(${block.initX} + 12px)`, `calc(${block.initX} - 8px)`, `calc(${block.initX} + 8px)`, block.initX],
-      y: block.initY,
+      x: [x, `calc(${x} - 10px)`, `calc(${x} + 10px)`, `calc(${x} - 6px)`, `calc(${x} + 6px)`, x],
+      y,
       opacity: 1,
       scale: 1,
     };
@@ -82,8 +96,8 @@ function getBlockAnimate(
     };
   }
   return {
-    x: block.initX,
-    y: [block.initY, block.initY - 9, block.initY, block.initY + 9, block.initY],
+    x,
+    y: [y, y - 9, y, y + 9, y],
     opacity: 1,
     scale: 1,
   };
@@ -116,7 +130,16 @@ export default function HeroSection() {
   const [placed, setPlaced] = useState<number[]>([]);
   const [shakingId, setShakingId] = useState<number | null>(null);
   const [showCompletion, setShowCompletion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const isComplete = placed.length === BLOCKS.length;
+
+  useEffect(() => {
+    // Detect mobile screen width for block positioning
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     if (isComplete) {
@@ -244,8 +267,17 @@ export default function HeroSection() {
                 transition={{ delay: 1.4 }}
                 className="text-white text-sm mt-5"
               >
-                Klikněte na kostičky ve správném pořadí
+                Poskládejte večer krok po kroku
               </motion.p>
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 2.2 }}
+                onClick={() => setShowCompletion(true)}
+                className="text-white/40 text-xs mt-3 hover:text-white/70 transition-colors duration-200 pointer-events-auto underline underline-offset-4 decoration-white/20"
+              >
+                Přeskočit →
+              </motion.button>
             </motion.div>
           )}
 
@@ -317,6 +349,8 @@ export default function HeroSection() {
         const isPlaced = placed.includes(block.id);
         const stackIndex = placed.indexOf(block.id);
         const isShaking = shakingId === block.id;
+        // Next correct block to click — highlighted as a hint
+        const isNext = !isPlaced && !showCompletion && CORRECT_ORDER[placed.length] === block.id;
 
         return (
           <motion.button
@@ -325,22 +359,26 @@ export default function HeroSection() {
             onClick={() => handleBlockClick(block.id)}
             disabled={isPlaced || showCompletion}
             className={[
-              "absolute z-20 w-52 text-left px-5 py-3.5 rounded-sm border select-none",
-              "transition-shadow duration-200",
+              "absolute z-20 text-left px-4 py-3 sm:px-5 sm:py-3.5 rounded-sm border select-none",
+              "w-40 sm:w-52",
+              "transition-all duration-300",
               isPlaced
                 ? "bg-[#C8D400]/10 border-[#C8D400]/40 cursor-default"
                 : isShaking
                 ? "bg-red-500/10 border-red-400/40 cursor-pointer"
-                : "bg-white/[0.04] border-white/15 hover:bg-white/[0.08] hover:border-white/30 cursor-pointer",
+                : isNext
+                ? "bg-[#C8D400]/[0.07] border-[#C8D400]/50 cursor-pointer"
+                : "bg-white/[0.04] border-white/10 cursor-pointer opacity-60",
             ].join(" ")}
             style={{
               top: "50%",
               left: "50%",
-              marginLeft: "-104px",
-              marginTop: "-33px",
+              marginLeft: isMobile ? "-80px" : "-104px",
+              marginTop: "-30px",
+              boxShadow: isNext ? "0 0 18px rgba(200,212,0,0.2)" : undefined,
             }}
-            initial={{ x: block.initX, y: block.initY, opacity: 0 }}
-            animate={getBlockAnimate(block, isPlaced, stackIndex, showCompletion, isShaking)}
+            initial={{ x: isMobile ? block.initXMobile : block.initX, y: isMobile ? block.initYMobile : block.initY, opacity: 0 }}
+            animate={getBlockAnimate(block, isPlaced, stackIndex, showCompletion, isShaking, isMobile)}
             transition={getBlockTransition(isPlaced, isShaking, i)}
             whileHover={!isPlaced && !showCompletion && !isShaking ? { scale: 1.06 } : undefined}
             whileTap={!isPlaced && !showCompletion && !isShaking ? { scale: 0.96 } : undefined}
@@ -349,7 +387,7 @@ export default function HeroSection() {
               <p
                 className={[
                   "font-semibold text-sm leading-tight",
-                  isPlaced ? "text-[#C8D400]" : isShaking ? "text-red-300" : "text-white",
+                  isPlaced ? "text-[#C8D400]" : isShaking ? "text-red-300" : isNext ? "text-[#C8D400]" : "text-white/70",
                 ].join(" ")}
               >
                 {block.label}
@@ -366,7 +404,7 @@ export default function HeroSection() {
       <motion.div
         animate={{ opacity: placed.length > 0 ? 0 : 1 }}
         transition={{ duration: 0.4 }}
-        className="absolute bottom-8 right-8 lg:right-10 flex flex-col items-center gap-2 pointer-events-none"
+        className="absolute bottom-8 left-8 lg:left-10 flex flex-col items-center gap-2 pointer-events-none"
       >
         <span className="text-white/30 text-xs tracking-widest uppercase rotate-90 origin-center">
           Scroll

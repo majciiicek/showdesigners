@@ -117,25 +117,25 @@ export default async function ReferenceDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Meta bar */}
+      {/* Stats bar */}
       <div className="bg-[#0a0a0a] border-b border-white/5">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex flex-wrap gap-8 py-5">
-            <div className="flex flex-col gap-0.5">
-              <span className="text-white/30 text-xs uppercase tracking-widest">Datum</span>
-              <span className="text-white/80 text-sm">{d.date}</span>
+          <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/5">
+            <div className="py-8 lg:py-10 pr-8">
+              <p className="text-white/30 text-xs uppercase tracking-widest mb-2">Hosté</p>
+              <p className="font-display text-3xl lg:text-4xl text-white leading-none">{d.guests}</p>
             </div>
-            <div className="flex flex-col gap-0.5">
-              <span className="text-white/30 text-xs uppercase tracking-widest">Hosté</span>
-              <span className="text-white/80 text-sm">{d.guests}</span>
+            <div className="py-8 lg:py-10 px-8">
+              <p className="text-white/30 text-xs uppercase tracking-widest mb-2">Datum</p>
+              <p className="font-display text-3xl lg:text-4xl text-white leading-none">{d.date}</p>
             </div>
-            <div className="flex flex-col gap-0.5">
-              <span className="text-white/30 text-xs uppercase tracking-widest">Místo</span>
-              <span className="text-white/80 text-sm">{d.venue}</span>
+            <div className="py-8 lg:py-10 px-8 col-span-2 lg:col-span-1">
+              <p className="text-white/30 text-xs uppercase tracking-widest mb-2">Místo</p>
+              <p className="font-display text-3xl lg:text-4xl text-white leading-none">{d.venue}</p>
             </div>
-            <div className="flex flex-col gap-0.5">
-              <span className="text-white/30 text-xs uppercase tracking-widest">Program</span>
-              <div className="flex flex-wrap gap-1.5 mt-0.5">
+            <div className="py-8 lg:py-10 pl-8 col-span-2 lg:col-span-1 border-t border-white/5 lg:border-t-0">
+              <p className="text-white/30 text-xs uppercase tracking-widest mb-3">Program</p>
+              <div className="flex flex-wrap gap-1.5">
                 {ref.tags.map((tag) => (
                   <span
                     key={tag}
@@ -153,50 +153,72 @@ export default async function ReferenceDetailPage({ params }: Props) {
       {/* Brief + Solution */}
       <section className="py-16 lg:py-24 bg-black">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-12 lg:gap-16 items-start">
+            {/* Brief — context, visually secondary */}
             <div>
-              <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-4">
+              <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-4">
                 Zadání
               </p>
-              <p className="text-white/65 text-base leading-relaxed">{d.brief}</p>
+              <p className="text-white/45 text-sm leading-relaxed">{d.brief}</p>
             </div>
-            <div>
+            {/* Solution — hero, visually primary */}
+            <div className="border-l-2 border-[#C8D400]/40 pl-8 lg:pl-10">
               <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-4">
                 Naše řešení
               </p>
-              <p className="text-white/65 text-base leading-relaxed">{d.solution}</p>
+              <p className="text-white/85 text-lg leading-relaxed">{d.solution}</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Program timeline */}
-      <section className="py-16 lg:py-20 bg-[#0a0a0a]">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-10">
-            Průběh večera
-          </p>
-
-          <div className="flex flex-col divide-y divide-white/5">
-            {d.program.map((item) => (
-              <div
-                key={item.time}
-                className="grid grid-cols-[80px_1fr] lg:grid-cols-[120px_220px_1fr] gap-4 lg:gap-8 py-5 items-start"
-              >
-                <span className="font-mono text-[#C8D400]/60 text-sm tabular-nums pt-0.5">
-                  {item.time}
-                </span>
-                <span className="font-display text-white text-xl lg:text-2xl leading-tight">
-                  {item.act.toUpperCase()}
-                </span>
-                <span className="text-white/40 text-sm leading-relaxed col-span-2 lg:col-span-1 lg:pt-1">
-                  {item.note}
-                </span>
-              </div>
-            ))}
+      {/* Pull quote — only shown when available */}
+      {d.quote && (
+        <section className="py-20 lg:py-28 bg-[#0a0a0a] overflow-hidden">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 relative">
+            <span
+              aria-hidden="true"
+              className="absolute -top-8 left-4 font-display text-[180px] lg:text-[240px] leading-none text-white/[0.03] select-none pointer-events-none"
+            >
+              „
+            </span>
+            <p className="font-display text-3xl lg:text-5xl text-white leading-tight max-w-4xl relative z-10">
+              {d.quote}
+            </p>
+            <div className="mt-8 w-12 h-px bg-[#C8D400]" />
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
+      {/* Program timeline — only shown when data is available */}
+      {d.program.length > 0 && (
+        <section className="py-16 lg:py-20 bg-[#0a0a0a]">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-10">
+              Průběh večera
+            </p>
+
+            <div className="flex flex-col divide-y divide-white/5">
+              {d.program.map((item) => (
+                <div
+                  key={item.time}
+                  className="grid grid-cols-[80px_1fr] lg:grid-cols-[120px_220px_1fr] gap-4 lg:gap-8 py-5 items-start"
+                >
+                  <span className="font-mono text-[#C8D400]/60 text-sm tabular-nums pt-0.5">
+                    {item.time}
+                  </span>
+                  <span className="font-display text-white text-xl lg:text-2xl leading-tight">
+                    {item.act.toUpperCase()}
+                  </span>
+                  <span className="text-white/40 text-sm leading-relaxed col-span-2 lg:col-span-1 lg:pt-1">
+                    {item.note}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Gallery */}
       <section className="py-16 lg:py-20 bg-black">
@@ -230,7 +252,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
         <section className="py-16 lg:py-20 bg-[#0a0a0a] border-t border-white/5">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-8">
-              Show designer akce
+              Show designer na místě
             </p>
             <div className="flex items-center gap-6">
               {d.showDesigner.photo ? (

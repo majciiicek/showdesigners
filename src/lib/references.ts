@@ -13,6 +13,7 @@ export interface ReferenceDetail {
     venue: string;
     brief: string;       // what the client wanted
     solution: string;    // what we designed
+    quote?: string;      // optional pull quote displayed large between brief and gallery
     program: { time: string; act: string; note: string }[];
     gallery: string[];
     showDesigner?: {
@@ -29,10 +30,10 @@ export const references: ReferenceDetail[] = [
     title: "30. výročí UNIS Computer",
     type: "Korporátní akce",
     description:
-      "Program pro 30. výročí firmy — světelná show jako hlavní číslo, doplněná párovou akrobacií a dekorativními walking acts po celou dobu večeře.",
+      "Program pro 30. výročí firmy — světelná show jako hlavní číslo, doplněná dekorativními walking acts po celou dobu večeře.",
     image:
       "/images/lightshow/5250_REPORTAZ_2025_10_09_UNIS_COMPUTER_BESEDNI_DUM_BRNO_OSLAVA_VYROCI_30LET_UNIS_COMPUTER_A_AXENTA_S9203495.webp",
-    tags: ["Lightshow", "Párová akrobacie", "Walking acts"],
+    tags: ["Lightshow", "Walking acts"],
     detail: {
       subtitle: "Galavečer pro 120 hostů v Besedním domě v Brně",
       date: "Říjen 2025",
@@ -42,38 +43,13 @@ export const references: ReferenceDetail[] = [
         "Klient slavil 30 let existence — výjimečné jubileum, které si zasluhovalo víc než standardní večírek. Chtěli program, který bude skutečně reprezentativní, vstřičný vůči smíšenému publiku (management i technické týmy) a zakončí večer silným emocionálním momentem. Zároveň bylo důležité, aby entertainment nebyl v konfliktu se slavnostní atmosférou a proslovy.",
       solution:
         "Navrhli jsme dramaturgii, která respektuje tok večera. V první části večeře jsme nasadili elegantní dekorativní walking acts — hosté je mohli volně sledovat mezi stoly, aniž by přerušovaly konverzace. Hlavní číslo večera — světelná show synchronizovaná na vlastní soundtrack — bylo zařazeno přesně po poslední zdravici, jako přirozené vyvrcholení. Celý program jsme koordinovali s cateringem a AV technikou, takže večer plynul bez záseků.",
-      program: [
-        {
-          time: "19:00",
-          act: "Příchod hostů",
-          note: "Dekorativní walking acts v hale — elegantní vizuální doprovod recepce",
-        },
-        {
-          time: "19:30",
-          act: "Slavnostní večeře",
-          note: "Průběžné walking acts mezi stoly, diskrétní — nevyrušují proslovy",
-        },
-        {
-          time: "21:00",
-          act: "Proslovy a poděkování",
-          note: "Entertainment pauzuje, přebírá moderátor",
-        },
-        {
-          time: "21:30",
-          act: "Hlavní číslo: Světelná show",
-          note: "Synchronizovaná LED show s vlastním soundtrackem, 8 minut — kulminující moment večera",
-        },
-        {
-          time: "21:45",
-          act: "Párová vzdušná akrobacie",
-          note: "Intimní závěrečné číslo jako přechod do volné zábavy",
-        },
-        {
-          time: "22:00",
-          act: "Volná zábava",
-          note: "Živá hudba, konec dramaturgického programu",
-        },
-      ],
+      quote: "Světelná show jako hlavní číslo večera — synchronizovaná na vlastní soundtrack, přesně ve chvíli, kdy ji hosté čekali nejvíc.",
+      program: [],
+      showDesigner: {
+        name: "Michal Halačka",
+        photo: "/images/obchod/michalhalacka.webp",
+        bio: "Michal byl show designerem na místě — koordinoval průběh večera, komunikoval s umělci a dohlížel na to, aby program proběhl přesně podle plánu.",
+      },
       gallery: [
         "/images/lightshow/5209_REPORTAZ_2025_10_09_UNIS_COMPUTER_BESEDNI_DUM_BRNO_OSLAVA_VYROCI_30LET_UNIS_COMPUTER_A_AXENTA_SA901928.webp",
         "/images/lightshow/5250_REPORTAZ_2025_10_09_UNIS_COMPUTER_BESEDNI_DUM_BRNO_OSLAVA_VYROCI_30LET_UNIS_COMPUTER_A_AXENTA_S9203495.webp",
@@ -107,14 +83,8 @@ export const references: ReferenceDetail[] = [
         "Klient chtěl zorganizovat celodenní family day s vesmírným tématem — akci, která zabaví děti i dospělé zároveň a vytvoří nezapomenutelnou atmosféru pod otevřeným nebem.",
       solution:
         "Navrhli jsme celodenní dramaturgii s vesmírným leitmotivem. Přes den procházely areálem vesmírné walking acts a hostesky, brass band Groove Army roztančil celé místo, pro děti byl připraven žonglér s balónky a face painting. Večer gradoval LED Cryomanem a fire show jako finálním vrcholem celé akce.",
-      program: [
-        { time: "Celý den", act: "Vesmírné walking acts", note: "Vesmírné víly a hostesky v kostýmech mezi hosty" },
-        { time: "Celý den", act: "Vesmírné hostesky", note: "Tematické kostýmy, interakce s hosty" },
-        { time: "Celý den", act: "Dětský program", note: "Žonglér s balónky, face painting, bubliny" },
-        { time: "Odpoledne", act: "Groove Army — brass band", note: "Mobilní brass band roztančil celý areál" },
-        { time: "Večer", act: "LED Cryoman", note: "Světelný efektní výstup jako přechod do finále" },
-        { time: "Závěr", act: "Fire show", note: "Finální velké číslo — kulminace celého dne" },
-      ],
+      quote: "400 hostů, celý den, vesmírné téma — a fire show jako finále, na které se nezapomíná.",
+      program: [],
       gallery: [
         "/images/second-foundation/DSCF4241.webp",
         "/images/second-foundation/2023-09-24_6-uprava.webp",
@@ -127,8 +97,9 @@ export const references: ReferenceDetail[] = [
         "/images/second-foundation/DSCF4874.webp",
       ],
       showDesigner: {
-        name: "Bára",
-        bio: "Bára má na starosti firemní akce a family days. Její silná stránka je práce s tématem — dokáže z každého zadání vytáhnout příběh, který baví děti i dospělé zároveň.",
+        name: "Bára Adamušová",
+        photo: "/images/showdesigneri/bara_adamusova.webp",
+        bio: "Bára byla show designerkou na místě — starala se o plynulý průběh celého dne, koordinovala umělce a řešila vše operativně přímo na akci.",
       },
     },
   },
@@ -149,10 +120,8 @@ export const references: ReferenceDetail[] = [
         "Organizátoři festivalu hledali doprovodný program, který doplní elektronickou hudbu a vytvoří vizuálně silné momenty mezi pódiemi. Program musel fungovat v exteriéru, ve dne i v noci, a oslovit široké publikum.",
       solution:
         "Nasadili jsme fire show s tribal tematikou — silné vizuální číslo ideální pro festivalové prostředí. Walking acts v originálních kostýmech procházely mezi návštěvníky a vytvářely organické, neskriptované momenty po celý den.",
-      program: [
-        { time: "Celý den", act: "Tribal walking acts", note: "Kostýmované postavy mezi návštěvníky — interakce, fotky, atmosféra" },
-        { time: "Večer", act: "Fire show", note: "Hlavní vizuální číslo — fire breathing, fire spinning, tribal choreografie" },
-      ],
+      quote: "20 000 lidí, jeden festival — a tribal fire show, která zastavila dav.",
+      program: [],
       gallery: [
         "/images/beats4love/514323960_1280871783405571_4616947194946571481_n.webp",
         "/images/beats4love/514533974_1280873206738762_2765605584119081362_n.webp",
@@ -182,10 +151,8 @@ export const references: ReferenceDetail[] = [
         "Město hledalo doprovodný program pro letní slavnosti, který by oživil historické náměstí a dal akci vizuální charakter odpovídající malebné lokalitě.",
       solution:
         "Nasadili jsme mirror couple walking acts — stříbrné kostýmy krásně kontrastovaly s historickou architekturou náměstí. Program fungoval jako živá dekorace prostoru i jako interaktivní zážitek pro návštěvníky.",
-      program: [
-        { time: "Celý den", act: "Mirror couple walking acts", note: "Stříbrné kostýmy, interakce s návštěvníky, fotky" },
-        { time: "Dopoledne / odpoledne", act: "Doprovodný program", note: "Průchod areálem, animace prostoru" },
-      ],
+      quote: "Historické náměstí jako kulisa, stříbrné postavy jako živá dekorace — program, který splynul s místem.",
+      program: [],
       gallery: [
         "/images/kasperskehory/2025 09 13 - 14 48 17 - 133.webp",
         "/images/kasperskehory/2025 09 13 - 14 49 22 - 136.webp",
@@ -215,11 +182,8 @@ export const references: ReferenceDetail[] = [
         "Mezinárodní organizace WANO pořádala gala večeři pro delegáty z celého světa. Program musel být světové úrovně, respektovat slavnostní atmosféru a naplnit velký sál, aniž by přerušoval networking a proslovy.",
       solution:
         "Navrhli jsme dramaturgii, která respektuje tok slavnostního večera. Vzdušná akrobacie jako hlavní číslo v kulminačním momentu, doplněná elegantními tanečními vystoupeními. Celý program byl koordinován s cateringem a AV produkcí.",
-      program: [
-        { time: "Recepce", act: "Walking acts", note: "Elegantní uvítání hostů při příchodu" },
-        { time: "Večeře", act: "Taneční vystoupení", note: "Jemný doprovodný program během servírování" },
-        { time: "Kulminace", act: "Vzdušná akrobacie", note: "Hlavní číslo večera — vrchol dramaturgického oblouku" },
-      ],
+      quote: "300 delegátů z celého světa — a vzdušná akrobacie jako kulminační moment, který překonal jazykové bariéry.",
+      program: [],
       gallery: [
         "/images/wano/BMG_Prague_Day-4-Tue-Galadinner_by-adam-costey-O-027.webp",
         "/images/wano/BMG_Prague_Day-4-Tue-Galadinner_by-adam-costey-O-037.webp",
@@ -249,10 +213,8 @@ export const references: ReferenceDetail[] = [
         "Klient hledal program, který bude ladit s výjimečným prostředím Trojského zámku a jeho barokními zahradami. Walking acts musely být elegantní, nenápadné a vyvolávat atmosféru doby.",
       solution:
         "Vybrali jsme historické walking acts v autentických barokních kostýmech — páry v dobovém oblečení procházely zahradami a sály, přirozeně splývaly s prostředím a zároveň přitahovaly pozornost hostů.",
-      program: [
-        { time: "Příchod hostů", act: "Barokní walking acts", note: "Uvítání v zahradách zámku — elegantní, tematické" },
-        { time: "Celý večer", act: "Historické kostýmy", note: "Průchod sály a terasami, interakce s hosty" },
-      ],
+      quote: "Barokní zahrady, 800 hostů, dobové kostýmy — entertainment jako součást architektury místa.",
+      program: [],
       gallery: [
         "/images/watroja/15062024_JTPrag24_492.webp",
         "/images/watroja/15062024_JTPrag24_504.webp",
@@ -282,12 +244,8 @@ export const references: ReferenceDetail[] = [
         "Firma Witzenmann připravila velký family day u příležitosti výročí — akce musela bavit děti všech věků i dospělé, probíhat celý den a vytvořit přátelskou, festivalovou atmosféru.",
       solution:
         "Sestavili jsme celodenní program s několika zónami. Pro děti artistika, bubliny a interaktivní program. Pro dospělé brass band a taneční vystoupení. Dramaturgický oblouk zajistil, že atmosféra rostla celý den až k závěrečnému finále.",
-      program: [
-        { time: "Celý den", act: "Dětský program", note: "Bubliny, artistika, interaktivní aktivity" },
-        { time: "Celý den", act: "Brass band", note: "Mobilní hudební doprovod po celém areálu" },
-        { time: "Odpoledne", act: "Taneční vystoupení", note: "Show pro celou rodinu na hlavním pódiu" },
-        { time: "Závěr", act: "Finální show", note: "Vyvrcholení celého dne" },
-      ],
+      quote: "2 000 hostů, celý den, všechny věkové kategorie — program, který bavil od rána do večera.",
+      program: [],
       gallery: [
         "/images/witzenmann/2023_06_10_profeel_witzenmann_30_let-274.webp",
         "/images/witzenmann/2023_06_10_profeel_witzenmann_30_let-278.webp",
