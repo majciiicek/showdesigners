@@ -3,8 +3,8 @@ import createImageUrlBuilder from "@sanity/image-url";
 type SanityImageSource = any;
 
 const builder = createImageUrlBuilder({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "6i1t4r1j",
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",
 });
 
 // Pomocná funkce — vrací URL obrázku ve WebP formátu
