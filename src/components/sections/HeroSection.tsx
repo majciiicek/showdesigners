@@ -108,7 +108,12 @@ function getBlockTransition(isPlaced: boolean, isShaking: boolean, index: number
     return { duration: 0.45, ease: "easeInOut" as const };
   }
   if (isPlaced) {
-    return { duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] };
+    return {
+      x: { type: "tween" as const, duration: 0.7, ease: "easeOut" as const },
+      y: { type: "tween" as const, duration: 0.7, ease: "easeOut" as const },
+      opacity: { duration: 0.4 },
+      scale: { duration: 0.3 },
+    };
   }
   return {
     y: {
@@ -269,12 +274,20 @@ export default function HeroSection() {
               >
                 Poskládejte večer krok po kroku
               </motion.p>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.25 }}
+                transition={{ delay: 1.8 }}
+                className="text-white text-xs mt-2"
+              >
+                Scrollujte a zjistěte více o Showdesigners
+              </motion.p>
               <motion.button
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 2.2 }}
                 onClick={() => setShowCompletion(true)}
-                className="text-white/40 text-xs mt-3 hover:text-white/70 transition-colors duration-200 pointer-events-auto underline underline-offset-4 decoration-white/20"
+                className="mt-5 px-5 py-2 rounded-sm border border-white/20 text-white/60 text-xs font-medium hover:border-white/50 hover:text-white/90 transition-all duration-200 pointer-events-auto"
               >
                 Přeskočit →
               </motion.button>
