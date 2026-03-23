@@ -18,8 +18,9 @@ export default function FloatingChat() {
     return () => window.removeEventListener("sd-cookie-banner", handler);
   }, []);
 
-  // Auto-open once per session after 20 seconds
+  // Auto-open once per session after 20 seconds — desktop only
   useEffect(() => {
+    if (window.innerWidth < 768) return;
     try {
       if (sessionStorage.getItem(AUTO_OPEN_KEY)) return;
     } catch { return; }
