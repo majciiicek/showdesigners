@@ -9,11 +9,17 @@ import { join } from "path";
 // Inline data — kopie z references.ts kvůli ESM kompatibilitě v tsx
 const { references } = await import("../src/lib/references.ts");
 
+const token = process.env.SANITY_MIGRATION_TOKEN;
+if (!token) {
+  console.error("❌ Chybí SANITY_MIGRATION_TOKEN v prostředí");
+  process.exit(1);
+}
+
 const client = createClient({
-  projectId: "6i1t4r1j",
-  dataset: "production",
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "6i1t4r1j",
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",
   apiVersion: "2024-01-01",
-  token: "skwcuWTYOp4j5VMsgKja04vJ1N8orWyAYfpZXEN4Gw48svwsOz6nFteaKu6jSYZvG7lakkPgIIt761LX6Qk7Ao5T4nfb0P7Hh1jSO5AzZCUdsy7fOfcqr2UPIyhEP1i4BWTUB5L6i9V75x6gbDIkQASyhDenuOGBzJB4MtO7KYLvFnll8KZl",
+  token,
   useCdn: false,
 });
 
