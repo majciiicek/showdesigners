@@ -57,12 +57,13 @@ export default function ReferencesGrid({ references }: Props) {
 
           const card = (
             <article className="group flex flex-col bg-[#0a0a0a] border border-white/5 rounded-sm overflow-hidden hover:border-white/10 transition-colors duration-300 h-full">
-              <div className="relative overflow-hidden" style={{ aspectRatio: "16/10" }}>
+              <div className="overflow-hidden" style={{ aspectRatio: "16/10" }}>
                 <Image
                   src={imageUrl}
                   alt={cs.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  width={800}
+                  height={500}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute top-4 left-4">

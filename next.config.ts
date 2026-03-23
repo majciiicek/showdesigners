@@ -11,6 +11,8 @@ const securityHeaders = [
   { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
   // Omezuje přístup ke kameře, mikrofonu a dalším API prohlížeče
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+  // Ochrana proti XSS útokům (starší prohlížeče)
+  { key: "X-XSS-Protection", value: "1; mode=block" },
   // Content Security Policy — povoluje pouze vlastní zdroje + Google Fonts
   {
     key: "Content-Security-Policy",
@@ -31,6 +33,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Skryje hlavičku X-Powered-By: Next.js — omezí únik informací o tech stacku
+  poweredByHeader: false,
   images: {
     remotePatterns: [
       {

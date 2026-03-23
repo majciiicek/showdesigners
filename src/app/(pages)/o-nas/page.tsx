@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "O nás — Showdesigners",
+  title: "O show designérech — tým a zázemí | Showdesigners",
   description:
     "Showdesigners vznikl z potřeby klientů, kteří hledali partnera — ne dodavatele. Konzultační vrstva postavená na 15 letech zkušeností agentury Aliatrix.",
 };
@@ -161,8 +161,9 @@ export default function ONasPage() {
                   <Image
                     src={person.image}
                     alt={person.name}
-                    fill
-                    className="object-cover object-top"
+                    width={400}
+                    height={533}
+                    className="w-full h-full object-cover object-top"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>

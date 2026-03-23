@@ -3,9 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Naše služba — Showdesigners",
+  title: "Show design od A do Z — co děláme | Showdesigners",
   description:
-    "Jak funguje show designer? Přebíráme kompletní zodpovědnost za entertainment vaší akce — od dramaturgii po každé vystoupení.",
+    "Jak funguje show designer? Přebíráme kompletní zodpovědnost za entertainment vaší akce — dramaturgie, umělci, koordinace na místě.",
 };
 
 const eventTypes = [
@@ -153,8 +153,9 @@ export default function SluzbaPage() {
                 <Image
                   src={et.image}
                   alt={et.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  width={800}
+                  height={600}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />

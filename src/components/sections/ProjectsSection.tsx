@@ -71,8 +71,9 @@ function ProjectCard({ title, category, image, size, index }: ProjectCardProps) 
       <Image
         src={image}
         alt={title}
-        fill
-        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        width={size === "large" ? 1200 : 600}
+        height={size === "large" ? 675 : 800}
+        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         sizes={size === "large" ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
       />
 

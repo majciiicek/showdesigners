@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import KontaktClient from "./KontaktClient";
 
 export const metadata: Metadata = {
-  title: "Kontakt — Showdesigners",
+  title: "Poptávka show designera — Kontakt | Showdesigners",
   description:
-    "Poptejte show pro vaši akci. Váš show designer se ozve do 24 hodin.",
+    "Poptejte show designera pro vaši akci — korporátní večírek, gala nebo soukromá oslava. Ozve se vám do 24 hodin.",
   openGraph: {
-    title: "Kontakt — Showdesigners",
-    description: "Poptejte show pro vaši akci. Váš show designer se ozve do 24 hodin.",
+    title: "Poptávka show designera — Kontakt | Showdesigners",
+    description: "Poptejte show designera pro vaši akci — korporátní večírek, gala nebo soukromá oslava. Ozve se vám do 24 hodin.",
   },
 };
 

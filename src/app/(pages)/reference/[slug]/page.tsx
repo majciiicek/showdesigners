@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getReferenceBySlug, getReferencesSlugs } from "@/sanity/lib/queries";
+import { getReferenceBySlug, getReferencesSlugs, getAllReferences } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 
 interface Props {
@@ -36,9 +36,15 @@ const typeColors: Record<string, string> = {
 
 export default async function ReferenceDetailPage({ params }: Props) {
   const { slug } = await params;
-  const ref = await getReferenceBySlug(slug);
+  const [ref, allReferences] = await Promise.all([
+    getReferenceBySlug(slug),
+    getAllReferences(),
+  ]);
 
   if (!ref || !ref.detail) notFound();
+
+  // Pick up to 3 other references for internal linking
+  const relatedRefs = allReferences.filter((r) => r.slug.current !== slug).slice(0, 3);
 
   const d = ref.detail;
   const heroUrl = urlFor(ref.image).width(1920).height(900).format("webp").url();
@@ -197,6 +203,27 @@ export default async function ReferenceDetailPage({ params }: Props) {
                 <p className="text-white/30 text-xs uppercase tracking-widest mb-3">Show Designer</p>
                 <p className="text-white/50 text-sm leading-relaxed max-w-lg">{d.showDesigner.bio}</p>
               </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Related references — internal linking */}
+      {relatedRefs.length > 0 && (
+        <section className="py-16 bg-[#0d0d0d] border-t border-white/5">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-8">Další realizace</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {relatedRefs.map((r) => (
+                <Link
+                  key={r._id}
+                  href={`/reference/${r.slug.current}`}
+                  className="group block bg-black/40 border border-white/5 rounded-sm p-6 hover:border-[#C8D400]/30 transition-colors duration-200"
+                >
+                  <p className="text-white/30 text-xs uppercase tracking-widest mb-2">{r.type}</p>
+                  <p className="font-display text-xl text-white group-hover:text-[#C8D400] transition-colors duration-200 leading-tight">{r.title.toUpperCase()}</p>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

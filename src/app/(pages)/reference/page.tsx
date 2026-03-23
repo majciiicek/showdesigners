@@ -5,9 +5,9 @@ import ReferencesGrid from "./ReferencesGrid";
 import { getAllReferences } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
-  title: "Reference — Showdesigners",
+  title: "Reference klientů — realizace show designu | Showdesigners",
   description:
-    "Case studies a reference klientů. Ukázky reálných realizací — korporátní gala, soukromé oslavy, festivaly.",
+    "Prohlédněte si naše realizace. Korporátní gala, rodinné dny, festivaly a soukromé akce — ukázky show designu v praxi.",
 };
 
 export default async function ReferencePage() {
@@ -37,6 +37,7 @@ export default async function ReferencePage() {
             NAŠE
             <br />
             <span className="text-[#C8D400]">REALIZACE.</span>
+            <span className="sr-only"> Show design pro firemní akce a soukromé oslavy.</span>
           </h1>
         </div>
       </section>
