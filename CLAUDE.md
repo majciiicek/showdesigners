@@ -20,6 +20,7 @@ npx tsc --noEmit   # TypeScript check (pre-existing errors in HeroSection.tsx ca
 - **Resend** — transactional email
 - **Zod v4** — use `message:` not `required_error:` / `errorMap:`
 - **Framer Motion** — animations, interactive hero
+- **Sanity CMS** — správa referencí, Sanity Studio na `/studio`
 
 ## Project Structure
 
@@ -47,16 +48,35 @@ src/
     ui/              # Nav, Footer, AiChat, CookieBanner, ContactForm, FloatingChat
   lib/
     supabase.ts      # Supabase client + Conversation/Message interfaces
-    references.ts    # Shared reference/case study data (used by list + detail pages)
+    references.ts    # LEGACY — již se nepoužívá pro web, zachováno pro referenci
+  sanity/
+    lib/
+      client.ts      # Sanity client (next-sanity, projectId: 6i1t4r1j, dataset: production)
+      image.ts       # urlFor() helper — automaticky vrací WebP
+      queries.ts     # GROQ dotazy + TypeScript typy (getAllReferences, getReferenceBySlug)
+    schemaTypes/
+      referenceType.ts  # Sanity schema pro typ "caseStudy"
+      index.ts
+  app/
+    studio/[[...tool]]/page.tsx  # Embedded Sanity Studio
 ```
 
 ## References Architecture
 
-Data lives in `src/lib/references.ts` as a typed array (`ReferenceDetail[]`). Each item has:
-- `slug`, `title`, `type`, `description`, `image`, `tags` — used on the listing page
-- `detail?: { ... }` — extended data only for case study pages (brief, solution, program timeline, gallery)
+**Data jsou v Sanity CMS** (projekt `6i1t4r1j`, dataset `production`), typ dokumentu `caseStudy`.
 
-Adding a new case study with a detail page: add entry to `references.ts` with a `detail` object. The card on the listing page automatically shows a "Case study →" badge and becomes clickable.
+- Sanity Studio: `localhost:3000/studio` (dev) / `showdesigners.cz/studio` (prod)
+- Obrázky: nahrávány přes Studio, automaticky konvertovány do WebP přes `urlFor(img).format("webp")`
+- Revalidace: 60 sekund (`{ next: { revalidate: 60 } }` v queries.ts)
+- Migrace: `scripts/migrate-to-sanity.mts` (jednorázový skript, vyžaduje `SANITY_MIGRATION_TOKEN`)
+
+### Schema dokumentu `caseStudy`
+
+Každý dokument má:
+- `slug`, `title`, `type`, `description`, `image`, `tags`, `order` — karta ve výpisu
+- `detail?: { subtitle, date, guests, venue, brief, solution, quote?, gallery[], showDesigner? }` — detail stránka
+
+Přidání nové reference: v Sanity Studiu → Reference → nový dokument. Pokud má `detail`, automaticky se zobrazí "Case study →" badge a stránka je dostupná na `/reference/[slug]`.
 
 Detail page (`/reference/[slug]`) includes `schema.org/BreadcrumbList` JSON-LD for SEO.
 
@@ -106,6 +126,10 @@ SUPABASE_URL=
 SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 NEXT_PUBLIC_SITE_URL=
+NEXT_PUBLIC_SANITY_PROJECT_ID=6i1t4r1j
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_API_READ_TOKEN=          # Viewer token — pro fetch dat
+SANITY_MIGRATION_TOKEN=         # Editor token — pouze pro migrační skript
 ```
 
 ## Design System
@@ -136,4 +160,5 @@ Toto rozlišení je důležité pro texty na webu, v referencích i v AI asisten
 - **AI system prompt** contains Showdesigners knowledge base inline in `SYSTEM_PROMPT` constant in `route.ts` — avoid backticks inside the template literal (causes Turbopack parse error)
 - **SYSTEM_PROMPT internal triggers**: use regular quotes `"__TRIGGER__"`, never backticks `` `__TRIGGER__` ``
 - Deploy: Vercel via GitHub push to `main`
-- CMS for references is planned — current data is hardcoded in `src/lib/references.ts`
+- Reference data jsou v Sanity, **ne** v `references.ts` — ten soubor je legacy
+- Sanity Studio CORS: `localhost:3000` a `showdesigners.cz` musí být povoleny v sanity.io/manage → API → CORS Origins
