@@ -53,7 +53,7 @@ export default function ReferencesGrid({ references }: Props) {
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {visible.map((cs) => {
-          const imageUrl = urlFor(cs.image).width(800).height(500).format("webp").url();
+          const imageUrl = urlFor(cs.image).format("webp").url();
 
           const card = (
             <article className="group flex flex-col bg-[#0a0a0a] border border-white/5 rounded-sm overflow-hidden hover:border-white/10 transition-colors duration-300 h-full">

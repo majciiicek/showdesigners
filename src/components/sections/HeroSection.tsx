@@ -97,7 +97,7 @@ function getBlockAnimate(
   }
   return {
     x,
-    y: [y, y - 9, y, y + 9, y],
+    y,
     opacity: 1,
     scale: 1,
   };
@@ -116,12 +116,6 @@ function getBlockTransition(isPlaced: boolean, isShaking: boolean, index: number
     };
   }
   return {
-    y: {
-      duration: 3.6 + index * 0.55,
-      repeat: Infinity,
-      ease: "easeInOut" as const,
-      delay: index * 0.4,
-    },
     opacity: { duration: 0.8, delay: 0.35 + index * 0.12 },
     scale: { duration: 0.2 },
   };
@@ -422,11 +416,7 @@ export default function HeroSection() {
         <span className="text-white/30 text-xs tracking-widest uppercase rotate-90 origin-center">
           Scroll
         </span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent"
-        />
+        <div className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent" />
       </motion.div>
 
     </section>

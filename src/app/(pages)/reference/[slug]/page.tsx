@@ -47,7 +47,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
   const relatedRefs = allReferences.filter((r) => r.slug.current !== slug).slice(0, 3);
 
   const d = ref.detail;
-  const heroUrl = urlFor(ref.image).width(1920).height(900).format("webp").url();
+  const heroUrl = urlFor(ref.image).format("webp").url();
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://showdesigners.cz";
 
@@ -164,7 +164,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
               {d.gallery.map((img, i) => (
                 <div key={i} className="relative break-inside-avoid overflow-hidden rounded-sm">
                   <Image
-                    src={urlFor(img).width(800).format("webp").url()}
+                    src={urlFor(img).format("webp").url()}
                     alt={`${ref.title} — foto ${i + 1}`}
                     width={800}
                     height={600}
@@ -187,7 +187,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
             <div className="flex items-start gap-6">
               {d.showDesigner.photo ? (
                 <Image
-                  src={urlFor(d.showDesigner.photo).width(160).height(160).format("webp").url()}
+                  src={urlFor(d.showDesigner.photo).format("webp").url()}
                   alt={d.showDesigner.name}
                   width={80}
                   height={80}

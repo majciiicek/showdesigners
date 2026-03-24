@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Inter } from "next/font/google";
+import dynamic from "next/dynamic";
 import Nav from "@/components/ui/Nav";
 import Footer from "@/components/ui/Footer";
 import CookieBanner from "@/components/ui/CookieBanner";
-import FloatingChat from "@/components/ui/FloatingChat";
 import "./globals.css";
+
+// Deferred — loads after hydration, not needed for initial render
+const FloatingChat = dynamic(() => import("@/components/ui/FloatingChat"), { ssr: false });
 
 // Display font — dramatic, bold condensed sans-serif for headlines
 const bebasNeue = Bebas_Neue({
