@@ -60,7 +60,7 @@ export default function SluzbaPage() {
       <section className="relative min-h-[80vh] lg:min-h-[90vh] flex items-end overflow-hidden">
         <Image
           src="/images/zavesnaakrobacie/salo-kruh16.webp"
-          alt=""
+          alt="Vzdušná akrobacie na firemní akci — Showdesigners"
           fill
           className="object-cover object-center"
           priority

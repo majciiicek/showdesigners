@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Zásady ochrany osobních údajů — Showdesigners",
-  description: "Informace o zpracování osobních údajů v souladu s GDPR (nařízení EU 2016/679).",
+  description: "Zásady ochrany osobních údajů Showdesigners — informace o zpracování osobních údajů, cookies a právech subjektů v souladu s GDPR (nařízení EU 2016/679).",
 };
 
 export default function ZasadyPage() {
@@ -16,6 +16,7 @@ export default function ZasadyPage() {
           ZÁSADY OCHRANY
           <br />
           OSOBNÍCH ÚDAJŮ
+          <span className="sr-only"> — zpracování dat a cookies podle GDPR.</span>
         </h1>
 
         <div className="prose prose-invert prose-sm max-w-none [&_h2]:font-display [&_h2]:text-2xl [&_h2]:text-white [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:text-white/60 [&_p]:leading-relaxed [&_ul]:text-white/60 [&_li]:leading-relaxed [&_a]:text-[#C8D400] [&_strong]:text-white">

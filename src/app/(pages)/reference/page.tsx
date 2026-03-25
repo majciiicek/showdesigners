@@ -18,7 +18,7 @@ export default async function ReferencePage() {
       <section className="relative min-h-[80vh] lg:min-h-[90vh] flex items-end overflow-hidden">
         <Image
           src="/images/kvetiny/GCAs_RedNight_Show_004.webp"
-          alt=""
+          alt="Florální show na gala večeři — ukázka realizace Showdesigners"
           fill
           className="object-cover object-center"
           priority
