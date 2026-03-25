@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 
 const areas = [
   {
@@ -40,15 +40,15 @@ export default function AdvisorSection() {
 
         {/* Header — centered, full width */}
         <div ref={ref} className="text-center mb-16 max-w-3xl mx-auto">
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
             className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-6"
           >
             Víc než show
-          </motion.p>
-          <motion.h2
+          </m.p>
+          <m.h2
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
@@ -56,8 +56,8 @@ export default function AdvisorSection() {
           >
             VÍME, CO DĚLÁ VEČER{" "}
             <span className="text-[#C8D400]">VÝJIMEČNÝM.</span>
-          </motion.h2>
-          <motion.p
+          </m.h2>
+          <m.p
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.3 }}
@@ -65,13 +65,13 @@ export default function AdvisorSection() {
           >
             Za 15 let jsme byli u stovek akcí. Viděli jsme, co funguje — a kde se to komplikuje.
             Váš show designer je od začátku poradce, ne jen dodavatel show.
-          </motion.p>
+          </m.p>
         </div>
 
         {/* Advisory areas */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5">
           {areas.map((area, i) => (
-            <motion.div
+            <m.div
               key={area.number}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -108,12 +108,12 @@ export default function AdvisorSection() {
                   {area.solution}
                 </p>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
         {/* Bottom note */}
-        <motion.p
+        <m.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-40px" }}
@@ -121,7 +121,7 @@ export default function AdvisorSection() {
           className="mt-8 text-white/25 text-sm text-center max-w-xl mx-auto leading-relaxed"
         >
           Toto není součástí žádného balíčku. Je to standardní součást každé spolupráce se Showdesigners.
-        </motion.p>
+        </m.p>
 
       </div>
     </section>

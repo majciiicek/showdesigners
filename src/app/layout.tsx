@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import Nav from "@/components/ui/Nav";
 import Footer from "@/components/ui/Footer";
 import CookieBanner from "@/components/ui/CookieBanner";
 import FloatingChatLazy from "@/components/ui/FloatingChatLazy";
+import MotionProvider from "@/components/ui/MotionProvider";
 import "./globals.css";
 
 // Display font — dramatic, bold condensed sans-serif for headlines
@@ -41,11 +43,14 @@ export default function RootLayout({
   return (
     <html lang="cs">
       <body className={`${bebasNeue.variable} ${inter.variable} antialiased`}>
-        <Nav />
-        <main>{children}</main>
-        <Footer />
-        <CookieBanner />
-        <FloatingChatLazy />
+        <MotionProvider>
+          <Nav />
+          <main>{children}</main>
+          <Footer />
+          <CookieBanner />
+          <FloatingChatLazy />
+          <Analytics />
+        </MotionProvider>
       </body>
     </html>
   );

@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 
 // 6 items with sizes that fill 3-column grid cleanly:
 // Row 1: large(2) + small(1) = 3
@@ -58,7 +58,7 @@ type ProjectCardProps = {
 
 function ProjectCard({ title, category, image, size, index }: ProjectCardProps) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
@@ -87,7 +87,7 @@ function ProjectCard({ title, category, image, size, index }: ProjectCardProps) 
         </p>
         <h3 className="text-white font-display text-2xl leading-none">{title}</h3>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -100,7 +100,7 @@ export default function ProjectsSection() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div ref={ref} className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
@@ -111,8 +111,8 @@ export default function ProjectsSection() {
             <h2 className="font-display text-5xl lg:text-7xl text-white leading-none">
               UKÁZKY REALIZACÍ
             </h2>
-          </motion.div>
-          <motion.div
+          </m.div>
+          <m.div
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -124,7 +124,7 @@ export default function ProjectsSection() {
               Všechny reference
               <span aria-hidden="true">→</span>
             </Link>
-          </motion.div>
+          </m.div>
         </div>
 
         {/* Bento grid */}

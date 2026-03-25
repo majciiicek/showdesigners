@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 
 export default function IntroSection() {
   const ref = useRef(null);
@@ -12,7 +12,7 @@ export default function IntroSection() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left — big label */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -27,10 +27,10 @@ export default function IntroSection() {
               <br />
               <span className="text-[#C8D400]">ÚROVNI.</span>
             </h2>
-          </motion.div>
+          </m.div>
 
           {/* Right — text */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
@@ -60,7 +60,7 @@ export default function IntroSection() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

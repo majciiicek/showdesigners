@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 
 const statements = [
   { line1: "NÁVRH", line2: "NA MÍRU." },
@@ -30,7 +30,7 @@ export default function StatsSection() {
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-black/10">
           {statements.map((s, i) => (
-            <motion.div
+            <m.div
               key={s.line2}
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -43,7 +43,7 @@ export default function StatsSection() {
                 <br />
                 {s.line2}
               </p>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

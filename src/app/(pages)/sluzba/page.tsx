@@ -76,10 +76,9 @@ export default function SluzbaPage() {
             className="font-display text-white leading-none max-w-4xl"
             style={{ fontSize: "clamp(3.5rem, 9vw, 8rem)" }}
           >
-            SHOW DESIGN
+            <span className="text-[#C8D400]">SHOW DESIGN</span>
             <br />
-            OD A{" "}
-            <span className="text-[#C8D400]">DO Z.</span>
+            OD A DO Z.
           </h1>
         </div>
       </section>

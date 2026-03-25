@@ -16,7 +16,7 @@ npx tsc --noEmit   # TypeScript check (pre-existing errors in HeroSection.tsx ca
 - **Next.js 16** (App Router, TypeScript strict mode)
 - **Tailwind CSS v4** (configuration in `src/app/globals.css`, not `tailwind.config.ts`)
 - **Anthropic SDK** — streaming via `client.messages.stream()`
-- **Supabase** — server-side only via `service_role` key (`src/lib/supabase.ts`), RLS disabled
+- **Supabase** — server-side only via `service_role` key (`src/lib/supabase.ts`), RLS enabled (service_role bypasses it automatically)
 - **Resend** — transactional email
 - **Zod v4** — use `message:` not `required_error:` / `errorMap:`
 - **Framer Motion** — animations, interactive hero
@@ -41,11 +41,11 @@ src/
       chat/session/  # GET/POST/PATCH — Supabase session management
       contact/       # POST /api/contact — contact form (Resend)
       inquiry/       # POST /api/inquiry — direct inquiry form
-    layout.tsx       # Nav, Footer, CookieBanner, FloatingChat
+    layout.tsx       # Nav, Footer, CookieBanner, FloatingChatLazy
     page.tsx         # Homepage
   components/
     sections/        # Homepage sections (Hero, Intro, Projects, AdvisorSection, etc.)
-    ui/              # Nav, Footer, AiChat, CookieBanner, ContactForm, FloatingChat
+    ui/              # Nav, Footer, AiChat, CookieBanner, ContactForm, FloatingChat, FloatingChatLazy
   lib/
     supabase.ts      # Supabase client + Conversation/Message interfaces
     references.ts    # LEGACY — již se nepoužívá pro web, zachováno pro referenci
@@ -105,9 +105,13 @@ Detail page (`/reference/[slug]`) includes `schema.org/BreadcrumbList` JSON-LD f
 - Props: `hideLabel?: boolean` (suppresses header in FloatingChat), `autoStartMessage?: string` (triggers auto-start after session check)
 
 **`src/components/ui/FloatingChat.tsx`** — FAB widget, fixed bottom-right:
-- Auto-opens after 5s, once per session (`sessionStorage` key `sd_chat_auto_opened`)
+- Auto-opens after 20s on desktop, once per session (`sessionStorage` key `sd_chat_auto_opened`)
 - Starts chat with `__AUTO_OPEN__` trigger → Claude greets briefly + offers to close
 - Wraps `<AiChat hideLabel autoStartMessage="__AUTO_OPEN__" />`
+
+**`src/components/ui/FloatingChatLazy.tsx`** — thin `"use client"` wrapper:
+- Loads `FloatingChat` via `dynamic(() => import(...), { ssr: false })` — deferred after hydration
+- Required because `layout.tsx` is a Server Component and `dynamic` with `ssr: false` cannot be used there directly
 
 ## Database (Supabase)
 
@@ -157,8 +161,12 @@ Toto rozlišení je důležité pro texty na webu, v referencích i v AI asisten
 
 - **Tailwind v4**: no `tailwind.config.ts` — all theme config goes in `globals.css` with `@theme`
 - **Supabase client is server-only** — never import `src/lib/supabase.ts` in client components
+- **Supabase RLS**: enabled on `conversations` and `messages` tables — `service_role` bypasses it automatically, `anon` key is blocked
 - **AI system prompt** contains Showdesigners knowledge base inline in `SYSTEM_PROMPT` constant in `route.ts` — avoid backticks inside the template literal (causes Turbopack parse error)
 - **SYSTEM_PROMPT internal triggers**: use regular quotes `"__TRIGGER__"`, never backticks `` `__TRIGGER__` ``
+- **`dynamic()` with `ssr: false`** cannot be used in Server Components — wrap in a `"use client"` component first (see `FloatingChatLazy.tsx`)
+- **`urlFor()` from Sanity** — never chain `.width()` or `.height()` when passing to Next.js `<Image src>`. Next.js adds its own `w=` param which conflicts with Sanity CDN params → 400 errors. Use only `.format("webp").url()`
+- **Framer Motion `repeat: Infinity`** — avoid on page-level components, causes continuous main-thread work and high TBT. Use CSS animations for looping effects instead.
 - Deploy: Vercel via GitHub push to `main`
 - Reference data jsou v Sanity, **ne** v `references.ts` — ten soubor je legacy
 - Sanity Studio CORS: `localhost:3000` a `showdesigners.cz` musí být povoleny v sanity.io/manage → API → CORS Origins

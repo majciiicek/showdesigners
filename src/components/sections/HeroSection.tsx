@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 // ---------------------------------------------------------------------------
 // Data
@@ -170,7 +170,7 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
 
       {/* Background photo — subtle atmospheric texture */}
-      <motion.div
+      <m.div
         aria-hidden="true"
         className="absolute inset-0"
         animate={{ opacity: showCompletion ? 0 : 1 }}
@@ -186,10 +186,10 @@ export default function HeroSection() {
         />
         {/* Overlay — dark enough to keep blocks readable */}
         <div className="absolute inset-0 bg-black/60" />
-      </motion.div>
+      </m.div>
 
       {/* Hero video — fades in on completion */}
-      <motion.video
+      <m.video
         autoPlay
         muted
         loop
@@ -201,10 +201,10 @@ export default function HeroSection() {
         transition={{ duration: 1.2 }}
       >
         <source src="/videos/hero.mp4" type="video/mp4" />
-      </motion.video>
+      </m.video>
 
       {/* Dark overlay over video — only visible when video is showing */}
-      <motion.div
+      <m.div
         aria-hidden="true"
         className="absolute inset-0 bg-black/55"
         initial={{ opacity: 0 }}
@@ -214,7 +214,7 @@ export default function HeroSection() {
 
 
       {/* Lime radial glow — intensifies when complete */}
-      <motion.div
+      <m.div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         animate={{ opacity: isComplete ? 0.14 : 0.04 }}
@@ -231,7 +231,7 @@ export default function HeroSection() {
         <AnimatePresence mode="wait">
 
           {!showCompletion && (
-            <motion.div
+            <m.div
               key="instruction"
               className="text-center"
               animate={{
@@ -241,15 +241,15 @@ export default function HeroSection() {
               transition={{ duration: 0.35 }}
               exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.3 } }}
             >
-              <motion.p
+              <m.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
                 className="text-[#C8D400] text-xs font-semibold tracking-[0.25em] uppercase mb-4"
               >
                 Entertainment consultancy
-              </motion.p>
-              <motion.h1
+              </m.p>
+              <m.h1
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.65, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -259,24 +259,24 @@ export default function HeroSection() {
                 <br />
                 SVŮJ{" "}
                 <span className="text-[#C8D400]">VEČER</span>
-              </motion.h1>
-              <motion.p
+              </m.h1>
+              <m.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.35 }}
                 transition={{ delay: 1.4 }}
                 className="text-white text-sm mt-5"
               >
                 Poskládejte večer krok po kroku
-              </motion.p>
-              <motion.p
+              </m.p>
+              <m.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.25 }}
                 transition={{ delay: 1.8 }}
                 className="text-white text-xs mt-2"
               >
                 Scrollujte a zjistěte více o Showdesigners
-              </motion.p>
-              <motion.button
+              </m.p>
+              <m.button
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 2.2 }}
@@ -284,27 +284,27 @@ export default function HeroSection() {
                 className="mt-5 px-5 py-2 rounded-sm border border-white/20 text-white/60 text-xs font-medium hover:border-white/50 hover:text-white/90 transition-all duration-200 pointer-events-auto"
               >
                 Přeskočit →
-              </motion.button>
-            </motion.div>
+              </m.button>
+            </m.div>
           )}
 
           {showCompletion && (
-            <motion.div
+            <m.div
               key="completion"
               initial={{ opacity: 0, scale: 0.88, y: 24 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="text-center px-6 pointer-events-auto"
             >
-              <motion.p
+              <m.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.15 }}
                 className="text-[#C8D400] text-xs font-semibold tracking-[0.25em] uppercase mb-4"
               >
                 Příběh večera je kompletní
-              </motion.p>
-              <motion.h2
+              </m.p>
+              <m.h2
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -313,8 +313,8 @@ export default function HeroSection() {
                 SHOWDESIGNERS TO
                 <br />
                 <span className="text-[#C8D400]">POSTAVÍ ZA VÁS</span>
-              </motion.h2>
-              <motion.p
+              </m.h2>
+              <m.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.5 }}
                 transition={{ delay: 0.45 }}
@@ -323,8 +323,8 @@ export default function HeroSection() {
                 Jeden partner. Kompletní entertainment.
                 <br />
                 Od dramaturgie po poslední vystoupení.
-              </motion.p>
-              <motion.div
+              </m.p>
+              <m.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.55 }}
@@ -342,8 +342,8 @@ export default function HeroSection() {
                 >
                   Začít znovu
                 </button>
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
           )}
 
         </AnimatePresence>
@@ -360,7 +360,7 @@ export default function HeroSection() {
         const isNext = !isPlaced && !showCompletion && CORRECT_ORDER[placed.length] === block.id;
 
         return (
-          <motion.button
+          <m.button
             key={block.id}
             aria-label={`Přidat ${block.label} do programu`}
             onClick={() => handleBlockClick(block.id)}
@@ -403,12 +403,12 @@ export default function HeroSection() {
                 {block.desc}
               </p>
             </div>
-          </motion.button>
+          </m.button>
         );
       })}
 
       {/* Scroll indicator */}
-      <motion.div
+      <m.div
         animate={{ opacity: placed.length > 0 ? 0 : 1 }}
         transition={{ duration: 0.4 }}
         className="absolute bottom-8 left-8 lg:left-10 flex flex-col items-center gap-2 pointer-events-none"
@@ -417,7 +417,7 @@ export default function HeroSection() {
           Scroll
         </span>
         <div className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent" />
-      </motion.div>
+      </m.div>
 
     </section>
   );

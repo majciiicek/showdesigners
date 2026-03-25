@@ -40,6 +40,7 @@ CREATE TRIGGER conversations_updated_at
   BEFORE UPDATE ON conversations
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 
--- RLS vypnuto — přístup pouze přes service_role klíč ze serveru
-ALTER TABLE conversations DISABLE ROW LEVEL SECURITY;
-ALTER TABLE messages DISABLE ROW LEVEL SECURITY;
+-- RLS zapnuto — service_role klíč ho automaticky obchází (plný přístup ze serveru)
+-- anon klíč nemá žádná policy → zablokován
+ALTER TABLE conversations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE messages ENABLE ROW LEVEL SECURITY;

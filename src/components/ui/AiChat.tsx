@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 interface Message {
   role: "user" | "assistant";
@@ -275,7 +275,7 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
   // Not yet started
   if (!isStarted) {
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -329,7 +329,7 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
             </div>
           )}
         </div>
-      </motion.div>
+      </m.div>
     );
   }
 
@@ -354,7 +354,7 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
       {/* Returning user banner */}
       <AnimatePresence>
         {isReturning && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -375,7 +375,7 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
                 Začít znovu
               </button>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
@@ -387,7 +387,7 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
               if (msg.content.startsWith("__RETURNING_USER__")) return null;
               if (msg.content.startsWith("__AUTO_OPEN__")) return null;
               return (
-                <motion.div
+                <m.div
                   key={i}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -397,14 +397,14 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
                   <div className="bg-white/10 text-white text-sm leading-relaxed px-4 py-3 rounded-sm max-w-[80%]">
                     {msg.content}
                   </div>
-                </motion.div>
+                </m.div>
               );
             }
 
             const displayText = cleanDisplayText(msg.content);
 
             return (
-              <motion.div
+              <m.div
                 key={i}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -423,13 +423,13 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
                     </span>
                   )}
                 </div>
-              </motion.div>
+              </m.div>
             );
           })}
         </AnimatePresence>
 
         {inquirySent && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
@@ -442,7 +442,7 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
               <p className="text-white text-sm font-medium">Poptávka odeslána</p>
               <p className="text-white/50 text-xs mt-1">Váš show designer se ozve do 24 hodin. Zkontrolujte také složku spam.</p>
             </div>
-          </motion.div>
+          </m.div>
         )}
 
         {error && (

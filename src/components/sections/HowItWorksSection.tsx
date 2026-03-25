@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 
 const steps = [
   {
@@ -50,15 +50,15 @@ export default function HowItWorksSection() {
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <div ref={ref} className="mb-16">
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
             className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-4"
           >
             Jak to funguje
-          </motion.p>
-          <motion.h2
+          </m.p>
+          <m.h2
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
@@ -67,12 +67,12 @@ export default function HowItWorksSection() {
             OD VIZE
             <br />
             <span className="text-white/30">K PŘÍBĚHU.</span>
-          </motion.h2>
+          </m.h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10">
           {steps.map((step, i) => (
-            <motion.div
+            <m.div
               key={step.number}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -90,12 +90,12 @@ export default function HowItWorksSection() {
                 <h3 className="font-display text-3xl text-white mb-3">{step.title}</h3>
                 <p className="text-white/60 text-base leading-relaxed">{step.description}</p>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
         {/* CTA */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
@@ -111,7 +111,7 @@ export default function HowItWorksSection() {
           <span className="text-white/40 text-sm">
             Náš obchodní tým se ozve do 24 hodin.
           </span>
-        </motion.div>
+        </m.div>
 
       </div>
     </section>

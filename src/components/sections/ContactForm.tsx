@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 const schema = z.object({
   name: z.string().min(2, "Zadejte jméno"),
@@ -67,7 +67,7 @@ export default function ContactForm() {
       <AnimatePresence mode="wait">
         {status === "success" ? (
           // Success state
-          <motion.div
+          <m.div
             key="success"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -96,10 +96,10 @@ export default function ContactForm() {
             >
               Odeslat další poptávku →
             </button>
-          </motion.div>
+          </m.div>
         ) : (
           // Form
-          <motion.form
+          <m.form
             key="form"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -217,7 +217,7 @@ export default function ContactForm() {
             >
               {status === "loading" ? "Odesílám…" : "Odeslat poptávku"}
             </button>
-          </motion.form>
+          </m.form>
         )}
       </AnimatePresence>
     </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef } from "react";
 
 export default function CtaSection() {
@@ -25,15 +25,15 @@ export default function CtaSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[400px]">
           {/* Left — headline */}
           <div className="flex flex-col justify-center py-20 lg:py-28 lg:pr-16 border-b lg:border-b-0 lg:border-r border-black/10">
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
               className="text-black/40 text-xs font-semibold tracking-[0.2em] uppercase mb-6"
             >
               Začněte dnes
-            </motion.p>
-            <motion.h2
+            </m.p>
+            <m.h2
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
@@ -45,11 +45,11 @@ export default function CtaSection() {
               KOMPLETNÍ
               <br />
               PROGRAM.
-            </motion.h2>
+            </m.h2>
           </div>
 
           {/* Right — contact */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
@@ -80,7 +80,7 @@ export default function CtaSection() {
                 Alžběta Grée — +420 777 668 694
               </a>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>
