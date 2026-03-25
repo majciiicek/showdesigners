@@ -44,7 +44,10 @@ export default async function ReferenceDetailPage({ params }: Props) {
   if (!ref || !ref.detail) notFound();
 
   // Pick up to 3 other references for internal linking
-  const relatedRefs = allReferences.filter((r) => r.slug.current !== slug).slice(0, 3);
+  // Rotate starting index based on current slug so every reference gets linked from multiple detail pages
+  const others = allReferences.filter((r) => r.slug.current !== slug);
+  const startIndex = allReferences.findIndex((r) => r.slug.current === slug) % Math.max(others.length, 1);
+  const relatedRefs = [...others.slice(startIndex), ...others.slice(0, startIndex)].slice(0, 3);
 
   const d = ref.detail;
   const heroUrl = urlFor(ref.image).format("webp").url();
