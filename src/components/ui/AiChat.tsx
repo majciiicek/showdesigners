@@ -60,7 +60,9 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
           setKnownName(data.conversation.name);
           setSessionToken(token);
           setIsStarted(true);
-          setIsReturning(true);
+          // Show returning banner only if user actually typed something (not just auto-open greeting)
+          const hasUserMessage = data.messages.some((m) => m.role === "user");
+          setIsReturning(hasUserMessage);
         }
       } catch {
         // Silently ignore — start fresh
