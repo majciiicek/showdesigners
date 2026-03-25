@@ -250,7 +250,7 @@ export default function HeroSection() {
                 Entertainment consultancy
               </m.p>
               <m.h1
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.65, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className="font-display text-display text-white"
