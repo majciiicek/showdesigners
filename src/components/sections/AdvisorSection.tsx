@@ -91,9 +91,12 @@ export default function AdvisorSection() {
 
               {/* Problem */}
               <div className="pl-8 flex flex-col gap-4">
-                <p className="text-white/35 text-sm leading-relaxed border-l border-white/10 pl-4">
-                  {area.problem}
-                </p>
+                <div>
+                  <p className="text-white/20 text-[10px] font-semibold tracking-[0.2em] uppercase mb-2">Co se může stát</p>
+                  <p className="text-white/35 text-sm leading-relaxed border-l border-white/10 pl-4">
+                    {area.problem}
+                  </p>
+                </div>
 
                 {/* Divider */}
                 <div className="flex items-center gap-3">
