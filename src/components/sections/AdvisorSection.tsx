@@ -14,7 +14,7 @@ const areas = [
     number: "02",
     title: "Koordinace s dodavateli",
     problem: "Umělce nikdo nevidí, protože catering ještě servíruje. Technici neví, kdy a co pustit. Každý řeší jen svou část.",
-    solution: "Hlídáme, aby catering, technika, zvuk a program šly ruku v ruce. Komunikujeme za vás se všemi stranami — vy se nemusíte starat.",
+    solution: "Na místě akce hlídáme timing za vás — víme, kdy catering otevírá, kdy technika pouští světla, kdy je správný moment pro nástup umělců. Vy komunikujete jen s námi.",
   },
   {
     number: "03",
