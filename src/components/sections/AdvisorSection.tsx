@@ -54,7 +54,7 @@ export default function AdvisorSection() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="font-display text-display text-white leading-none mb-8"
           >
-            VÍME, CO DĚLÁ VEČER{" "}
+            VÍME, CO DĚLÁ EVENT{" "}
             <span className="text-[#C8D400]">VÝJIMEČNÝM.</span>
           </m.h2>
           <m.p
