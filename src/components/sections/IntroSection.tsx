@@ -21,11 +21,11 @@ export default function IntroSection() {
               Kdo jsme
             </p>
             <h2 className="font-display text-display text-white leading-none">
-              ENTERTAINMENT
+              <span className="text-[#C8D400]">ENTERTAINMENT</span>
               <br />
               NA NEJVYŠŠÍ
               <br />
-              <span className="text-[#C8D400]">ÚROVNI.</span>
+              ÚROVNI.
             </h2>
           </m.div>
 

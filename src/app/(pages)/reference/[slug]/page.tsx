@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getReferenceBySlug, getReferencesSlugs, getAllReferences } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
+import RelatedRefsScroll from "@/components/ui/RelatedRefsScroll";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -43,11 +44,8 @@ export default async function ReferenceDetailPage({ params }: Props) {
 
   if (!ref || !ref.detail) notFound();
 
-  // Pick up to 3 other references for internal linking
-  // Rotate starting index based on current slug so every reference gets linked from multiple detail pages
-  const others = allReferences.filter((r) => r.slug.current !== slug);
-  const startIndex = allReferences.findIndex((r) => r.slug.current === slug) % Math.max(others.length, 1);
-  const relatedRefs = [...others.slice(startIndex), ...others.slice(0, startIndex)].slice(0, 3);
+  // All other references with a detail page, in order from Sanity (order asc)
+  const relatedRefs = allReferences.filter((r) => r.slug.current !== slug && r.hasDetail);
 
   const d = ref.detail;
   const heroUrl = urlFor(ref.image).width(1600).format("webp").url();
@@ -216,19 +214,8 @@ export default async function ReferenceDetailPage({ params }: Props) {
         <section className="py-16 bg-[#0d0d0d] border-t border-white/5">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-8">Další realizace</p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {relatedRefs.map((r) => (
-                <Link
-                  key={r._id}
-                  href={`/reference/${r.slug.current}`}
-                  className="group block bg-black/40 border border-white/5 rounded-sm p-6 hover:border-[#C8D400]/30 transition-colors duration-200"
-                >
-                  <p className="text-white/30 text-xs uppercase tracking-widest mb-2">{r.type}</p>
-                  <p className="font-display text-xl text-white group-hover:text-[#C8D400] transition-colors duration-200 leading-tight">{r.title.toUpperCase()}</p>
-                </Link>
-              ))}
-            </div>
           </div>
+          <RelatedRefsScroll refs={relatedRefs} />
         </section>
       )}
 

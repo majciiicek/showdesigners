@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import Nav from "@/components/ui/Nav";
 import Footer from "@/components/ui/Footer";
 import CookieBanner from "@/components/ui/CookieBanner";
-import FloatingChatLazy from "@/components/ui/FloatingChatLazy";
+import ConditionalFloatingChat from "@/components/ui/ConditionalFloatingChat";
 import MotionProvider from "@/components/ui/MotionProvider";
 import "./globals.css";
 
@@ -48,7 +48,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
           <CookieBanner />
-          <FloatingChatLazy />
+          <ConditionalFloatingChat />
           <Analytics />
         </MotionProvider>
       </body>
