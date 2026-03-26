@@ -50,7 +50,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
   const relatedRefs = [...others.slice(startIndex), ...others.slice(0, startIndex)].slice(0, 3);
 
   const d = ref.detail;
-  const heroUrl = urlFor(ref.image).format("webp").url();
+  const heroUrl = urlFor(ref.image).width(1600).format("webp").url();
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://showdesigners.cz";
 
@@ -167,7 +167,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
               {d.gallery.map((img, i) => (
                 <div key={i} className="relative break-inside-avoid overflow-hidden rounded-sm">
                   <Image
-                    src={urlFor(img).format("webp").url()}
+                    src={urlFor(img).width(900).format("webp").url()}
                     alt={`${ref.title} — foto ${i + 1}`}
                     width={800}
                     height={600}
