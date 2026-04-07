@@ -43,7 +43,7 @@ const projects = [
   {
     title: "Plesová show",
     category: "Taneční vystoupení",
-    image: "/images/plesovashow/plesova-show1.webp",
+    image: "/images/plesovashow/plesova-show2.webp",
     size: "large",
   },
 ];
