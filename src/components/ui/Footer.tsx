@@ -119,6 +119,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="text-white/60">
+                <span className="text-white/30 text-xs uppercase tracking-widest block mb-0.5">Obchodní mág</span>
                 Alžběta Grée{" "}
                 <a
                   href="tel:+420777668694"
@@ -128,6 +129,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="text-white/60">
+                <span className="text-white/30 text-xs uppercase tracking-widest block mb-0.5">Founder</span>
                 Michal Halačka{" "}
                 <a
                   href="tel:+420774297349"
