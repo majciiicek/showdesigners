@@ -247,7 +247,7 @@ export default function HeroSection() {
                 transition={{ delay: 0.5 }}
                 className="text-[#C8D400] text-xs font-semibold tracking-[0.25em] uppercase mb-4"
               >
-                Entertainment consultancy
+                Show design na klíč
               </m.p>
               <m.h1
                 initial={{ y: 24 }}
@@ -255,10 +255,10 @@ export default function HeroSection() {
                 transition={{ delay: 0.65, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className="font-display text-display text-white"
               >
-                POSKLÁDEJTE
+                VÁŠ VEČER
                 <br />
-                SVŮJ{" "}
-                <span className="text-[#C8D400]">VEČER</span>
+                POSTAVÍME{" "}
+                <span className="text-[#C8D400]">ZA VÁS</span>
               </m.h1>
               <m.p
                 initial={{ opacity: 0 }}
@@ -266,7 +266,7 @@ export default function HeroSection() {
                 transition={{ delay: 1.4 }}
                 className="text-white text-sm mt-5"
               >
-                Poskládejte večer krok po kroku
+                Prozkoumejte, z čeho skládáme dokonalý večer
               </m.p>
               <m.p
                 initial={{ opacity: 0 }}
@@ -302,7 +302,7 @@ export default function HeroSection() {
                 transition={{ delay: 0.15 }}
                 className="text-[#C8D400] text-xs font-semibold tracking-[0.25em] uppercase mb-4"
               >
-                Příběh večera je kompletní
+                Tohle vše zajistíme za vás
               </m.p>
               <m.h2
                 initial={{ opacity: 0, y: 18 }}
