@@ -35,7 +35,7 @@ export default function HowItWorksSection() {
       {/* Full-bleed background photo */}
       <div className="absolute inset-0">
         <Image
-          src="/images/parovaakrobacie/67FC50CA-DBE7-4CF0-A0AB-5989867906E7.webp"
+          src="/images/parovaakrobacie/partnerska-akrobacie2.webp"
           alt="Partnerská akrobacie na firemním večírku — show designer Showdesigners na místě"
           fill
           className="object-cover object-center"

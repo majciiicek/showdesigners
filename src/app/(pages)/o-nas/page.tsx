@@ -33,7 +33,7 @@ export default function ONasPage() {
       {/* Hero — foto na pozadí */}
       <section className="relative min-h-[80vh] lg:min-h-[90vh] flex items-end overflow-hidden">
         <Image
-          src="/images/plesovashow/IMG_6317_foto_Jiří_Balát_edit.webp"
+          src="/images/plesovashow/plesova-show1.webp"
           alt="Plesová show — tým Showdesigners na místě akce"
           fill
           className="object-cover object-center"

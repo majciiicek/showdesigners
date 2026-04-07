@@ -177,7 +177,7 @@ export default function HeroSection() {
         transition={{ duration: 1 }}
       >
         <Image
-          src="/images/fireshow/0IMG0280-Enhanced-NR.webp"
+          src="/images/fireshow/tribal-fireshow2.webp"
           alt=""
           fill
           className="object-cover"

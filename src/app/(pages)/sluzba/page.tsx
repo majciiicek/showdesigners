@@ -13,13 +13,13 @@ const eventTypes = [
     title: "Korporátní akce",
     description:
       "Gala večeře, firemní večírky, team buildingy, produktové launche. Program, který odpovídá firemní kultuře a zanechá dojem.",
-    image: "/images/parovaakrobacie/ALLWYN_by_art4people_101225_2048px_JanHromadko-1119.webp",
+    image: "/images/parovaakrobacie/partnerska-akrobacie1.webp",
   },
   {
     title: "Luxusní soukromé akce",
     description:
       "Svatby, VIP narozeniny, soukromé oslavy. Každý detail choreografován pro ten správný moment.",
-    image: "/images/plesovashow/IMG_6329_foto_Jiří_Balát_edit.webp",
+    image: "/images/plesovashow/plesova-show2.webp",
   },
   {
     title: "Festivaly a kulturní akce",
@@ -59,7 +59,7 @@ export default function SluzbaPage() {
       {/* Hero — foto na pozadí */}
       <section className="relative min-h-[80vh] lg:min-h-[90vh] flex items-end overflow-hidden">
         <Image
-          src="/images/zavesnaakrobacie/salo-kruh16.webp"
+          src="/images/zavesnaakrobacie/salo-kruh1.webp"
           alt="Vzdušná akrobacie na firemní akci — Showdesigners"
           fill
           className="object-cover object-center"
