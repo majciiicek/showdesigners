@@ -213,7 +213,7 @@ export default function ONasPage() {
             CHCETE NÁS POZNAT?
           </h2>
           <Link
-            href="/kontakt"
+            href="/kontakt?mode=form"
             className="flex-shrink-0 bg-black text-[#C8D400] font-semibold text-base px-10 py-4 rounded-sm btn-hover-dark"
           >
             Napište nám

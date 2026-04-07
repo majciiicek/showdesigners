@@ -1,13 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import ContactForm from "@/components/sections/ContactForm";
 import AiChat from "@/components/ui/AiChat";
 
 type Mode = "form" | "ai";
 
 export default function KontaktClient() {
-  const [mode, setMode] = useState<Mode>("ai");
+  const searchParams = useSearchParams();
+  const [mode, setMode] = useState<Mode>(
+    searchParams.get("mode") === "form" ? "form" : "ai"
+  );
 
   return (
     <section className="bg-black pt-32 pb-24 lg:pt-40 lg:pb-36">
