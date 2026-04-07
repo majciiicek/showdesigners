@@ -65,7 +65,7 @@ export default function FloatingChat() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C8D400]" />
                 </span>
                 <span className="text-white/60 text-xs font-medium tracking-[0.15em] uppercase">
-                  AI asistent
+                  Virtuální Alžběta
                 </span>
               </div>
               <button
@@ -90,7 +90,7 @@ export default function FloatingChat() {
       {/* FAB toggle button */}
       <m.button
         onClick={() => setIsOpen((v) => !v)}
-        aria-label={isOpen ? "Zavřít asistenta" : "Otevřít AI asistenta"}
+        aria-label={isOpen ? "Zavřít Virtuální Alžbětu" : "Otevřít Virtuální Alžbětu"}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="flex items-center gap-2.5 bg-[#C8D400] text-black font-semibold text-sm px-5 py-3.5 rounded-full shadow-lg"
@@ -131,7 +131,7 @@ export default function FloatingChat() {
             </m.svg>
           )}
         </AnimatePresence>
-        <span>{isOpen ? "Zavřít" : "Asistent"}</span>
+        <span>{isOpen ? "Zavřít" : "Alžběta"}</span>
       </m.button>
 
     </div>

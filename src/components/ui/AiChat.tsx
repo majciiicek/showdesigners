@@ -286,11 +286,11 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
         {!hideLabel && (
           <div className="flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-[#C8D400] animate-pulse" />
-            <span className="text-white/40 text-xs uppercase tracking-widest">AI asistent</span>
+            <span className="text-white/40 text-xs uppercase tracking-widest">Virtuální Alžběta</span>
           </div>
         )}
         <p className="text-white/70 text-base leading-relaxed max-w-md">
-          Místo formuláře si můžete promluvit s naším AI asistentem. Provede vás poptávkou přirozenou konverzací — žádné vyplňování políček.
+          Místo formuláře si můžete promluvit s Virtuální Alžbětou. Provede vás poptávkou přirozenou konverzací — žádné vyplňování políček.
         </p>
 
         <div className="flex flex-col gap-3 w-full">

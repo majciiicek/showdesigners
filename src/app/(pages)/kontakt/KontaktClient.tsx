@@ -29,7 +29,7 @@ export default function KontaktClient() {
               <span className="text-[#C8D400]">SHOW.</span>
             </h1>
             <p className="text-white/60 text-base leading-relaxed max-w-sm mb-12">
-              Pohovořte s naším AI asistentem nebo vyplňte formulář. Váš show designer se ozve do 24 hodin.
+              Pohovořte s Virtuální Alžbětou nebo vyplňte formulář. Váš show designer se ozve do 24 hodin.
             </p>
 
             {/* Direct contacts */}
@@ -67,7 +67,7 @@ export default function KontaktClient() {
                     : "text-white/40 hover:text-white"
                 }`}
               >
-                AI asistent
+                Virtuální Alžběta
               </button>
               <button
                 onClick={() => setMode("form")}
