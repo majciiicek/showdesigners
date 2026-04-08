@@ -35,6 +35,28 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   // Skryje hlavičku X-Powered-By: Next.js — omezí únik informací o tech stacku
   poweredByHeader: false,
+
+  // Maps EN and DE URL slugs to the CS file-system paths.
+  // Locale is detected from hostname (middleware), so the right language is
+  // still served even though the underlying route is the CS folder.
+  async rewrites() {
+    return [
+      // English slugs
+      { source: "/about",            destination: "/o-nas"     },
+      { source: "/services",         destination: "/sluzba"    },
+      { source: "/references",       destination: "/reference" },
+      { source: "/references/:slug", destination: "/reference/:slug" },
+      { source: "/contact",          destination: "/kontakt"   },
+      { source: "/privacy",          destination: "/zasady"    },
+      // German slugs
+      { source: "/ueber-uns",        destination: "/o-nas"     },
+      { source: "/leistungen",       destination: "/sluzba"    },
+      { source: "/referenzen",       destination: "/reference" },
+      { source: "/referenzen/:slug", destination: "/reference/:slug" },
+      { source: "/datenschutz",      destination: "/zasady"    },
+    ];
+  },
+
   images: {
     remotePatterns: [
       {
