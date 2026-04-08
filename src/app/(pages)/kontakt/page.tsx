@@ -3,7 +3,8 @@ import { Suspense } from "react";
 import KontaktClient from "./KontaktClient";
 import { getLocale } from "@/lib/locale";
 import { getTranslations, OG_LOCALE_MAP } from "@/lib/i18n";
-import { getAlternateUrls } from "@/lib/slugs";
+import { getAlternateUrls, SLUG_MAP } from "@/lib/slugs";
+import { getPageTranslations } from "@/lib/page-translations";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -26,10 +27,19 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function KontaktPage() {
+export default async function KontaktPage() {
+  const locale = await getLocale();
+  const pt = getPageTranslations(locale);
+  const privacyHref = `/${SLUG_MAP.zasady[locale]}`;
+
   return (
     <Suspense>
-      <KontaktClient />
+      <KontaktClient
+        text={pt.contact}
+        formText={pt.contact}
+        chatText={pt.ui}
+        privacyHref={privacyHref}
+      />
     </Suspense>
   );
 }

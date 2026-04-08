@@ -3,30 +3,27 @@
 import { useRef } from "react";
 import { m, useInView } from "framer-motion";
 
-const testimonials = [
-  {
-    quote:
-      "Výborná show, perfektní osvětlení a profesionální přístup. Byli jsme velmi spokojeni.",
-    author: "Michaela Šperová",
-    role: "Firemní akce",
-  },
-  {
-    quote:
-      "Na firemní akce jsme měli laserové bludiště a akrobatické vystoupení. Naprosto skvělé a profesionální. Milá komunikace, samostatnost a profesionální úroveň. Za celou firmu doporučuji.",
-    author: "Barbora Váhalíková",
-    role: "Firemní akce",
-  },
-  {
-    quote:
-      "Velká spokojenost! Díky světelné taneční show a LED hosteskám se naše firemní akce stala nezapomenutelnou.",
-    author: "Šárka Matoušková",
-    role: "Firemní akce",
-  },
-];
+export type TestimonialsText = {
+  testimonials_label: string;
+  testimonials_headline: string;
+  testimonials_role: string;
+  testimonial_1_quote: string;
+  testimonial_1_author: string;
+  testimonial_2_quote: string;
+  testimonial_2_author: string;
+  testimonial_3_quote: string;
+  testimonial_3_author: string;
+};
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({ text }: { text: TestimonialsText }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const testimonials = [
+    { quote: text.testimonial_1_quote, author: text.testimonial_1_author, role: text.testimonials_role },
+    { quote: text.testimonial_2_quote, author: text.testimonial_2_author, role: text.testimonials_role },
+    { quote: text.testimonial_3_quote, author: text.testimonial_3_author, role: text.testimonials_role },
+  ];
 
   return (
     <section className="py-24 lg:py-36 bg-[#0d0d0d] relative overflow-hidden">
@@ -49,7 +46,7 @@ export default function TestimonialsSection() {
             transition={{ duration: 0.6 }}
             className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-4"
           >
-            Co říkají klienti
+            {text.testimonials_label}
           </m.p>
           <m.h2
             initial={{ opacity: 0, y: 30 }}
@@ -57,7 +54,7 @@ export default function TestimonialsSection() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="font-display text-5xl lg:text-7xl text-white leading-none"
           >
-            REFERENCE
+            {text.testimonials_headline}
           </m.h2>
         </div>
 

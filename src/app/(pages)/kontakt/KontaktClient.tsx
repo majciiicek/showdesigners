@@ -2,12 +2,34 @@
 
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import ContactForm from "@/components/sections/ContactForm";
-import AiChat from "@/components/ui/AiChat";
+import ContactForm, { type FormText } from "@/components/sections/ContactForm";
+import AiChat, { type ChatText } from "@/components/ui/AiChat";
 
 type Mode = "form" | "ai";
 
-export default function KontaktClient() {
+export type KontaktText = {
+  kontakt_label: string;
+  kontakt_headline_1: string;
+  kontakt_headline_2: string;
+  kontakt_headline_3: string;
+  kontakt_sub: string;
+  kontakt_email_label: string;
+  kontakt_phone_label: string;
+  kontakt_tab_ai: string;
+  kontakt_tab_form: string;
+};
+
+export default function KontaktClient({
+  text,
+  formText,
+  chatText,
+  privacyHref,
+}: {
+  text: KontaktText;
+  formText: FormText;
+  chatText: ChatText;
+  privacyHref: string;
+}) {
   const searchParams = useSearchParams();
   const [mode, setMode] = useState<Mode>(
     searchParams.get("mode") === "form" ? "form" : "ai"
@@ -20,33 +42,33 @@ export default function KontaktClient() {
           {/* Left — info */}
           <div>
             <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-6">
-              Kontakt
+              {text.kontakt_label}
             </p>
             <h1
               className="font-display text-white leading-none mb-8"
               style={{ fontSize: "clamp(3rem, 7vw, 6rem)" }}
             >
-              POJĎME
+              {text.kontakt_headline_1}
               <br />
-              DĚLAT
+              {text.kontakt_headline_2}
               <br />
-              <span className="text-[#C8D400]">SHOW.</span>
+              <span className="text-[#C8D400]">{text.kontakt_headline_3}</span>
             </h1>
             <p className="text-white/60 text-base leading-relaxed max-w-sm mb-12">
-              Pohovořte s Virtuální Alžbětou nebo vyplňte formulář. Váš show designer se ozve do 24 hodin.
+              {text.kontakt_sub}
             </p>
 
             {/* Direct contacts */}
             <div className="flex flex-col gap-6">
               <a href="mailto:booking@showdesigners.cz" className="group flex flex-col">
-                <span className="text-white/30 text-xs uppercase tracking-widest mb-1">Email</span>
+                <span className="text-white/30 text-xs uppercase tracking-widest mb-1">{text.kontakt_email_label}</span>
                 <span className="text-[#C8D400] text-lg group-hover:text-[#d9e600] transition-colors duration-200">
                   booking@showdesigners.cz
                 </span>
               </a>
 
               <div className="flex flex-col gap-3">
-                <span className="text-white/30 text-xs uppercase tracking-widest">Telefon</span>
+                <span className="text-white/30 text-xs uppercase tracking-widest">{text.kontakt_phone_label}</span>
                 <div className="flex flex-col gap-1">
                   <a href="tel:+420777668694" className="text-white/80 hover:text-white transition-colors duration-200">
                     Alžběta Grée — +420 777 668 694
@@ -71,7 +93,7 @@ export default function KontaktClient() {
                     : "text-white/40 hover:text-white"
                 }`}
               >
-                Virtuální Alžběta
+                {text.kontakt_tab_ai}
               </button>
               <button
                 onClick={() => setMode("form")}
@@ -81,12 +103,16 @@ export default function KontaktClient() {
                     : "text-white/40 hover:text-white"
                 }`}
               >
-                Formulář
+                {text.kontakt_tab_form}
               </button>
             </div>
 
             {/* Content */}
-            {mode === "ai" ? <AiChat /> : <ContactForm />}
+            {mode === "ai" ? (
+              <AiChat text={chatText} />
+            ) : (
+              <ContactForm text={formText} privacyHref={privacyHref} />
+            )}
           </div>
         </div>
       </div>

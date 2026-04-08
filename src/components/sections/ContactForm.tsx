@@ -6,24 +6,43 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { m, AnimatePresence } from "framer-motion";
 
-const schema = z.object({
-  name: z.string().min(2, "Zadejte jméno"),
-  email: z.string().email("Neplatná e-mailová adresa"),
-  phone: z.string().optional(),
-  company: z.string().optional(),
-  eventType: z.enum(["korporatni", "soukroma", "festival", "hotel", "jine"]).refine(
-    (v) => v !== undefined,
-    { message: "Vyberte typ akce" }
-  ),
-  eventDate: z.string().optional(),
-  budget: z.enum(["50-150k", "150-500k", "500k-plus"]).optional(),
-  message: z.string().min(10, "Zpráva musí mít alespoň 10 znaků"),
-  gdprConsent: z.literal(true, { message: "Souhlas je povinný" }),
-  // Honeypot — humans leave this empty, bots fill it automatically
-  website: z.string().max(0, "").optional(),
-});
-
-type FormData = z.infer<typeof schema>;
+export type FormText = {
+  form_name_label: string;
+  form_name_placeholder: string;
+  form_name_error: string;
+  form_email_label: string;
+  form_email_placeholder: string;
+  form_email_error: string;
+  form_phone_label: string;
+  form_company_label: string;
+  form_company_placeholder: string;
+  form_eventtype_label: string;
+  form_eventtype_placeholder: string;
+  form_eventtype_error: string;
+  form_eventtype_1: string;
+  form_eventtype_2: string;
+  form_eventtype_3: string;
+  form_eventtype_4: string;
+  form_eventtype_5: string;
+  form_date_label: string;
+  form_budget_label: string;
+  form_budget_unknown: string;
+  form_budget_1: string;
+  form_budget_2: string;
+  form_budget_3: string;
+  form_message_label: string;
+  form_message_placeholder: string;
+  form_message_error: string;
+  form_gdpr_text: string;
+  form_gdpr_link: string;
+  form_gdpr_error: string;
+  form_error_message: string;
+  form_submit: string;
+  form_loading: string;
+  form_success_headline: string;
+  form_success_sub: string;
+  form_success_reset: string;
+};
 
 // Shared input class
 const inputClass =
@@ -33,8 +52,28 @@ const labelClass = "block text-white/50 text-xs uppercase tracking-widest mb-2";
 
 const errorClass = "text-red-400 text-xs mt-1";
 
-export default function ContactForm() {
+export default function ContactForm({ text, privacyHref }: { text: FormText; privacyHref: string }) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  // Build schema with translated error messages
+  const schema = z.object({
+    name: z.string().min(2, text.form_name_error),
+    email: z.string().email(text.form_email_error),
+    phone: z.string().optional(),
+    company: z.string().optional(),
+    eventType: z.enum(["korporatni", "soukroma", "festival", "hotel", "jine"]).refine(
+      (v) => v !== undefined,
+      { message: text.form_eventtype_error }
+    ),
+    eventDate: z.string().optional(),
+    budget: z.enum(["50-150k", "150-500k", "500k-plus"]).optional(),
+    message: z.string().min(10, text.form_message_error),
+    gdprConsent: z.literal(true, { message: text.form_gdpr_error }),
+    // Honeypot — humans leave this empty, bots fill it automatically
+    website: z.string().max(0, "").optional(),
+  });
+
+  type FormData = z.infer<typeof schema>;
 
   const {
     register,
@@ -86,15 +125,15 @@ export default function ContactForm() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h2 className="font-display text-4xl text-white mb-3">ODESLÁNO.</h2>
+            <h2 className="font-display text-4xl text-white mb-3">{text.form_success_headline}</h2>
             <p className="text-white/60 text-base mb-8">
-              Váš show designer se ozve do 24 hodin.
+              {text.form_success_sub}
             </p>
             <button
               onClick={() => setStatus("idle")}
               className="text-white/40 text-sm hover:text-white transition-colors duration-200"
             >
-              Odeslat další poptávku →
+              {text.form_success_reset}
             </button>
           </m.div>
         ) : (
@@ -111,13 +150,13 @@ export default function ContactForm() {
             {/* Row: name + email */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="name" className={labelClass}>Jméno *</label>
-                <input id="name" type="text" placeholder="Jan Novák" className={inputClass} {...register("name")} />
+                <label htmlFor="name" className={labelClass}>{text.form_name_label} *</label>
+                <input id="name" type="text" placeholder={text.form_name_placeholder} className={inputClass} {...register("name")} />
                 {errors.name && <p className={errorClass}>{errors.name.message}</p>}
               </div>
               <div>
-                <label htmlFor="email" className={labelClass}>E-mail *</label>
-                <input id="email" type="email" placeholder="jan@firma.cz" className={inputClass} {...register("email")} />
+                <label htmlFor="email" className={labelClass}>{text.form_email_label} *</label>
+                <input id="email" type="email" placeholder={text.form_email_placeholder} className={inputClass} {...register("email")} />
                 {errors.email && <p className={errorClass}>{errors.email.message}</p>}
               </div>
             </div>
@@ -125,25 +164,25 @@ export default function ContactForm() {
             {/* Row: phone + company */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="phone" className={labelClass}>Telefon</label>
+                <label htmlFor="phone" className={labelClass}>{text.form_phone_label}</label>
                 <input id="phone" type="tel" placeholder="+420 777 000 000" className={inputClass} {...register("phone")} />
               </div>
               <div>
-                <label htmlFor="company" className={labelClass}>Firma</label>
-                <input id="company" type="text" placeholder="Název firmy" className={inputClass} {...register("company")} />
+                <label htmlFor="company" className={labelClass}>{text.form_company_label}</label>
+                <input id="company" type="text" placeholder={text.form_company_placeholder} className={inputClass} {...register("company")} />
               </div>
             </div>
 
             {/* Event type */}
             <div>
-              <label htmlFor="eventType" className={labelClass}>Typ akce *</label>
+              <label htmlFor="eventType" className={labelClass}>{text.form_eventtype_label} *</label>
               <select id="eventType" className={`${inputClass} cursor-pointer`} {...register("eventType")}>
-                <option value="" disabled hidden>Vyberte typ akce</option>
-                <option value="korporatni">Korporátní akce</option>
-                <option value="soukroma">Soukromá oslava</option>
-                <option value="festival">Festival / kulturní akce</option>
-                <option value="hotel">Hotel / resort</option>
-                <option value="jine">Jiné</option>
+                <option value="" disabled hidden>{text.form_eventtype_placeholder}</option>
+                <option value="korporatni">{text.form_eventtype_1}</option>
+                <option value="soukroma">{text.form_eventtype_2}</option>
+                <option value="festival">{text.form_eventtype_3}</option>
+                <option value="hotel">{text.form_eventtype_4}</option>
+                <option value="jine">{text.form_eventtype_5}</option>
               </select>
               {errors.eventType && <p className={errorClass}>{errors.eventType.message}</p>}
             </div>
@@ -151,27 +190,27 @@ export default function ContactForm() {
             {/* Row: date + budget */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="eventDate" className={labelClass}>Datum akce</label>
+                <label htmlFor="eventDate" className={labelClass}>{text.form_date_label}</label>
                 <input id="eventDate" type="date" className={`${inputClass} [color-scheme:dark]`} {...register("eventDate")} />
               </div>
               <div>
-                <label htmlFor="budget" className={labelClass}>Orientační rozpočet</label>
+                <label htmlFor="budget" className={labelClass}>{text.form_budget_label}</label>
                 <select id="budget" className={`${inputClass} cursor-pointer`} {...register("budget")}>
-                  <option value="">Nevím / nechci uvádět</option>
-                  <option value="50-150k">50 000 – 150 000 Kč</option>
-                  <option value="150-500k">150 000 – 500 000 Kč</option>
-                  <option value="500k-plus">500 000 Kč a více</option>
+                  <option value="">{text.form_budget_unknown}</option>
+                  <option value="50-150k">{text.form_budget_1}</option>
+                  <option value="150-500k">{text.form_budget_2}</option>
+                  <option value="500k-plus">{text.form_budget_3}</option>
                 </select>
               </div>
             </div>
 
             {/* Message */}
             <div>
-              <label htmlFor="message" className={labelClass}>Zpráva *</label>
+              <label htmlFor="message" className={labelClass}>{text.form_message_label} *</label>
               <textarea
                 id="message"
                 rows={5}
-                placeholder="Popište akci, atmosféru, co si přejete…"
+                placeholder={text.form_message_placeholder}
                 className={`${inputClass} resize-none`}
                 {...register("message")}
               />
@@ -193,9 +232,9 @@ export default function ContactForm() {
                 {...register("gdprConsent")}
               />
               <label htmlFor="gdpr" className="text-white/50 text-xs leading-relaxed cursor-pointer">
-                Souhlasím se zpracováním osobních údajů za účelem vyřízení poptávky.{" "}
-                <a href="/zasady" className="text-[#C8D400] hover:underline">
-                  Zásady ochrany osobních údajů
+                {text.form_gdpr_text}{" "}
+                <a href={privacyHref} className="text-[#C8D400] hover:underline">
+                  {text.form_gdpr_link}
                 </a>
                 . *
               </label>
@@ -205,7 +244,7 @@ export default function ContactForm() {
             {/* Error message */}
             {status === "error" && (
               <p className="text-red-400 text-sm border border-red-400/30 rounded-sm px-4 py-3 bg-red-400/5">
-                Nepodařilo se odeslat poptávku. Zkuste to prosím znovu nebo nás kontaktujte přímo na booking@showdesigners.cz.
+                {text.form_error_message}
               </p>
             )}
 
@@ -215,7 +254,7 @@ export default function ContactForm() {
               disabled={status === "loading"}
               className="mt-2 bg-[#C8D400] text-black font-semibold text-base px-8 py-4 rounded-sm btn-hover-lime disabled:opacity-50 disabled:cursor-not-allowed self-start"
             >
-              {status === "loading" ? "Odesílám…" : "Odeslat poptávku"}
+              {status === "loading" ? text.form_loading : text.form_submit}
             </button>
           </m.form>
         )}

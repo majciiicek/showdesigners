@@ -5,47 +5,32 @@ import Image from "next/image";
 import Link from "next/link";
 import { m, useInView } from "framer-motion";
 
-// 6 items with sizes that fill 3-column grid cleanly:
-// Row 1: large(2) + small(1) = 3
-// Row 2: small(1) + large(2) = 3
-// Row 3: small(1) + large(2) = 3
-const projects = [
-  {
-    title: "Partnerská akrobacie",
-    category: "Artistika",
-    image: "/images/parovaakrobacie/partnerska-akrobacie1.webp",
-    size: "large",
-  },
-  {
-    title: "Fire show",
-    category: "Oheň & světlo",
-    image: "/images/fireshow/tribal-fireshow1.webp",
-    size: "small",
-  },
-  {
-    title: "Geisha",
-    category: "Walking act",
-    image: "/images/geisha/geisha.webp",
-    size: "small",
-  },
-  {
-    title: "Light show",
-    category: "Oheň & světlo",
-    image: "/images/lightshow/lightshow1.webp",
-    size: "large",
-  },
-  {
-    title: "Lollipop show",
-    category: "Artistika",
-    image: "/images/lollipop/lollipop.webp",
-    size: "small",
-  },
-  {
-    title: "Plesová show",
-    category: "Taneční vystoupení",
-    image: "/images/plesovashow/plesova-show2.webp",
-    size: "large",
-  },
+export type ProjectsText = {
+  projects_label: string;
+  projects_headline: string;
+  projects_link: string;
+  project_0_title: string;
+  project_0_category: string;
+  project_1_title: string;
+  project_1_category: string;
+  project_2_title: string;
+  project_2_category: string;
+  project_3_title: string;
+  project_3_category: string;
+  project_4_title: string;
+  project_4_category: string;
+  project_5_title: string;
+  project_5_category: string;
+};
+
+// Image/size data only — titles and categories come from text prop
+const PROJECT_DATA = [
+  { image: "/images/parovaakrobacie/partnerska-akrobacie1.webp", size: "large" },
+  { image: "/images/fireshow/tribal-fireshow1.webp",             size: "small" },
+  { image: "/images/geisha/geisha.webp",                         size: "small" },
+  { image: "/images/lightshow/lightshow1.webp",                  size: "large" },
+  { image: "/images/lollipop/lollipop.webp",                     size: "small" },
+  { image: "/images/plesovashow/plesova-show2.webp",             size: "large" },
 ];
 
 type ProjectCardProps = {
@@ -91,9 +76,15 @@ function ProjectCard({ title, category, image, size, index }: ProjectCardProps) 
   );
 }
 
-export default function ProjectsSection() {
+export default function ProjectsSection({ text, referencesHref }: { text: ProjectsText; referencesHref: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  const projects = PROJECT_DATA.map((data, i) => ({
+    ...data,
+    title:    text[`project_${i}_title`    as keyof ProjectsText],
+    category: text[`project_${i}_category` as keyof ProjectsText],
+  }));
 
   return (
     <section className="py-24 lg:py-36 bg-black">
@@ -106,10 +97,10 @@ export default function ProjectsSection() {
             transition={{ duration: 0.7 }}
           >
             <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-              Naše práce
+              {text.projects_label}
             </p>
             <h2 className="font-display text-5xl lg:text-7xl text-white leading-none">
-              UKÁZKY REALIZACÍ
+              {text.projects_headline}
             </h2>
           </m.div>
           <m.div
@@ -118,10 +109,10 @@ export default function ProjectsSection() {
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             <Link
-              href="/reference"
+              href={referencesHref}
               className="text-white/60 text-sm hover:text-[#C8D400] transition-colors duration-200 flex items-center gap-2"
             >
-              Všechny reference
+              {text.projects_link}
               <span aria-hidden="true">→</span>
             </Link>
           </m.div>
@@ -130,7 +121,7 @@ export default function ProjectsSection() {
         {/* Bento grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {projects.map((project, i) => (
-            <ProjectCard key={project.title} {...project} index={i} />
+            <ProjectCard key={i} {...project} index={i} />
           ))}
         </div>
       </div>

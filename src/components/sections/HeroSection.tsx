@@ -19,46 +19,15 @@ interface Block {
   initYMobile: number;
 }
 
-const BLOCKS: Block[] = [
-  {
-    id: 0,
-    label: "Dramaturgie",
-    desc: "Příběh a rytmus celého večera",
-    initX: "-30vw",
-    initXMobile: "-88px",
-    initY: -130,
-    initYMobile: -195,
-  },
-  {
-    id: 1,
-    label: "Umělci & Show",
-    desc: "Výběr, booking a koordinace",
-    initX: "28vw",
-    initXMobile: "88px",
-    initY: -150,
-    initYMobile: -195,
-  },
-  {
-    id: 2,
-    label: "Atmosféra",
-    desc: "Energie — zvuk, světla, flow",
-    initX: "-27vw",
-    initXMobile: "-88px",
-    initY: 150,
-    initYMobile: 195,
-  },
-  {
-    id: 3,
-    label: "Scénografie",
-    desc: "Prostor jako součást příběhu",
-    initX: "28vw",
-    initXMobile: "88px",
-    initY: 130,
-    initYMobile: 195,
-  },
+// Position data only — labels/descs come from text prop
+const BLOCK_POSITIONS = [
+  { id: 0, initX: "-30vw", initXMobile: "-88px", initY: -130, initYMobile: -195 },
+  { id: 1, initX: "28vw",  initXMobile: "88px",  initY: -150, initYMobile: -195 },
+  { id: 2, initX: "-27vw", initXMobile: "-88px", initY: 150,  initYMobile: 195  },
+  { id: 3, initX: "28vw",  initXMobile: "88px",  initY: 130,  initYMobile: 195  },
 ];
 
-// Correct order: Dramaturgie → Umělci → Atmosféra → Scénografie
+// Correct order: 0 → 1 → 2 → 3
 const CORRECT_ORDER = [0, 1, 2, 3];
 
 // Y-positions in the center stack (bottom → top)
@@ -95,12 +64,7 @@ function getBlockAnimate(
       scale: 0.97,
     };
   }
-  return {
-    x,
-    y,
-    opacity: 1,
-    scale: 1,
-  };
+  return { x, y, opacity: 1, scale: 1 };
 }
 
 function getBlockTransition(isPlaced: boolean, isShaking: boolean, index: number) {
@@ -122,18 +86,53 @@ function getBlockTransition(isPlaced: boolean, isShaking: boolean, index: number
 }
 
 // ---------------------------------------------------------------------------
+// Props
+// ---------------------------------------------------------------------------
+
+export type HeroText = {
+  hero_sublabel: string;
+  hero_headline_line1: string;
+  hero_headline_line2: string;
+  hero_headline_highlight: string;
+  hero_explore: string;
+  hero_scroll: string;
+  hero_skip: string;
+  hero_block_0_label: string;
+  hero_block_0_desc: string;
+  hero_block_1_label: string;
+  hero_block_1_desc: string;
+  hero_block_2_label: string;
+  hero_block_2_desc: string;
+  hero_block_3_label: string;
+  hero_block_3_desc: string;
+  hero_completion_prefix: string;
+  hero_completion_headline_1: string;
+  hero_completion_headline_2: string;
+  hero_completion_sub_1: string;
+  hero_completion_sub_2: string;
+  hero_completion_cta: string;
+  hero_completion_restart: string;
+};
+
+// ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
 
-export default function HeroSection() {
+export default function HeroSection({ text, ctaHref }: { text: HeroText; ctaHref: string }) {
   const [placed, setPlaced] = useState<number[]>([]);
   const [shakingId, setShakingId] = useState<number | null>(null);
   const [showCompletion, setShowCompletion] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const isComplete = placed.length === BLOCKS.length;
+  const isComplete = placed.length === BLOCK_POSITIONS.length;
+
+  // Build blocks array from position data + translated text
+  const blocks: Block[] = BLOCK_POSITIONS.map((pos, i) => ({
+    ...pos,
+    label: text[`hero_block_${i}_label` as keyof HeroText],
+    desc:  text[`hero_block_${i}_desc`  as keyof HeroText],
+  }));
 
   useEffect(() => {
-    // Detect mobile screen width for block positioning
     const check = () => setIsMobile(window.innerWidth < 640);
     check();
     window.addEventListener("resize", check);
@@ -152,10 +151,8 @@ export default function HeroSection() {
 
     const nextCorrect = CORRECT_ORDER[placed.length];
     if (id === nextCorrect) {
-      // Correct block — place it
       setPlaced((prev) => [...prev, id]);
     } else {
-      // Wrong block — shake and bounce back
       setShakingId(id);
       setTimeout(() => setShakingId(null), 500);
     }
@@ -169,7 +166,7 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
 
-      {/* Background photo — subtle atmospheric texture */}
+      {/* Background photo */}
       <m.div
         aria-hidden="true"
         className="absolute inset-0"
@@ -184,7 +181,6 @@ export default function HeroSection() {
           style={{ filter: "blur(2px)" }}
           priority
         />
-        {/* Overlay — dark enough to keep blocks readable */}
         <div className="absolute inset-0 bg-black/60" />
       </m.div>
 
@@ -203,7 +199,7 @@ export default function HeroSection() {
         <source src="/videos/hero.mp4" type="video/mp4" />
       </m.video>
 
-      {/* Dark overlay over video — only visible when video is showing */}
+      {/* Dark overlay over video */}
       <m.div
         aria-hidden="true"
         className="absolute inset-0 bg-black/55"
@@ -212,8 +208,7 @@ export default function HeroSection() {
         transition={{ duration: 1.2 }}
       />
 
-
-      {/* Lime radial glow — intensifies when complete */}
+      {/* Lime radial glow */}
       <m.div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -247,7 +242,7 @@ export default function HeroSection() {
                 transition={{ delay: 0.5 }}
                 className="text-[#C8D400] text-xs font-semibold tracking-[0.25em] uppercase mb-4"
               >
-                Show design na klíč
+                {text.hero_sublabel}
               </m.p>
               <m.h1
                 initial={{ y: 24 }}
@@ -255,10 +250,10 @@ export default function HeroSection() {
                 transition={{ delay: 0.65, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className="font-display text-display text-white"
               >
-                VÁŠ VEČER
+                {text.hero_headline_line1}
                 <br />
-                POSTAVÍME{" "}
-                <span className="text-[#C8D400]">ZA VÁS</span>
+                {text.hero_headline_line2}{" "}
+                <span className="text-[#C8D400]">{text.hero_headline_highlight}</span>
               </m.h1>
               <m.p
                 initial={{ opacity: 0 }}
@@ -266,7 +261,7 @@ export default function HeroSection() {
                 transition={{ delay: 1.4 }}
                 className="text-white text-sm mt-5"
               >
-                Prozkoumejte, z čeho skládáme dokonalý večer
+                {text.hero_explore}
               </m.p>
               <m.p
                 initial={{ opacity: 0 }}
@@ -274,7 +269,7 @@ export default function HeroSection() {
                 transition={{ delay: 1.8 }}
                 className="text-white text-xs mt-2"
               >
-                Scrollujte a zjistěte více o Showdesigners
+                {text.hero_scroll}
               </m.p>
               <m.button
                 initial={{ opacity: 0 }}
@@ -283,7 +278,7 @@ export default function HeroSection() {
                 onClick={() => setShowCompletion(true)}
                 className="mt-5 px-5 py-2 rounded-sm border border-white/20 text-white/60 text-xs font-medium hover:border-white/50 hover:text-white/90 transition-all duration-200 pointer-events-auto"
               >
-                Přeskočit →
+                {text.hero_skip}
               </m.button>
             </m.div>
           )}
@@ -302,7 +297,7 @@ export default function HeroSection() {
                 transition={{ delay: 0.15 }}
                 className="text-[#C8D400] text-xs font-semibold tracking-[0.25em] uppercase mb-4"
               >
-                Tohle vše zajistíme za vás
+                {text.hero_completion_prefix}
               </m.p>
               <m.h2
                 initial={{ opacity: 0, y: 18 }}
@@ -310,9 +305,9 @@ export default function HeroSection() {
                 transition={{ delay: 0.25, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 className="font-display text-display text-white mb-3"
               >
-                SHOWDESIGNERS TO
+                {text.hero_completion_headline_1}
                 <br />
-                <span className="text-[#C8D400]">POSTAVÍ ZA VÁS</span>
+                <span className="text-[#C8D400]">{text.hero_completion_headline_2}</span>
               </m.h2>
               <m.p
                 initial={{ opacity: 0 }}
@@ -320,9 +315,9 @@ export default function HeroSection() {
                 transition={{ delay: 0.45 }}
                 className="text-white text-base mb-10 max-w-sm mx-auto leading-relaxed"
               >
-                Jeden partner. Kompletní entertainment.
+                {text.hero_completion_sub_1}
                 <br />
-                Od dramaturgie po poslední vystoupení.
+                {text.hero_completion_sub_2}
               </m.p>
               <m.div
                 initial={{ opacity: 0, y: 10 }}
@@ -331,16 +326,16 @@ export default function HeroSection() {
                 className="flex flex-col sm:flex-row items-center justify-center gap-4"
               >
                 <Link
-                  href="/kontakt"
+                  href={ctaHref}
                   className="bg-[#C8D400] text-black font-semibold px-10 py-4 rounded-sm btn-hover-lime"
                 >
-                  Nezávazná poptávka
+                  {text.hero_completion_cta}
                 </Link>
                 <button
                   onClick={handleReset}
                   className="text-white/30 text-sm hover:text-white/60 transition-colors underline underline-offset-4"
                 >
-                  Začít znovu
+                  {text.hero_completion_restart}
                 </button>
               </m.div>
             </m.div>
@@ -352,17 +347,16 @@ export default function HeroSection() {
       {/* ------------------------------------------------------------------ */}
       {/* Scattered / stacking blocks                                         */}
       {/* ------------------------------------------------------------------ */}
-      {BLOCKS.map((block, i) => {
+      {blocks.map((block, i) => {
         const isPlaced = placed.includes(block.id);
         const stackIndex = placed.indexOf(block.id);
         const isShaking = shakingId === block.id;
-        // Next correct block to click — highlighted as a hint
         const isNext = !isPlaced && !showCompletion && CORRECT_ORDER[placed.length] === block.id;
 
         return (
           <m.button
             key={block.id}
-            aria-label={`Přidat ${block.label} do programu`}
+            aria-label={`${block.label}`}
             onClick={() => handleBlockClick(block.id)}
             disabled={isPlaced || showCompletion}
             className={[

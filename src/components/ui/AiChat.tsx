@@ -8,6 +8,29 @@ interface Message {
   content: string;
 }
 
+export type ChatText = {
+  chat_label: string;
+  chat_header: string;
+  chat_new_conversation: string;
+  chat_intro: string;
+  chat_start_button: string;
+  chat_find_conversation: string;
+  chat_email_placeholder: string;
+  chat_find_button: string;
+  chat_returning_banner: string;
+  chat_continue: string;
+  chat_restart: string;
+  chat_inquiry_sent_title: string;
+  chat_inquiry_sent_sub: string;
+  chat_input_placeholder: string;
+  chat_send_aria: string;
+  chat_error_start: string;
+  chat_error_continue: string;
+  chat_email_validation: string;
+  chat_email_not_found: string;
+  chat_lookup_error: string;
+};
+
 const LOCAL_TOKEN_KEY = "sd_session_token";
 
 function cleanDisplayText(text: string): string {
@@ -26,7 +49,15 @@ function clearStoredToken() {
   try { localStorage.removeItem(LOCAL_TOKEN_KEY); } catch { /* ignore */ }
 }
 
-export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLabel?: boolean; autoStartMessage?: string }) {
+export default function AiChat({
+  hideLabel = false,
+  autoStartMessage,
+  text,
+}: {
+  hideLabel?: boolean;
+  autoStartMessage?: string;
+  text: ChatText;
+}) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -60,7 +91,6 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
           setKnownName(data.conversation.name);
           setSessionToken(token);
           setIsStarted(true);
-          // Show returning banner only if user actually typed something (not just auto-open greeting)
           const hasUserMessage = data.messages.some((m) => m.role === "user");
           setIsReturning(hasUserMessage);
         }
@@ -123,7 +153,7 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
     try {
       await streamMessage([], "Ahoj", token);
     } catch {
-      setError("Nepodařilo se spustit asistenta. Zkuste to prosím znovu.");
+      setError(text.chat_error_start);
       setIsLoading(false);
     }
   }
@@ -143,16 +173,15 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
         sessionToken
       );
     } catch {
-      setError("Nepodařilo se obnovit konverzaci.");
+      setError(text.chat_error_continue);
       setIsLoading(false);
     }
   }
 
-  // Look up conversation by email (for users on a different device/browser)
   async function lookupByEmail() {
     setLookupError("");
     if (!lookupEmail.includes("@")) {
-      setLookupError("Zadejte platnou e-mailovou adresu.");
+      setLookupError(text.chat_email_validation);
       return;
     }
 
@@ -161,7 +190,7 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
       const data = await res.json() as { conversation: { session_token: string; inquiry_sent: boolean; name: string | null } | null; messages: { role: "user" | "assistant"; content: string }[] };
 
       if (!data.conversation || data.messages.length === 0) {
-        setLookupError("Žádná konverzace s tímto emailem nenalezena.");
+        setLookupError(text.chat_email_not_found);
         return;
       }
 
@@ -174,7 +203,7 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
       setShowEmailLookup(false);
       setIsReturning(true);
     } catch {
-      setLookupError("Chyba při hledání. Zkuste to prosím znovu.");
+      setLookupError(text.chat_lookup_error);
     }
   }
 
@@ -200,11 +229,11 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
 
       if (!res.ok) {
         const json = await res.json() as { error?: string };
-        throw new Error(json.error ?? "Chyba serveru");
+        throw new Error(json.error ?? "Server error");
       }
 
       const reader = res.body?.getReader();
-      if (!reader) throw new Error("Stream není dostupný");
+      if (!reader) throw new Error("Stream not available");
 
       const decoder = new TextDecoder();
       let assistantText = "";
@@ -233,7 +262,7 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
         setInquirySent(true);
       }
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Nastala neočekávaná chyba.";
+      const message = err instanceof Error ? err.message : "Unexpected error.";
       setError(message);
       setMessages(history);
     } finally {
@@ -286,11 +315,11 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
         {!hideLabel && (
           <div className="flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-[#C8D400] animate-pulse" />
-            <span className="text-white/40 text-xs uppercase tracking-widest">Virtuální Alžběta</span>
+            <span className="text-white/40 text-xs uppercase tracking-widest">{text.chat_label}</span>
           </div>
         )}
         <p className="text-white/70 text-base leading-relaxed max-w-md">
-          Místo formuláře si můžete promluvit s Virtuální Alžbětou. Provede vás poptávkou přirozenou konverzací — žádné vyplňování políček.
+          {text.chat_intro}
         </p>
 
         <div className="flex flex-col gap-3 w-full">
@@ -298,16 +327,15 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
             onClick={() => void startChat()}
             className="bg-[#C8D400] text-black font-semibold text-base px-8 py-4 rounded-sm btn-hover-lime self-start"
           >
-            Zahájit konverzaci
+            {text.chat_start_button}
           </button>
 
-          {/* Email lookup — for returning users on different device */}
           {!showEmailLookup ? (
             <button
               onClick={() => setShowEmailLookup(true)}
               className="text-white/30 text-sm hover:text-white/60 transition-colors duration-200 self-start"
             >
-              Již jsme mluvili? Najít konverzaci →
+              {text.chat_find_conversation}
             </button>
           ) : (
             <div className="flex flex-col gap-2 max-w-sm">
@@ -317,14 +345,14 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
                   value={lookupEmail}
                   onChange={(e) => setLookupEmail(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && void lookupByEmail()}
-                  placeholder="Váš e-mail z předchozí konverzace"
+                  placeholder={text.chat_email_placeholder}
                   className="flex-1 bg-white/5 border border-white/10 text-white placeholder:text-white/20 text-sm px-4 py-2.5 rounded-sm focus:outline-none focus:border-[#C8D400] transition-colors"
                 />
                 <button
                   onClick={() => void lookupByEmail()}
                   className="bg-[#C8D400] text-black text-sm font-semibold px-4 py-2.5 rounded-sm btn-hover-lime"
                 >
-                  Najít
+                  {text.chat_find_button}
                 </button>
               </div>
               {lookupError && <p className="text-red-400 text-xs">{lookupError}</p>}
@@ -337,18 +365,18 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
 
   return (
     <div ref={chatTopRef} className="flex flex-col border border-white/10 rounded-sm overflow-hidden">
-      {/* Header — skrytý pokud je hideLabel (FloatingChat má vlastní header) */}
+      {/* Header */}
       {!hideLabel && (
         <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 bg-white/[0.02]">
           <div className="flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-[#C8D400] animate-pulse" />
-            <span className="text-white/50 text-xs uppercase tracking-widest">AI asistent</span>
+            <span className="text-white/50 text-xs uppercase tracking-widest">{text.chat_header}</span>
           </div>
           <button
             onClick={clearSession}
             className="text-white/20 text-xs hover:text-white/50 transition-colors duration-200"
           >
-            Nová konverzace
+            {text.chat_new_conversation}
           </button>
         </div>
       )}
@@ -362,19 +390,19 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
             exit={{ opacity: 0, height: 0 }}
             className="border-b border-white/10 bg-[#C8D400]/5 px-5 py-4 flex items-center justify-between gap-4"
           >
-            <p className="text-white/60 text-sm">Máte rozdělanou konverzaci. Chcete pokračovat?</p>
+            <p className="text-white/60 text-sm">{text.chat_returning_banner}</p>
             <div className="flex gap-3 flex-shrink-0">
               <button
                 onClick={() => void continueChat()}
                 className="bg-[#C8D400] text-black text-xs font-semibold px-4 py-2 rounded-sm btn-hover-lime"
               >
-                Pokračovat
+                {text.chat_continue}
               </button>
               <button
                 onClick={clearSession}
                 className="text-white/40 text-xs hover:text-white transition-colors duration-200"
               >
-                Začít znovu
+                {text.chat_restart}
               </button>
             </div>
           </m.div>
@@ -441,8 +469,8 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
             <div>
-              <p className="text-white text-sm font-medium">Poptávka odeslána</p>
-              <p className="text-white/50 text-xs mt-1">Váš show designer se ozve do 24 hodin. Zkontrolujte také složku spam.</p>
+              <p className="text-white text-sm font-medium">{text.chat_inquiry_sent_title}</p>
+              <p className="text-white/50 text-xs mt-1">{text.chat_inquiry_sent_sub}</p>
             </div>
           </m.div>
         )}
@@ -464,7 +492,7 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
             value={input}
             onChange={handleInput}
             onKeyDown={handleKeyDown}
-            placeholder="Napište zprávu…"
+            placeholder={text.chat_input_placeholder}
             rows={1}
             disabled={isLoading}
             className="flex-1 bg-transparent text-white text-sm placeholder:text-white/20 resize-none focus:outline-none leading-relaxed py-1 max-h-[120px] disabled:opacity-40"
@@ -472,7 +500,7 @@ export default function AiChat({ hideLabel = false, autoStartMessage }: { hideLa
           <button
             onClick={() => void handleSend()}
             disabled={!input.trim() || isLoading}
-            aria-label="Odeslat"
+            aria-label={text.chat_send_aria}
             className="flex-shrink-0 w-9 h-9 rounded-sm bg-[#C8D400] text-black flex items-center justify-center hover:bg-[#d9e600] transition-colors duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

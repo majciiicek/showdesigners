@@ -2,15 +2,22 @@
 
 import { useState, useEffect } from "react";
 import { m, AnimatePresence } from "framer-motion";
-import AiChat from "./AiChat";
+import AiChat, { type ChatText } from "./AiChat";
 
 const AUTO_OPEN_KEY = "sd_chat_auto_opened";
 
-export default function FloatingChat() {
+export type FloatingText = {
+  floating_label: string;
+  floating_close_label: string;
+  floating_open_label: string;
+  floating_close_aria: string;
+  floating_open_aria: string;
+};
+
+export default function FloatingChat({ text, chatText }: { text: FloatingText; chatText: ChatText }) {
   const [isOpen, setIsOpen] = useState(false);
   const [cookieBannerVisible, setCookieBannerVisible] = useState(false);
 
-  // Track cookie banner visibility to avoid overlapping it
   useEffect(() => {
     if (!localStorage.getItem("sd-cookie-consent")) setCookieBannerVisible(true);
     const handler = (e: Event) => setCookieBannerVisible((e as CustomEvent<boolean>).detail);
@@ -18,7 +25,6 @@ export default function FloatingChat() {
     return () => window.removeEventListener("sd-cookie-banner", handler);
   }, []);
 
-  // Auto-open once per session after 20 seconds — desktop only
   useEffect(() => {
     if (window.innerWidth < 768) return;
     try {
@@ -33,13 +39,12 @@ export default function FloatingChat() {
     return () => clearTimeout(t);
   }, []);
 
-  // Cookie banner is ~130px tall + 16px bottom offset = ~146px from bottom
   const bottomOffset = cookieBannerVisible ? "bottom-44" : "bottom-6";
 
   return (
     <div className={`fixed ${bottomOffset} right-4 sm:right-6 sm:bottom-6 z-50 flex flex-col items-end gap-3 transition-all duration-300`}>
 
-      {/* Chat panel — slides up from button */}
+      {/* Chat panel */}
       <AnimatePresence>
         {isOpen && (
           <m.div
@@ -65,12 +70,12 @@ export default function FloatingChat() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C8D400]" />
                 </span>
                 <span className="text-white/60 text-xs font-medium tracking-[0.15em] uppercase">
-                  Virtuální Alžběta
+                  {text.floating_label}
                 </span>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                aria-label="Zavřít"
+                aria-label={text.floating_close_aria}
                 className="w-6 h-6 flex items-center justify-center text-white/25 hover:text-white/70 transition-colors duration-200 rounded-full hover:bg-white/5"
               >
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -81,7 +86,7 @@ export default function FloatingChat() {
 
             {/* AiChat */}
             <div className="overflow-hidden px-5">
-              <AiChat hideLabel autoStartMessage="__AUTO_OPEN__" />
+              <AiChat hideLabel autoStartMessage="__AUTO_OPEN__" text={chatText} />
             </div>
           </m.div>
         )}
@@ -90,13 +95,11 @@ export default function FloatingChat() {
       {/* FAB toggle button */}
       <m.button
         onClick={() => setIsOpen((v) => !v)}
-        aria-label={isOpen ? "Zavřít Virtuální Alžbětu" : "Otevřít Virtuální Alžbětu"}
+        aria-label={isOpen ? text.floating_close_aria : text.floating_open_aria}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="flex items-center gap-2.5 bg-[#C8D400] text-black font-semibold text-sm px-5 py-3.5 rounded-full shadow-lg"
-        style={{
-          boxShadow: "0 8px 32px rgba(200,212,0,0.35)",
-        }}
+        style={{ boxShadow: "0 8px 32px rgba(200,212,0,0.35)" }}
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
@@ -131,7 +134,7 @@ export default function FloatingChat() {
             </m.svg>
           )}
         </AnimatePresence>
-        <span>{isOpen ? "Zavřít" : "Alžběta"}</span>
+        <span>{isOpen ? text.floating_close_label : text.floating_open_label}</span>
       </m.button>
 
     </div>

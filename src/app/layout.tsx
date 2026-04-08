@@ -8,6 +8,8 @@ import ConditionalFloatingChat from "@/components/ui/ConditionalFloatingChat";
 import MotionProvider from "@/components/ui/MotionProvider";
 import { getLocale } from "@/lib/locale";
 import { DOMAIN_MAP } from "@/lib/i18n";
+import { getPageTranslations } from "@/lib/page-translations";
+import { SLUG_MAP } from "@/lib/slugs";
 import "./globals.css";
 
 // Display font — dramatic, bold condensed sans-serif for headlines
@@ -43,6 +45,8 @@ export default async function RootLayout({
 }>) {
   const locale = await getLocale();
   const domain = DOMAIN_MAP[locale];
+  const pt = getPageTranslations(locale);
+  const privacyHref = `/${SLUG_MAP.zasady[locale]}`;
 
   // Organization schema — localized per domain
   const orgSchema = {
@@ -80,8 +84,8 @@ export default async function RootLayout({
           <NavServer />
           <main>{children}</main>
           <Footer />
-          <CookieBanner />
-          <ConditionalFloatingChat />
+          <CookieBanner text={pt.ui} privacyHref={privacyHref} />
+          <ConditionalFloatingChat text={pt.ui} chatText={pt.ui} />
           <Analytics />
         </MotionProvider>
       </body>

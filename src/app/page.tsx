@@ -39,16 +39,17 @@ export default async function HomePage() {
   const locale = await getLocale();
   const pt = getPageTranslations(locale);
   const contactHref = `/${SLUG_MAP.kontakt[locale]}`;
+  const referencesHref = `/${SLUG_MAP.reference[locale]}`;
 
   return (
     <>
-      <HeroSection />
+      <HeroSection text={pt.homepage} ctaHref={contactHref} />
       <IntroSection text={pt.homepage} />
-      <AdvisorSection />
-      <ProjectsSection />
+      <AdvisorSection text={pt.homepage} />
+      <ProjectsSection text={pt.homepage} referencesHref={referencesHref} />
       <StatsSection text={pt.homepage} />
       <HowItWorksSection text={pt.homepage} ctaHref={contactHref} />
-      <TestimonialsSection />
+      <TestimonialsSection text={pt.homepage} />
       <CtaSection text={pt.homepage} ctaHref={contactHref} />
     </>
   );
