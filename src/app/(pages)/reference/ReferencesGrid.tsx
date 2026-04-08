@@ -18,18 +18,25 @@ const typeColors: Record<string, string> = {
 
 const INITIAL_COUNT = 6;
 
+type RefsText = {
+  filter_all: string;
+  load_more: string;
+  case_study_badge: string;
+};
+
 interface Props {
   references: SanityReference[];
+  text: RefsText;
 }
 
-export default function ReferencesGrid({ references }: Props) {
-  const allTypes = ["Vše", ...Array.from(new Set(references.map((r) => r.type)))];
-  const [active, setActive] = useState("Vše");
+export default function ReferencesGrid({ references, text }: Props) {
+  const allTypes = [text.filter_all, ...Array.from(new Set(references.map((r) => r.type)))];
+  const [active, setActive] = useState(text.filter_all);
   const [showAll, setShowAll] = useState(false);
 
-  const filtered = active === "Vše" ? references : references.filter((r) => r.type === active);
-  const visible = active !== "Vše" || showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
-  const hasMore = active === "Vše" && !showAll && filtered.length > INITIAL_COUNT;
+  const filtered = active === text.filter_all ? references : references.filter((r) => r.type === active);
+  const visible = active !== text.filter_all || showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
+  const hasMore = active === text.filter_all && !showAll && filtered.length > INITIAL_COUNT;
 
   return (
     <>
@@ -78,7 +85,7 @@ export default function ReferencesGrid({ references }: Props) {
                 {cs.hasDetail && (
                   <div className="absolute bottom-4 right-4">
                     <span className="text-xs font-semibold px-3 py-1 rounded-full bg-black/70 text-white/70 border border-white/20">
-                      Case study →
+                      {text.case_study_badge}
                     </span>
                   </div>
                 )}
@@ -117,7 +124,7 @@ export default function ReferencesGrid({ references }: Props) {
             onClick={() => setShowAll(true)}
             className="border border-white/15 text-white/60 hover:text-white hover:border-white/30 text-sm px-8 py-3 rounded-full transition-all duration-200"
           >
-            Další reference
+            {text.load_more}
           </button>
         </div>
       )}

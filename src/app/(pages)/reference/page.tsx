@@ -34,6 +34,7 @@ export default async function ReferencePage() {
   const pt = getPageTranslations(locale);
   const r = pt.references;
   const contactHref = `/${SLUG_MAP.kontakt[locale]}`;
+  const refsText = pt.references;
 
   return (
     <>
@@ -68,7 +69,7 @@ export default async function ReferencePage() {
       {/* Case studies grid */}
       <section className="py-16 bg-black">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <ReferencesGrid references={references} />
+          <ReferencesGrid references={references} text={refsText} />
         </div>
       </section>
 

@@ -187,9 +187,33 @@
     "hero_headline_2": "REALIZACE.",
     "hero_headline_sr_only": "Show design pro firemní akce a soukromé oslavy.",
 
-    "cta_headline": "VÁŠE AKCE MŮŽE BÝT DALŠÍ.",
+    "cta_headline": "VAŠE AKCE MŮŽE BÝT DALŠÍ.",
     "cta_sub": "Připravíme program přesně pro vás.",
-    "cta_button": "Nezávazná poptávka"
+    "cta_button": "Nezávazná poptávka",
+
+    "filter_all": "Vše",
+    "load_more": "Další reference",
+    "case_study_badge": "Case study →",
+
+    "breadcrumb_home": "Showdesigners",
+    "breadcrumb_refs": "Reference",
+
+    "stat_guests": "Hosté",
+    "stat_date": "Datum",
+    "stat_venue": "Místo",
+    "stat_program": "Program",
+
+    "brief_label": "Zadání",
+    "solution_label": "Naše řešení",
+    "gallery_label": "Fotografie z akce",
+    "show_designer_label": "Show designer na místě",
+    "show_designer_sub": "Každá akce má přiděleného show designera — poprvé se potkáte po podpisu, a od té chvíle je to váš člověk na místě.",
+    "show_designer_role": "Show Designer",
+    "related_label": "Další realizace",
+
+    "detail_cta_headline": "VAŠE AKCE MŮŽE BÝT DALŠÍ.",
+    "detail_cta_sub": "Připravíme program přesně pro vás.",
+    "detail_cta_button": "Nezávazná poptávka"
   },
 
   "contact": {

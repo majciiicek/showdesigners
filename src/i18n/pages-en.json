@@ -189,7 +189,31 @@
 
     "cta_headline": "YOUR EVENT COULD BE NEXT.",
     "cta_sub": "We will design a programme precisely for you.",
-    "cta_button": "Send an Enquiry"
+    "cta_button": "Send an Enquiry",
+
+    "filter_all": "All",
+    "load_more": "More references",
+    "case_study_badge": "Case study →",
+
+    "breadcrumb_home": "Showdesigners",
+    "breadcrumb_refs": "References",
+
+    "stat_guests": "Guests",
+    "stat_date": "Date",
+    "stat_venue": "Venue",
+    "stat_program": "Programme",
+
+    "brief_label": "Brief",
+    "solution_label": "Our solution",
+    "gallery_label": "Event photography",
+    "show_designer_label": "Show designer on-site",
+    "show_designer_sub": "Every event is assigned a dedicated show designer — you meet them after signing, and from that moment they are your person on the ground.",
+    "show_designer_role": "Show Designer",
+    "related_label": "More productions",
+
+    "detail_cta_headline": "YOUR EVENT COULD BE NEXT.",
+    "detail_cta_sub": "We will design a programme precisely for you.",
+    "detail_cta_button": "Send an Enquiry"
   },
 
   "contact": {

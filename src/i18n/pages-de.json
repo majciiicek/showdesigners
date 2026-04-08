@@ -189,7 +189,31 @@
 
     "cta_headline": "IHR EVENT KÖNNTE DAS NÄCHSTE SEIN.",
     "cta_sub": "Wir entwickeln ein Programm, das genau zu Ihnen passt.",
-    "cta_button": "Unverbindlich anfragen"
+    "cta_button": "Unverbindlich anfragen",
+
+    "filter_all": "Alle",
+    "load_more": "Weitere Referenzen",
+    "case_study_badge": "Case study →",
+
+    "breadcrumb_home": "Showdesigners",
+    "breadcrumb_refs": "Referenzen",
+
+    "stat_guests": "Gäste",
+    "stat_date": "Datum",
+    "stat_venue": "Ort",
+    "stat_program": "Programm",
+
+    "brief_label": "Briefing",
+    "solution_label": "Unsere Lösung",
+    "gallery_label": "Eventfotos",
+    "show_designer_label": "Show Designer vor Ort",
+    "show_designer_sub": "Jede Veranstaltung bekommt einen eigenen Show Designer — Sie treffen ihn nach der Unterschrift, und ab diesem Moment ist er Ihre Person vor Ort.",
+    "show_designer_role": "Show Designer",
+    "related_label": "Weitere Produktionen",
+
+    "detail_cta_headline": "IHR EVENT KÖNNTE DAS NÄCHSTE SEIN.",
+    "detail_cta_sub": "Wir entwickeln ein Programm, das genau zu Ihnen passt.",
+    "detail_cta_button": "Unverbindlich anfragen"
   },
 
   "contact": {
