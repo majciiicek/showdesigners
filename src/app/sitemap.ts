@@ -1,25 +1,41 @@
-import { MetadataRoute } from "next";
-import { getReferencesSlugs } from "@/sanity/lib/queries";
+import { MetadataRoute } from 'next'
+import { headers } from 'next/headers'
+import { getLocaleFromHostname, DOMAIN_MAP } from '@/lib/i18n'
+import { SLUG_MAP } from '@/lib/slugs'
+import { getReferencesSlugs } from '@/sanity/lib/queries'
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://showdesigners.cz";
+const PAGE_CONFIG = [
+  { key: null,        priority: 1.0, changeFreq: 'monthly'  as const },
+  { key: 'sluzba',    priority: 0.8, changeFreq: 'monthly'  as const },
+  { key: 'o-nas',     priority: 0.7, changeFreq: 'monthly'  as const },
+  { key: 'reference', priority: 0.8, changeFreq: 'weekly'   as const },
+  { key: 'kontakt',   priority: 0.9, changeFreq: 'yearly'   as const },
+  { key: 'zasady',    priority: 0.3, changeFreq: 'yearly'   as const },
+]
 
+// Domain-aware sitemap — each domain gets its own sitemap with localized slugs
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const referenceSlugs = await getReferencesSlugs();
+  const headersList = await headers()
+  const hostname = headersList.get('host') || ''
+  const locale = getLocaleFromHostname(hostname)
+  const domain = DOMAIN_MAP[locale]
 
-  const referenceUrls: MetadataRoute.Sitemap = referenceSlugs.map(({ slug }) => ({
-    url: `${BASE_URL}/reference/${slug}`,
+  const staticPages: MetadataRoute.Sitemap = PAGE_CONFIG.map(({ key, priority, changeFreq }) => ({
+    url: key ? `${domain}/${SLUG_MAP[key][locale]}` : domain,
     lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
+    changeFrequency: changeFreq,
+    priority,
+  }))
 
-  return [
-    { url: BASE_URL, lastModified: new Date(), changeFrequency: "monthly", priority: 1 },
-    { url: `${BASE_URL}/sluzba`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE_URL}/o-nas`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/reference`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
-    { url: `${BASE_URL}/kontakt`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.9 },
-    { url: `${BASE_URL}/zasady`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
-    ...referenceUrls,
-  ];
+  // Reference detail pages — same slug across all locales (Sanity content)
+  const referenceSlugs = await getReferencesSlugs()
+  const referenceSlug = SLUG_MAP.reference[locale]
+  const referencePages: MetadataRoute.Sitemap = referenceSlugs.map(({ slug }) => ({
+    url: `${domain}/${referenceSlug}/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
+  return [...staticPages, ...referencePages]
 }

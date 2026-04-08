@@ -1,5 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getLocale } from "@/lib/locale";
+import { getTranslations } from "@/lib/i18n";
+import { SLUG_MAP } from "@/lib/slugs";
 
 const socialLinks = [
   {
@@ -40,16 +43,18 @@ const socialLinks = [
   },
 ];
 
-const navLinks = [
-  { href: "/sluzba", label: "Co děláme" },
-  { href: "/o-nas", label: "O nás" },
-  { href: "/reference", label: "Reference" },
-  { href: "/kontakt", label: "Kontakt" },
-  { href: "/zasady", label: "Zásady ochrany osobních údajů" },
-];
-
-export default function Footer() {
+export default async function Footer() {
+  const locale = await getLocale();
+  const t = getTranslations(locale);
   const year = new Date().getFullYear();
+
+  const navLinks = [
+    { href: `/${SLUG_MAP.sluzba[locale]}`,    label: t.nav.sluzba    },
+    { href: `/${SLUG_MAP["o-nas"][locale]}`,  label: t.nav["o-nas"]  },
+    { href: `/${SLUG_MAP.reference[locale]}`, label: t.nav.reference },
+    { href: `/${SLUG_MAP.kontakt[locale]}`,   label: t.nav.kontakt   },
+    { href: `/${SLUG_MAP.zasady[locale]}`,    label: t.footer.zasady },
+  ];
 
   return (
     <footer className="bg-[#0a0a0a] border-t border-white/5">
@@ -67,7 +72,7 @@ export default function Footer() {
               />
             </Link>
             <p className="text-white/50 text-sm leading-relaxed max-w-xs">
-              Kompletní entertainment pro vaši akci. Jeden partner — od dramaturgii po každé vystoupení.
+              {t.footer.tagline}
             </p>
             <div className="flex items-center gap-4 mt-6">
               {socialLinks.map((s) => (
@@ -88,7 +93,7 @@ export default function Footer() {
           {/* Navigation */}
           <div>
             <h3 className="text-white/30 text-xs font-semibold uppercase tracking-widest mb-4">
-              Navigace
+              {t.footer.nav_heading}
             </h3>
             <ul className="flex flex-col gap-2">
               {navLinks.map((link) => (
@@ -107,7 +112,7 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h3 className="text-white/30 text-xs font-semibold uppercase tracking-widest mb-4">
-              Kontakt
+              {t.footer.contact_heading}
             </h3>
             <ul className="flex flex-col gap-3 text-sm">
               <li>
@@ -144,14 +149,25 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-white/30 text-xs">
-            © {year} Showdesigners — součást skupiny Aliatrix
+            © {year} Showdesigners — {t.footer.copyright}
           </p>
-          <Link
-            href="/zasady"
-            className="text-white/30 text-xs hover:text-white/60 transition-colors duration-200"
-          >
-            Zásady ochrany osobních údajů
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link
+              href={`/${SLUG_MAP.zasady[locale]}`}
+              className="text-white/30 text-xs hover:text-white/60 transition-colors duration-200"
+            >
+              {t.footer.zasady}
+            </Link>
+            {/* Impressum — legally required in Germany */}
+            {locale === "de" && (
+              <Link
+                href={`/${SLUG_MAP.impressum[locale]}`}
+                className="text-white/30 text-xs hover:text-white/60 transition-colors duration-200"
+              >
+                {t.footer.impressum}
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </footer>

@@ -1,59 +1,51 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { getLocale } from "@/lib/locale";
+import { getTranslations, OG_LOCALE_MAP } from "@/lib/i18n";
+import { getPageTranslations } from "@/lib/page-translations";
+import { getAlternateUrls, SLUG_MAP } from "@/lib/slugs";
 
-export const metadata: Metadata = {
-  title: "Show design od A do Z — co děláme | Showdesigners",
-  description:
-    "Jak funguje show designer? Přebíráme kompletní zodpovědnost za entertainment vaší akce — dramaturgie, umělci, koordinace na místě.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const t = getTranslations(locale);
+  const alternates = getAlternateUrls("sluzba", locale);
 
-const eventTypes = [
-  {
-    title: "Korporátní akce",
-    description:
-      "Gala večeře, firemní večírky, team buildingy, produktové launche. Program, který odpovídá firemní kultuře a zanechá dojem.",
-    image: "/images/parovaakrobacie/partnerska-akrobacie1.webp",
-  },
-  {
-    title: "Luxusní soukromé akce",
-    description:
-      "Svatby, VIP narozeniny, soukromé oslavy. Každý detail choreografován pro ten správný moment.",
-    image: "/images/plesovashow/plesova-show2.webp",
-  },
-  {
-    title: "Festivaly a kulturní akce",
-    description:
-      "Doprovodné programy, dramaturgická spolupráce, scénografie prostoru. Víme, co drží pozornost velkého publika.",
-    image: "/images/dennishow/DSC05912.webp",
-  },
-  {
-    title: "Hotely a resorty",
-    description:
-      "Pravidelný nebo jednorázový entertainment pro hosty. Show, která se stane součástí zážitku pobytu. Zvládneme i doprovodný program pro konference a firemní setkání.",
-    image: "/images/cyrwheel/GCAs_RedNight_Show_088.webp",
-  },
-];
+  return {
+    title: t.meta.sluzba.title,
+    description: t.meta.sluzba.description,
+    alternates: {
+      canonical: alternates.canonical,
+      languages: alternates.languages,
+    },
+    openGraph: {
+      title: t.meta.sluzba.title,
+      description: t.meta.sluzba.description,
+      url: alternates.canonical,
+      locale: OG_LOCALE_MAP[locale],
+    },
+  };
+}
 
-const processSteps = [
-  {
-    step: "01",
-    title: "První kontakt",
-    body: "Ozvete se s poptávkou — typ akce, datum, atmosféra, přibližný rozpočet. Nebo si nejdřív popovídejte s naším AI asistentem — příjemný způsob, jak nám o akci říct co nejvíc, bez formulářů.",
-  },
-  {
-    step: "02",
-    title: "Návrh a příprava",
-    body: "Náš kreativní tým navrhne dramaturgii, vybere umělce a doladí každý detail. Veškerá komunikace a koordinace je na nás — vy se nestaráte o nic.",
-  },
-  {
-    step: "03",
-    title: "Den akce",
-    body: "Váš show designer je na místě od přípravy po závěrečné číslo. Každý vstup proběhne přesně jak bylo naplánováno.",
-  },
-];
+export default async function SluzbaPage() {
+  const locale = await getLocale();
+  const pt = getPageTranslations(locale);
+  const s = pt.services;
+  const contactHref = `/${SLUG_MAP.kontakt[locale]}`;
 
-export default function SluzbaPage() {
+  const eventTypes = [
+    { title: s.type_1_title, description: s.type_1_body, image: "/images/parovaakrobacie/partnerska-akrobacie1.webp" },
+    { title: s.type_2_title, description: s.type_2_body, image: "/images/plesovashow/plesova-show2.webp" },
+    { title: s.type_3_title, description: s.type_3_body, image: "/images/dennishow/DSC05912.webp" },
+    { title: s.type_4_title, description: s.type_4_body, image: "/images/cyrwheel/GCAs_RedNight_Show_088.webp" },
+  ];
+
+  const processSteps = [
+    { step: "01", title: s.step_01_title, body: s.step_01_body },
+    { step: "02", title: s.step_02_title, body: s.step_02_body },
+    { step: "03", title: s.step_03_title, body: s.step_03_body },
+  ];
+
   return (
     <>
       {/* Hero — foto na pozadí */}
@@ -70,15 +62,15 @@ export default function SluzbaPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8 w-full pb-20 lg:pb-28">
           <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-6">
-            Co děláme
+            {s.hero_label}
           </p>
           <h1
             className="font-display text-white leading-none max-w-4xl"
             style={{ fontSize: "clamp(3.5rem, 9vw, 8rem)" }}
           >
-            <span className="text-[#C8D400]">SHOW DESIGN</span>
+            <span className="text-[#C8D400]">{s.hero_headline_1}</span>
             <br />
-            OD A DO Z.
+            {s.hero_headline_2}
           </h1>
         </div>
       </section>
@@ -88,10 +80,10 @@ export default function SluzbaPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="max-w-2xl">
             <p className="text-white/80 text-xl leading-relaxed mb-6">
-              Každá akce je jiná — jiný prostor, jiné publikum, jiná energie. Proto nepracujeme se šablonou. Pracujeme s vaší vizí a navrhujeme program, který do ní přesně sedí.
+              {s.intro_body_1}
             </p>
             <p className="text-white/50 text-base leading-relaxed">
-              Od první schůzky se vám věnuje náš obchodní a kreativní tým — společně navrhneme dramaturgii, vybereme umělce a doladíme každý detail. Na samotné akci pak program řídí <strong className="text-white">show designer</strong> přímo na místě.
+              {s.intro_body_2}
             </p>
           </div>
         </div>
@@ -111,22 +103,22 @@ export default function SluzbaPage() {
         />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <p className="text-black/40 text-xs font-semibold tracking-[0.2em] uppercase mb-4">
-            Krok za krokem
+            {s.process_label}
           </p>
           <h2 className="font-display text-5xl lg:text-7xl text-black leading-none mb-16">
-            PRŮBĚH SPOLUPRÁCE
+            {s.process_headline}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-black/10">
-            {processSteps.map((s) => (
-              <div key={s.step} className="bg-[#C8D400] p-8 lg:p-10">
+            {processSteps.map((step) => (
+              <div key={step.step} className="bg-[#C8D400] p-8 lg:p-10">
                 <span
                   className="font-display text-black/20 leading-none block mb-6"
                   style={{ fontSize: "5rem" }}
                 >
-                  {s.step}
+                  {step.step}
                 </span>
-                <h3 className="font-display text-2xl text-black mb-3">{s.title}</h3>
-                <p className="text-black/60 text-sm leading-relaxed">{s.body}</p>
+                <h3 className="font-display text-2xl text-black mb-3">{step.title}</h3>
+                <p className="text-black/60 text-sm leading-relaxed">{step.body}</p>
               </div>
             ))}
           </div>
@@ -137,10 +129,10 @@ export default function SluzbaPage() {
       <section className="py-24 bg-black">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-4">
-            Typy akcí
+            {s.types_label}
           </p>
           <h2 className="font-display text-5xl lg:text-7xl text-white leading-none mb-16">
-            PRO KOHO PRACUJEME
+            {s.types_headline}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {eventTypes.map((et) => (
@@ -182,15 +174,15 @@ export default function SluzbaPage() {
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
             <h2 className="font-display text-5xl lg:text-6xl text-black leading-none">
-              CHYSTÁTE AKCI?
+              {s.cta_headline}
             </h2>
           </div>
-          <p className="text-black/50 text-base">Odpovídáme do 24 hodin.</p>
+          <p className="text-black/50 text-base">{s.cta_note}</p>
           <Link
-            href="/kontakt"
+            href={contactHref}
             className="flex-shrink-0 bg-black text-[#C8D400] font-semibold text-base px-10 py-4 rounded-sm btn-hover-dark"
           >
-            Nezávazná poptávka
+            {s.cta_button}
           </Link>
         </div>
       </section>

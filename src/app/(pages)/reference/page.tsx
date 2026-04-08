@@ -3,15 +3,38 @@ import Image from "next/image";
 import Link from "next/link";
 import ReferencesGrid from "./ReferencesGrid";
 import { getAllReferences } from "@/sanity/lib/queries";
+import { getLocale } from "@/lib/locale";
+import { getTranslations, OG_LOCALE_MAP } from "@/lib/i18n";
+import { getPageTranslations } from "@/lib/page-translations";
+import { getAlternateUrls, SLUG_MAP } from "@/lib/slugs";
 
-export const metadata: Metadata = {
-  title: "Reference klientů — realizace show designu | Showdesigners",
-  description:
-    "Prohlédněte si naše realizace. Korporátní gala, rodinné dny, festivaly a soukromé akce — ukázky show designu v praxi.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const t = getTranslations(locale);
+  const alternates = getAlternateUrls("reference", locale);
+
+  return {
+    title: t.meta.reference.title,
+    description: t.meta.reference.description,
+    alternates: {
+      canonical: alternates.canonical,
+      languages: alternates.languages,
+    },
+    openGraph: {
+      title: t.meta.reference.title,
+      description: t.meta.reference.description,
+      url: alternates.canonical,
+      locale: OG_LOCALE_MAP[locale],
+    },
+  };
+}
 
 export default async function ReferencePage() {
-  const references = await getAllReferences();
+  const [references, locale] = await Promise.all([getAllReferences(), getLocale()]);
+  const pt = getPageTranslations(locale);
+  const r = pt.references;
+  const contactHref = `/${SLUG_MAP.kontakt[locale]}`;
+
   return (
     <>
       {/* Hero — foto pozadí */}
@@ -28,16 +51,16 @@ export default async function ReferencePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8 w-full pb-20 lg:pb-28">
           <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-6">
-            Reference
+            {r.hero_label}
           </p>
           <h1
             className="font-display text-white leading-none"
             style={{ fontSize: "clamp(3.5rem, 9vw, 8rem)" }}
           >
-            NAŠE
+            {r.hero_headline_1}
             <br />
-            <span className="text-[#C8D400]">REALIZACE.</span>
-            <span className="sr-only"> Show design pro firemní akce a soukromé oslavy.</span>
+            <span className="text-[#C8D400]">{r.hero_headline_2}</span>
+            <span className="sr-only"> {r.hero_headline_sr_only}</span>
           </h1>
         </div>
       </section>
@@ -63,15 +86,15 @@ export default async function ReferencePage() {
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
             <h2 className="font-display text-5xl lg:text-6xl text-black leading-none mb-3">
-              VÁŠE AKCE MŮŽE BÝT DALŠÍ.
+              {r.cta_headline}
             </h2>
-            <p className="text-black/50 text-sm">Připravíme program přesně pro vás.</p>
+            <p className="text-black/50 text-sm">{r.cta_sub}</p>
           </div>
           <Link
-            href="/kontakt"
+            href={contactHref}
             className="flex-shrink-0 bg-black text-[#C8D400] font-semibold text-base px-10 py-4 rounded-sm btn-hover-dark"
           >
-            Nezávazná poptávka
+            {r.cta_button}
           </Link>
         </div>
       </section>

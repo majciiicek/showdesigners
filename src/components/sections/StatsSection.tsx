@@ -3,16 +3,31 @@
 import { useRef } from "react";
 import { m, useInView } from "framer-motion";
 
-const statements = [
-  { line1: "NÁVRH", line2: "NA MÍRU." },
-  { line1: "PŘÍBĚH,", line2: "NE PROGRAM." },
-  { line1: "VÁŠ SHOW DESIGNER.", line2: "CELÁ AKCE." },
-  { line1: "SHOW", line2: "V KONTEXTU." },
-];
+interface StatsSectionText {
+  stats_1_line_1: string;
+  stats_1_line_2: string;
+  stats_2_line_1: string;
+  stats_2_line_2: string;
+  stats_3_line_1: string;
+  stats_3_line_2: string;
+  stats_4_line_1: string;
+  stats_4_line_2: string;
+}
 
-export default function StatsSection() {
+interface StatsSectionProps {
+  text: StatsSectionText;
+}
+
+export default function StatsSection({ text }: StatsSectionProps) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const statements = [
+    { line1: text.stats_1_line_1, line2: text.stats_1_line_2 },
+    { line1: text.stats_2_line_1, line2: text.stats_2_line_2 },
+    { line1: text.stats_3_line_1, line2: text.stats_3_line_2 },
+    { line1: text.stats_4_line_1, line2: text.stats_4_line_2 },
+  ];
 
   return (
     <section ref={ref} className="bg-[#C8D400] relative overflow-hidden">

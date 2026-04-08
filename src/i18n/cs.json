@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "home": {
+      "title": "Showdesigners — Kompletní entertainment pro vaši akci",
+      "description": "Jeden partner. Kompletní program. Showdesigners zajistí celý zábavní večer vaší akce od A do Z — s osobně prověřenými umělci a 15 lety zkušeností."
+    },
+    "o-nas": {
+      "title": "O show designérech — tým a zázemí | Showdesigners",
+      "description": "Showdesigners vznikl z potřeby klientů, kteří hledali partnera — ne dodavatele. Konzultační vrstva postavená na 15 letech zkušeností agentury Aliatrix."
+    },
+    "reference": {
+      "title": "Reference klientů — realizace show designu | Showdesigners",
+      "description": "Prohlédněte si naše realizace. Korporátní gala, rodinné dny, festivaly a soukromé akce — ukázky show designu v praxi."
+    },
+    "kontakt": {
+      "title": "Poptávka show designera — Kontakt | Showdesigners",
+      "description": "Poptejte show designera pro vaši akci — korporátní večírek, gala nebo soukromá oslava. Ozve se vám do 24 hodin."
+    },
+    "sluzba": {
+      "title": "Show design od A do Z — co děláme | Showdesigners",
+      "description": "Jak funguje show designer? Přebíráme kompletní zodpovědnost za entertainment vaší akce — dramaturgie, umělci, koordinace na místě."
+    },
+    "zasady": {
+      "title": "Zásady ochrany osobních údajů — Showdesigners",
+      "description": "Zásady ochrany osobních údajů Showdesigners — informace o zpracování osobních údajů, cookies a právech subjektů v souladu s GDPR."
+    }
+  },
+  "nav": {
+    "sluzba": "Co děláme",
+    "o-nas": "O nás",
+    "reference": "Reference",
+    "kontakt": "Kontakt",
+    "cta": "Poptávka"
+  },
+  "slugs": {
+    "o-nas": "o-nas",
+    "sluzba": "sluzba",
+    "reference": "reference",
+    "kontakt": "kontakt",
+    "zasady": "zasady",
+    "impressum": "impressum"
+  },
+  "footer": {
+    "tagline": "Kompletní entertainment pro vaši akci. Jeden partner — od dramaturgie po každé vystoupení.",
+    "nav_heading": "Navigace",
+    "contact_heading": "Kontakt",
+    "zasady": "Zásady ochrany osobních údajů",
+    "impressum": "Impressum",
+    "copyright": "součást skupiny Aliatrix"
+  }
+}

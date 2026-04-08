@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "home": {
+      "title": "Showdesigners — Entertainment für Ihr Event | Show Designers",
+      "description": "Ein Partner. Vollständiges Programm. Showdesigners übernimmt das gesamte Entertainment Ihrer Veranstaltung — mit eigenen Künstlern und 15 Jahren Erfahrung."
+    },
+    "o-nas": {
+      "title": "Über uns — Team & Hintergrund | Show Designers",
+      "description": "Showdesigners entstand aus dem Bedarf nach einem echten Partner — nicht einem Lieferanten. Aufgebaut auf 15 Jahren Erfahrung der Agentur Aliatrix."
+    },
+    "reference": {
+      "title": "Referenzen — Show Design in der Praxis | Show Designers",
+      "description": "Unsere Projekte im Überblick: Firmen-Gala, Privatfeiern, Festivals — Show Design für anspruchsvolle Veranstaltungen im DACH-Raum und darüber hinaus."
+    },
+    "kontakt": {
+      "title": "Show Designer anfragen — Kontakt | Show Designers",
+      "description": "Jetzt unverbindlich anfragen — für Firmenevent, Gala oder private Feier. Ihr persönlicher Ansprechpartner meldet sich innerhalb von 24 Stunden."
+    },
+    "sluzba": {
+      "title": "Show Design von A bis Z — Leistungen | Show Designers",
+      "description": "Was macht ein Show Designer? Wir übernehmen das vollständige Entertainment Ihrer Veranstaltung — Dramaturgie, Künstler, Koordination vor Ort."
+    },
+    "zasady": {
+      "title": "Datenschutzerklärung — Showdesigners",
+      "description": "Datenschutzerklärung von Showdesigners — Informationen zur Verarbeitung personenbezogener Daten, Cookies und Ihren Rechten gemäß DSGVO."
+    }
+  },
+  "nav": {
+    "sluzba": "Leistungen",
+    "o-nas": "Über uns",
+    "reference": "Referenzen",
+    "kontakt": "Kontakt",
+    "cta": "Anfrage"
+  },
+  "slugs": {
+    "o-nas": "ueber-uns",
+    "sluzba": "leistungen",
+    "reference": "referenzen",
+    "kontakt": "kontakt",
+    "zasady": "datenschutz",
+    "impressum": "impressum"
+  },
+  "footer": {
+    "tagline": "Vollständiges Entertainment für Ihre Veranstaltung. Ein Partner — von der Dramaturgie bis zum letzten Auftritt.",
+    "nav_heading": "Navigation",
+    "contact_heading": "Kontakt",
+    "zasady": "Datenschutzerklärung",
+    "impressum": "Impressum",
+    "copyright": "Teil der Aliatrix-Gruppe"
+  }
+}

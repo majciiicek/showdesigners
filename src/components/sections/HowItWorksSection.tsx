@@ -5,30 +5,34 @@ import Image from "next/image";
 import Link from "next/link";
 import { m, useInView } from "framer-motion";
 
-const steps = [
-  {
-    number: "01",
-    title: "Vize",
-    description:
-      "Řeknete nám, co chcete, aby hosté cítili. Náš obchodní tým vás provede od prvního hovoru až po podpis — žádné formuláře, žádné katalogy.",
-  },
-  {
-    number: "02",
-    title: "Příběh",
-    description:
-      "Kreativní tým sestaví dramaturgii celé akce — ne jen program za programem, ale příběh s napětím a vrcholy, které společně ladí.",
-  },
-  {
-    number: "03",
-    title: "Den D",
-    description:
-      "Poprvé se potkáte se svým show designerem. Je fyzicky na místě, řídí celý program a řeší vše operativně. Vy si užíváte akci.",
-  },
-];
+interface HowItWorksSectionText {
+  how_label: string;
+  how_headline_1: string;
+  how_headline_2: string;
+  step_01_title: string;
+  step_01_body: string;
+  step_02_title: string;
+  step_02_body: string;
+  step_03_title: string;
+  step_03_body: string;
+  how_cta_button: string;
+  how_cta_note: string;
+}
 
-export default function HowItWorksSection() {
+interface HowItWorksSectionProps {
+  text: HowItWorksSectionText;
+  ctaHref: string;
+}
+
+export default function HowItWorksSection({ text, ctaHref }: HowItWorksSectionProps) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  const steps = [
+    { number: "01", title: text.step_01_title, description: text.step_01_body },
+    { number: "02", title: text.step_02_title, description: text.step_02_body },
+    { number: "03", title: text.step_03_title, description: text.step_03_body },
+  ];
 
   return (
     <section className="relative py-24 lg:py-36 overflow-hidden">
@@ -56,7 +60,7 @@ export default function HowItWorksSection() {
             transition={{ duration: 0.6 }}
             className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-4"
           >
-            Jak to funguje
+            {text.how_label}
           </m.p>
           <m.h2
             initial={{ opacity: 0, y: 30 }}
@@ -64,9 +68,9 @@ export default function HowItWorksSection() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="font-display text-5xl lg:text-7xl text-white leading-none"
           >
-            OD VIZE
+            {text.how_headline_1}
             <br />
-            <span className="text-white/30">K PŘÍBĚHU.</span>
+            <span className="text-white/30">{text.how_headline_2}</span>
           </m.h2>
         </div>
 
@@ -103,16 +107,15 @@ export default function HowItWorksSection() {
           className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-6"
         >
           <Link
-            href="/kontakt"
+            href={ctaHref}
             className="bg-[#C8D400] text-black font-semibold text-base px-8 py-4 rounded-sm btn-hover-lime"
           >
-            Začít první krok
+            {text.how_cta_button}
           </Link>
           <span className="text-white/40 text-sm">
-            Náš obchodní tým se ozve do 24 hodin.
+            {text.how_cta_note}
           </span>
         </m.div>
-
       </div>
     </section>
   );

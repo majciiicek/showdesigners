@@ -4,7 +4,21 @@ import Link from "next/link";
 import { m, useInView } from "framer-motion";
 import { useRef } from "react";
 
-export default function CtaSection() {
+interface CtaSectionText {
+  cta_label: string;
+  cta_headline_1: string;
+  cta_headline_2: string;
+  cta_headline_3: string;
+  cta_body: string;
+  cta_button: string;
+}
+
+interface CtaSectionProps {
+  text: CtaSectionText;
+  ctaHref: string;
+}
+
+export default function CtaSection({ text, ctaHref }: CtaSectionProps) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -31,7 +45,7 @@ export default function CtaSection() {
               transition={{ duration: 0.6 }}
               className="text-black/40 text-xs font-semibold tracking-[0.2em] uppercase mb-6"
             >
-              Začněte dnes
+              {text.cta_label}
             </m.p>
             <m.h2
               initial={{ opacity: 0, y: 30 }}
@@ -40,11 +54,11 @@ export default function CtaSection() {
               className="font-display text-black leading-none"
               style={{ fontSize: "clamp(3rem, 6vw, 6rem)" }}
             >
-              JEDEN PARTNER.
+              {text.cta_headline_1}
               <br />
-              KOMPLETNÍ
+              {text.cta_headline_2}
               <br />
-              PROGRAM.
+              {text.cta_headline_3}
             </m.h2>
           </div>
 
@@ -56,15 +70,15 @@ export default function CtaSection() {
             className="flex flex-col justify-center py-20 lg:py-28 lg:pl-16 gap-8"
           >
             <p className="text-black/70 text-base leading-relaxed max-w-xs">
-              Řekněte nám, jaký večer chcete vytvořit. Zbytek je naše práce.
+              {text.cta_body}
             </p>
 
             <div className="flex flex-col gap-4">
               <Link
-                href="/kontakt"
+                href={ctaHref}
                 className="inline-flex items-center justify-center bg-black text-[#C8D400] font-semibold text-base px-8 py-4 rounded-sm btn-hover-dark self-start"
               >
-                Nezávazná poptávka
+                {text.cta_button}
               </Link>
               <a
                 href="mailto:booking@showdesigners.cz"

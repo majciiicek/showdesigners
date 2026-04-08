@@ -5,14 +5,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-const navLinks = [
-  { href: "/sluzba", label: "Co děláme" },
-  { href: "/o-nas", label: "O nás" },
-  { href: "/reference", label: "Reference" },
-  { href: "/kontakt", label: "Kontakt" },
-];
+interface NavLink {
+  href: string;
+  label: string;
+}
 
-export default function Nav() {
+interface NavProps {
+  links: NavLink[];
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+export default function Nav({ links, ctaLabel, ctaHref }: NavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -68,7 +72,7 @@ export default function Nav() {
 
           {/* Desktop navigation */}
           <ul className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {links.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
@@ -85,10 +89,10 @@ export default function Nav() {
           {/* CTA button */}
           <div className="hidden md:flex items-center gap-4">
             <Link
-              href="/kontakt"
+              href={ctaHref}
               className="bg-[#C8D400] text-black text-sm font-semibold px-5 py-2.5 rounded-sm btn-hover-lime"
             >
-              Poptávka
+              {ctaLabel}
             </Link>
           </div>
 
@@ -125,7 +129,7 @@ export default function Nav() {
         }`}
       >
         <ul className="flex flex-col items-center gap-8 mb-12">
-          {navLinks.map((link) => (
+          {links.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
@@ -137,10 +141,10 @@ export default function Nav() {
           ))}
         </ul>
         <Link
-          href="/kontakt"
+          href={ctaHref}
           className="bg-[#C8D400] text-black font-semibold text-lg px-8 py-4 rounded-sm"
         >
-          Poptávka
+          {ctaLabel}
         </Link>
       </div>
     </>

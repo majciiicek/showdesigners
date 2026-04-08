@@ -1,33 +1,51 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { getLocale } from "@/lib/locale";
+import { getTranslations, OG_LOCALE_MAP } from "@/lib/i18n";
+import { getPageTranslations } from "@/lib/page-translations";
+import { getAlternateUrls, SLUG_MAP } from "@/lib/slugs";
 
-export const metadata: Metadata = {
-  title: "O show designérech — tým a zázemí | Showdesigners",
-  description:
-    "Showdesigners vznikl z potřeby klientů, kteří hledali partnera — ne dodavatele. Konzultační vrstva postavená na 15 letech zkušeností agentury Aliatrix.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const t = getTranslations(locale);
+  const alternates = getAlternateUrls("o-nas", locale);
 
-const values = [
-  {
-    title: "Konzultanti, ne dodavatelé",
-    body: "Neprodáváme položky z katalogu. Navrhujeme dramaturgii celého večera a bereme za ni zodpovědnost.",
-  },
-  {
-    title: "Osobní prověrka každého umělce",
-    body: "V naší síti není nikdo, koho jsme osobně neviděli pracovat. Žádné překvapení na place.",
-  },
-  {
-    title: "Jeden kontakt pro vše",
-    body: "Váš show designer zná vás, vaši akci i všechny umělce. Komunikujete s jednou osobou — nikdy s call centrem.",
-  },
-  {
-    title: "Kvalita nad cenou",
-    body: "Pracujeme s realistickými rozpočty a hledáme nejlepší poměr kvality a ceny — ne nejlevnější variantu.",
-  },
-];
+  return {
+    title: t.meta["o-nas"].title,
+    description: t.meta["o-nas"].description,
+    alternates: {
+      canonical: alternates.canonical,
+      languages: alternates.languages,
+    },
+    openGraph: {
+      title: t.meta["o-nas"].title,
+      description: t.meta["o-nas"].description,
+      url: alternates.canonical,
+      locale: OG_LOCALE_MAP[locale],
+    },
+  };
+}
 
-export default function ONasPage() {
+export default async function ONasPage() {
+  const locale = await getLocale();
+  const pt = getPageTranslations(locale);
+  const a = pt.about;
+  const contactHref = `/${SLUG_MAP.kontakt[locale]}?mode=form`;
+
+  const values = [
+    { title: a.value_1_title, body: a.value_1_body },
+    { title: a.value_2_title, body: a.value_2_body },
+    { title: a.value_3_title, body: a.value_3_body },
+    { title: a.value_4_title, body: a.value_4_body },
+  ];
+
+  const team = [
+    { name: a.team_person_1_name, role: a.team_person_1_role, image: "/images/obchod/michalhalacka.webp", phone: "+420 774 297 349" },
+    { name: a.team_person_2_name, role: a.team_person_2_role, image: "/images/obchod/Alžběta Gree.webp", phone: "+420 777 668 694" },
+    { name: a.team_person_3_name, role: a.team_person_3_role, image: "/images/obchod/terezaadamusova.webp", phone: null },
+  ];
+
   return (
     <>
       {/* Hero — foto na pozadí */}
@@ -44,15 +62,15 @@ export default function ONasPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent" />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8 w-full pb-20 lg:pb-32">
           <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-6">
-            O nás
+            {a.hero_label}
           </p>
           <h1
             className="font-display text-white leading-none max-w-4xl"
             style={{ fontSize: "clamp(3.5rem, 9vw, 8rem)" }}
           >
-            <span className="text-[#C8D400]">PARTNER,</span>
+            <span className="text-[#C8D400]">{a.hero_headline_1}</span>
             <br />
-            NE DODAVATEL.
+            {a.hero_headline_2}
           </h1>
         </div>
       </section>
@@ -63,22 +81,16 @@ export default function ONasPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             <div>
               <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-6">
-                Náš příběh
+                {a.story_label}
               </p>
               <h2 className="font-display text-4xl lg:text-6xl text-white leading-none mb-8">
-                PROČ SHOWDESIGNERS VZNIKL
+                {a.story_headline}
               </h2>
             </div>
             <div className="flex flex-col gap-5 text-white/70 text-base leading-relaxed">
-              <p>
-                Za Showdesigners stojí tým agentury <strong className="text-white">Aliatrix</strong> — visual entertainment agentury s více než 15 lety na českém a středoevropském trhu. Za tu dobu jsme viděli stovky akcí. A naučili jsme se, co funguje.
-              </p>
-              <p>
-                Opakoval se nám jeden vzorec: klienti, kteří hledají jistotu. Ne nejnižší cenu, ale partnera, který celý entertainment vezme do rukou a odvede ho beze zbytku.
-              </p>
-              <p>
-                Showdesigners vznikl jako odpověď na tuto potřebu. Konzultační vrstva, kde klient nekupuje jednotlivá čísla — ale svěřuje celou dramaturgii večera jednomu show designerovi, který ji přetvoří v zážitek.
-              </p>
+              <p>{a.story_body_1}</p>
+              <p>{a.story_body_2}</p>
+              <p>{a.story_body_3}</p>
             </div>
           </div>
         </div>
@@ -97,10 +109,10 @@ export default function ONasPage() {
         />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <p className="text-black/40 text-xs font-semibold tracking-[0.2em] uppercase mb-4">
-            Naše hodnoty
+            {a.values_label}
           </p>
           <h2 className="font-display text-5xl lg:text-7xl text-black leading-none mb-16">
-            JAK PŘEMÝŠLÍME
+            {a.values_headline}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-black/10">
             {values.map((v) => (
@@ -126,32 +138,13 @@ export default function ONasPage() {
         />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-4">
-            Tým
+            {a.team_label}
           </p>
           <h2 className="font-display text-5xl lg:text-7xl text-white leading-none mb-16">
-            LIDÉ ZA PROJEKTEM
+            {a.team_headline}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                name: "Michal Halačka",
-                role: "Founder",
-                image: "/images/obchod/michalhalacka.webp",
-                phone: "+420 774 297 349",
-              },
-              {
-                name: "Alžběta Grée",
-                role: "Obchodní mág",
-                image: "/images/obchod/Alžběta Gree.webp",
-                phone: "+420 777 668 694",
-              },
-              {
-                name: "Tereza Adamusová",
-                role: "Kreativní ředitelka",
-                image: "/images/obchod/terezaadamusova.webp",
-                phone: null,
-              },
-            ].map((person) => (
+            {team.map((person) => (
               <div key={person.name} className="flex flex-col gap-4">
                 <div
                   className="relative overflow-hidden rounded-sm bg-[#111]"
@@ -188,10 +181,9 @@ export default function ONasPage() {
       <section className="py-20 bg-black border-t border-white/5">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="max-w-2xl">
-            <p className="text-white/30 text-xs uppercase tracking-widest mb-3">Zázemí</p>
+            <p className="text-white/30 text-xs uppercase tracking-widest mb-3">{a.aliatrix_label}</p>
             <p className="text-white/70 text-base leading-relaxed">
-              Showdesigners je samostatný brand vycházející ze zázemí agentury{" "}
-              <strong className="text-white">Aliatrix</strong> — visual entertainment agentury s vlastní produkcí a 15 lety zkušeností. Sdílíme tým, sítě umělců a produkční infrastrukturu.
+              {a.aliatrix_body}
             </p>
           </div>
         </div>
@@ -210,13 +202,13 @@ export default function ONasPage() {
         />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <h2 className="font-display text-5xl lg:text-6xl text-black leading-none">
-            CHCETE NÁS POZNAT?
+            {a.cta_headline}
           </h2>
           <Link
-            href="/kontakt?mode=form"
+            href={contactHref}
             className="flex-shrink-0 bg-black text-[#C8D400] font-semibold text-base px-10 py-4 rounded-sm btn-hover-dark"
           >
-            Napište nám
+            {a.cta_button}
           </Link>
         </div>
       </section>

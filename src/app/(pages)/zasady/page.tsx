@@ -1,9 +1,28 @@
 import type { Metadata } from "next";
+import { getLocale } from "@/lib/locale";
+import { getTranslations, OG_LOCALE_MAP } from "@/lib/i18n";
+import { getAlternateUrls } from "@/lib/slugs";
 
-export const metadata: Metadata = {
-  title: "Zásady ochrany osobních údajů — Showdesigners",
-  description: "Zásady ochrany osobních údajů Showdesigners — informace o zpracování osobních údajů, cookies a právech subjektů v souladu s GDPR (nařízení EU 2016/679).",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const t = getTranslations(locale);
+  const alternates = getAlternateUrls("zasady", locale);
+
+  return {
+    title: t.meta.zasady.title,
+    description: t.meta.zasady.description,
+    alternates: {
+      canonical: alternates.canonical,
+      languages: alternates.languages,
+    },
+    openGraph: {
+      title: t.meta.zasady.title,
+      description: t.meta.zasady.description,
+      url: alternates.canonical,
+      locale: OG_LOCALE_MAP[locale],
+    },
+  };
+}
 
 export default function ZasadyPage() {
   return (

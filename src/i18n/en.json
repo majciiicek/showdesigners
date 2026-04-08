@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "home": {
+      "title": "Showdesigners — Full Entertainment for Your Event",
+      "description": "One partner. Complete entertainment. Showdesigners designs and delivers your entire show — from dramaturgy to the final act. 15 years of experience behind every event."
+    },
+    "o-nas": {
+      "title": "About Us — Team & Background | Show Designers",
+      "description": "Showdesigners was born for clients who wanted a partner, not a vendor. A consultancy layer built on 15 years of Aliatrix expertise. Meet the team."
+    },
+    "reference": {
+      "title": "Client References — Show Design in Action | Show Designers",
+      "description": "Corporate galas, luxury weddings, festivals and private events — see how Showdesigners delivers show design that guests remember. Browse our work."
+    },
+    "kontakt": {
+      "title": "Request a Show Designer — Contact | Show Designers",
+      "description": "Tell us about your event — corporate gala, private celebration or festival. Your dedicated show designer is one message away. We respond within 24 hours."
+    },
+    "sluzba": {
+      "title": "Show Design from A to Z — What We Do | Show Designers",
+      "description": "How does a show designer work? We take full responsibility for your event's entertainment — dramaturgy, artists, on-site coordination. No templates, ever."
+    },
+    "zasady": {
+      "title": "Privacy Policy | Show Designers",
+      "description": "Privacy policy and personal data processing information for Showdesigners — theshowdesigners.com."
+    }
+  },
+  "nav": {
+    "sluzba": "What We Do",
+    "o-nas": "About",
+    "reference": "References",
+    "kontakt": "Contact",
+    "cta": "Get in Touch"
+  },
+  "slugs": {
+    "o-nas": "about",
+    "sluzba": "services",
+    "reference": "references",
+    "kontakt": "contact",
+    "zasady": "privacy",
+    "impressum": "impressum"
+  },
+  "footer": {
+    "tagline": "Complete entertainment for your event. One partner — from dramaturgy to the final performance.",
+    "nav_heading": "Navigation",
+    "contact_heading": "Contact",
+    "zasady": "Privacy Policy",
+    "impressum": "Impressum",
+    "copyright": "part of the Aliatrix Group"
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "homepage": {
+    "intro_label": "Who We Are",
+    "intro_headline_1": "ENTERTAINMENT",
+    "intro_headline_2": "AT THE HIGHEST",
+    "intro_headline_3": "LEVEL.",
+    "intro_body_1": "Showdesigners is not an agency that hands you a catalogue of acts. We are the partner who takes your vision and transforms it into a dramaturgically complete story — one your guests will live through fully and talk about long after.",
+    "intro_body_2": "Every event gets its own show designer — a single point of contact who understands your event as a whole. Not a coordinator. A dramaturg, advisor and producer in one.",
+    "intro_body_3": "Behind Showdesigners stands Aliatrix — 15 years in the industry, an in-house production team, and artists who have performed on three continents.",
+    "intro_diff_1": "One point of contact for the entire project — you never explain yourself twice.",
+    "intro_diff_2": "We design a fully bespoke programme — with deep expertise built around your specific event.",
+    "intro_diff_3": "We craft an evening with narrative and momentum — every act lands exactly where it should.",
+    "intro_diff_4": "Only artists we know personally and have worked with ourselves.",
+
+    "stats_1_line_1": "DESIGNED",
+    "stats_1_line_2": "TO ORDER.",
+    "stats_2_line_1": "A STORY,",
+    "stats_2_line_2": "NOT A SCHEDULE.",
+    "stats_3_line_1": "YOUR SHOW DESIGNER.",
+    "stats_3_line_2": "YOUR WHOLE EVENT.",
+    "stats_4_line_1": "SHOW",
+    "stats_4_line_2": "IN CONTEXT.",
+
+    "how_label": "How It Works",
+    "how_headline_1": "FROM VISION",
+    "how_headline_2": "TO STORY.",
+    "step_01_title": "Vision",
+    "step_01_body": "Tell us how you want your guests to feel. Our team walks you through everything from the first call to the signed brief — no forms, no catalogues.",
+    "step_02_title": "Story",
+    "step_02_body": "Our creative team designs the full dramaturgy of your event — not one act after another, but a story with tension and peaks that work together as a whole.",
+    "step_03_title": "The Day",
+    "step_03_body": "This is when you meet your show designer for the first time. They are physically on-site, running the entire programme and handling every detail on the ground. You enjoy the event.",
+    "how_cta_button": "Start the First Step",
+    "how_cta_note": "Our team will get back to you within 24 hours.",
+
+    "cta_label": "Start Today",
+    "cta_headline_1": "ONE PARTNER.",
+    "cta_headline_2": "COMPLETE",
+    "cta_headline_3": "PROGRAMME.",
+    "cta_body": "Tell us what kind of evening you want to create. The rest is our job.",
+    "cta_button": "Send an Enquiry"
+  },
+
+  "services": {
+    "hero_label": "What We Do",
+    "hero_headline_1": "SHOW DESIGN",
+    "hero_headline_2": "FROM A TO Z.",
+
+    "intro_body_1": "Every event is different — different space, different audience, different energy. That is why we never work from a template. We work from your vision and build a programme that fits it precisely.",
+    "intro_body_2": "From the first meeting, our sales and creative team is fully dedicated to you — together we design the dramaturgy, select the artists, and refine every detail. On the day itself, your show designer runs the programme live on-site.",
+
+    "process_label": "Step by Step",
+    "process_headline": "HOW WE WORK TOGETHER",
+    "step_01_title": "First Contact",
+    "step_01_body": "Reach out with your enquiry — event type, date, atmosphere, approximate budget. Or start by chatting with our AI assistant — a relaxed way to tell us as much as you like about your event, without any forms.",
+    "step_02_title": "Design & Preparation",
+    "step_02_body": "Our creative team designs the full dramaturgy, selects the artists and refines every detail. All communication and coordination is handled by us — you have nothing to worry about.",
+    "step_03_title": "Event Day",
+    "step_03_body": "Your show designer is on-site from setup to the final act. Every cue runs exactly as planned.",
+
+    "types_label": "Event Types",
+    "types_headline": "WHO WE WORK WITH",
+    "type_1_title": "Corporate Events",
+    "type_1_body": "Gala dinners, company parties, team-building events, product launches. A programme that reflects your company culture and leaves a lasting impression.",
+    "type_2_title": "Luxury Private Events",
+    "type_2_body": "Weddings, VIP birthdays, private celebrations. Every detail choreographed for the right moment.",
+    "type_3_title": "Festivals & Cultural Events",
+    "type_3_body": "Supporting programmes, dramaturgical collaboration, spatial scenography. We know how to hold the attention of a large audience.",
+    "type_4_title": "Hotels & Resorts",
+    "type_4_body": "Regular or one-off entertainment for guests. A show that becomes part of the stay experience. We also handle supporting programmes for conferences and corporate gatherings.",
+
+    "cta_headline": "PLANNING AN EVENT?",
+    "cta_note": "We respond within 24 hours.",
+    "cta_button": "Send an Enquiry"
+  },
+
+  "about": {
+    "hero_label": "About Us",
+    "hero_headline_1": "PARTNER,",
+    "hero_headline_2": "NOT VENDOR.",
+
+    "story_label": "Our Story",
+    "story_headline": "WHY SHOWDESIGNERS EXISTS",
+    "story_body_1": "Behind Showdesigners stands the team of Aliatrix — a visual entertainment agency with over 15 years on the Czech and Central European market. In that time, we have seen hundreds of events. And we have learned what works.",
+    "story_body_2": "One pattern kept repeating: clients who wanted certainty. Not the lowest price, but a partner who would take full ownership of the entertainment and deliver it without compromise.",
+    "story_body_3": "Showdesigners was our answer to that need. A consultancy layer where the client does not buy individual acts — but entrusts the entire evening's dramaturgy to one show designer, who transforms it into an experience.",
+
+    "values_label": "Our Values",
+    "values_headline": "HOW WE THINK",
+    "value_1_title": "Consultants, Not Vendors",
+    "value_1_body": "We do not sell items from a catalogue. We design the full dramaturgy of your evening and take responsibility for every part of it.",
+    "value_2_title": "Every Artist Personally Vetted",
+    "value_2_body": "No one in our network is there without us having seen them work in person. No surprises on the day.",
+    "value_3_title": "One Contact for Everything",
+    "value_3_body": "Your show designer knows you, your event, and all the artists. You communicate with one person — never a call centre.",
+    "value_4_title": "Quality Over Price",
+    "value_4_body": "We work with realistic budgets and look for the best quality-to-value ratio — not the cheapest option.",
+
+    "team_label": "Team",
+    "team_headline": "THE PEOPLE BEHIND THE PROJECTS",
+    "team_person_1_name": "Michal Halačka",
+    "team_person_1_role": "Founder",
+    "team_person_2_name": "Alžběta Grée",
+    "team_person_2_role": "Sales Extraordinaire",
+    "team_person_3_name": "Tereza Adamusová",
+    "team_person_3_role": "Creative Director",
+
+    "aliatrix_label": "Our Roots",
+    "aliatrix_body": "Showdesigners is an independent brand built on the foundation of Aliatrix — a visual entertainment agency with its own production and 15 years of experience. We share the team, the artist network and the production infrastructure.",
+
+    "cta_headline": "WANT TO GET TO KNOW US?",
+    "cta_button": "Write to Us"
+  },
+
+  "references": {
+    "hero_label": "References",
+    "hero_headline_1": "OUR",
+    "hero_headline_2": "WORK.",
+    "hero_headline_sr_only": "Show design for corporate events and private celebrations.",
+
+    "cta_headline": "YOUR EVENT COULD BE NEXT.",
+    "cta_sub": "We will design a programme precisely for you.",
+    "cta_button": "Send an Enquiry"
+  },
+
+  "contact": {
+    "ai_tab_label": "AI Assistant",
+    "form_tab_label": "Contact Form",
+    "page_headline": "LET'S TALK ABOUT YOUR EVENT.",
+    "page_subheadline": "Tell us what you are planning — we will take care of the rest."
+  },
+
+  "footer_extra": {
+    "role_sales": "Sales Extraordinaire",
+    "role_founder": "Founder",
+    "response_time": "We respond within 24 hours."
+  }
+}

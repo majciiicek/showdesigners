@@ -259,6 +259,15 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  // Detect locale from middleware header and build language instruction
+  const locale = (request.headers.get("x-locale") ?? "cs") as "cs" | "en" | "de";
+  const languageInstruction =
+    locale === "en"
+      ? "\n\nIMPORTANT: Always respond in English. The user is on the English-language website (theshowdesigners.com)."
+      : locale === "de"
+      ? "\n\nWICHTIG: Antworte immer auf Deutsch. Der Nutzer befindet sich auf der deutschsprachigen Website (showdesigners.de)."
+      : "";
+
   // Resolve conversation ID from session token
   let conversationId: string | null = null;
   if (sessionToken) {
@@ -290,7 +299,7 @@ export async function POST(request: NextRequest) {
         const anthropicStream = await client.messages.stream({
           model: "claude-sonnet-4-6",
           max_tokens: 1024,
-          system: SYSTEM_PROMPT + knownClientContext,
+          system: SYSTEM_PROMPT + languageInstruction + knownClientContext,
           messages,
         });
 

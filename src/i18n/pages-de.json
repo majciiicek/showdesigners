@@ -1,0 +1,138 @@
+{
+  "homepage": {
+    "intro_label": "Wer wir sind",
+    "intro_headline_1": "ENTERTAINMENT",
+    "intro_headline_2": "AUF HÖCHSTEM",
+    "intro_headline_3": "NIVEAU.",
+    "intro_body_1": "Showdesigners ist keine Agentur, die Ihnen einen Künstlerkatalog vorlegt. Wir sind der Partner, der Ihre Vision in eine dramaturgisch geschlossene Geschichte verwandelt — eine, die Ihre Gäste vollständig erleben und gern weitererzählen werden.",
+    "intro_body_2": "Jede Veranstaltung bekommt einen eigenen Show Designer — eine einzige Ansprechperson, die Ihr Event als Ganzes versteht. Kein Koordinator. Dramaturg, Berater und Produzent in einer Person.",
+    "intro_body_3": "Hinter Showdesigners steht Aliatrix — 15 Jahre Branchenerfahrung, eigene Produktion und Künstler, die auf drei Kontinenten aufgetreten sind.",
+    "intro_diff_1": "Ein Ansprechpartner für das gesamte Projekt — Sie müssen nichts zweimal erklären.",
+    "intro_diff_2": "Wir entwickeln ein vollständig maßgeschneidertes Programm — mit dem Know-how, das Ihr Event verdient.",
+    "intro_diff_3": "Wir gestalten einen Abend mit Dramaturgie und Spannungsbogen — jede Nummer sitzt genau dort, wo sie hingehört.",
+    "intro_diff_4": "Nur Künstler, die wir persönlich kennen und mit denen wir selbst gearbeitet haben.",
+
+    "stats_1_line_1": "KONZEPT /",
+    "stats_1_line_2": "NACH MASS.",
+    "stats_2_line_1": "EINE GESCHICHTE,",
+    "stats_2_line_2": "KEIN ABLAUFPLAN.",
+    "stats_3_line_1": "IHR SHOW DESIGNER.",
+    "stats_3_line_2": "IHR GANZES EVENT.",
+    "stats_4_line_1": "SHOW",
+    "stats_4_line_2": "MIT KONTEXT.",
+
+    "how_label": "So funktioniert es",
+    "how_headline_1": "VON DER VISION",
+    "how_headline_2": "ZUR GESCHICHTE.",
+    "step_01_title": "Vision",
+    "step_01_body": "Sagen Sie uns, wie sich Ihre Gäste fühlen sollen. Unser Team begleitet Sie vom ersten Gespräch bis zur Unterschrift — ohne Formulare, ohne Kataloge.",
+    "step_02_title": "Geschichte",
+    "step_02_body": "Unser Kreativteam entwickelt die Dramaturgie Ihres gesamten Abends — nicht Nummer für Nummer, sondern eine Geschichte mit Spannung und Höhepunkten, die als Ganzes funktioniert.",
+    "step_03_title": "Der große Tag",
+    "step_03_body": "Hier begegnen Sie Ihrem Show Designer zum ersten Mal. Er ist physisch vor Ort, leitet das gesamte Programm und löst alles operativ. Sie genießen Ihr Event.",
+    "how_cta_button": "Ersten Schritt starten",
+    "how_cta_note": "Unser Team meldet sich innerhalb von 24 Stunden.",
+
+    "cta_label": "Jetzt starten",
+    "cta_headline_1": "EIN PARTNER.",
+    "cta_headline_2": "VOLLSTÄNDIGES",
+    "cta_headline_3": "PROGRAMM.",
+    "cta_body": "Erzählen Sie uns, welchen Abend Sie gestalten möchten. Den Rest übernehmen wir.",
+    "cta_button": "Unverbindlich anfragen"
+  },
+
+  "services": {
+    "hero_label": "Leistungen",
+    "hero_headline_1": "SHOW DESIGN",
+    "hero_headline_2": "VON A BIS Z.",
+
+    "intro_body_1": "Jede Veranstaltung ist anders — anderer Raum, anderes Publikum, andere Energie. Deshalb arbeiten wir nie mit Vorlagen. Wir arbeiten mit Ihrer Vision und entwickeln ein Programm, das genau dazu passt.",
+    "intro_body_2": "Von der ersten Besprechung an sind unser Vertriebs- und Kreativteam vollständig für Sie da — gemeinsam entwickeln wir die Dramaturgie, wählen die Künstler aus und verfeinern jedes Detail. Am Veranstaltungstag führt Ihr Show Designer das Programm live vor Ort.",
+
+    "process_label": "Schritt für Schritt",
+    "process_headline": "SO ARBEITEN WIR ZUSAMMEN",
+    "step_01_title": "Erste Kontaktaufnahme",
+    "step_01_body": "Melden Sie sich mit Ihrer Anfrage — Veranstaltungstyp, Datum, gewünschte Atmosphäre, ungefähres Budget. Oder sprechen Sie zuerst mit unserem KI-Assistenten — ein unkomplizierter Weg, uns möglichst viel über Ihr Event zu erzählen, ganz ohne Formulare.",
+    "step_02_title": "Konzept & Vorbereitung",
+    "step_02_body": "Unser Kreativteam entwickelt die vollständige Dramaturgie, wählt die Künstler aus und verfeinert jedes Detail. Die gesamte Kommunikation und Koordination liegt bei uns — Sie müssen sich um nichts kümmern.",
+    "step_03_title": "Veranstaltungstag",
+    "step_03_body": "Ihr Show Designer ist von Aufbau bis zum letzten Auftritt vor Ort. Jeder Einsatz läuft exakt wie geplant.",
+
+    "types_label": "Veranstaltungsarten",
+    "types_headline": "FÜR WEN WIR ARBEITEN",
+    "type_1_title": "Firmenevents",
+    "type_1_body": "Gala-Dinners, Betriebsfeiern, Team-Events, Produktpräsentationen. Ein Programm, das zur Unternehmenskultur passt und nachhaltig im Gedächtnis bleibt.",
+    "type_2_title": "Exklusive Privatfeiern",
+    "type_2_body": "Hochzeiten, VIP-Geburtstage, private Jubiläen. Jedes Detail choreografiert für den richtigen Moment.",
+    "type_3_title": "Festivals & Kulturveranstaltungen",
+    "type_3_body": "Rahmenprogramme, dramaturgische Zusammenarbeit, Raumgestaltung. Wir wissen, wie man große Publikumsmengen in den Bann zieht.",
+    "type_4_title": "Hotels & Resorts",
+    "type_4_body": "Regelmäßiges oder einmaliges Entertainment für Ihre Gäste. Eine Show, die Teil des Aufenthaltserlebnisses wird. Auch Begleitprogramme für Tagungen und Konferenzen sind möglich.",
+
+    "cta_headline": "PLANEN SIE EIN EVENT?",
+    "cta_note": "Wir antworten innerhalb von 24 Stunden.",
+    "cta_button": "Unverbindlich anfragen"
+  },
+
+  "about": {
+    "hero_label": "Über uns",
+    "hero_headline_1": "PARTNER,",
+    "hero_headline_2": "NICHT DIENSTLEISTER.",
+
+    "story_label": "Unsere Geschichte",
+    "story_headline": "WARUM SHOWDESIGNERS ENTSTAND",
+    "story_body_1": "Hinter Showdesigners steht das Team von Aliatrix — einer Visual-Entertainment-Agentur mit über 15 Jahren Erfahrung auf dem tschechischen und mitteleuropäischen Markt. In dieser Zeit haben wir hunderte Veranstaltungen begleitet. Und wir haben gelernt, was wirklich funktioniert.",
+    "story_body_2": "Immer wieder begegnete uns dasselbe Muster: Kunden, die Verlässlichkeit suchten. Keinen Niedrigpreis, sondern einen Partner, der das gesamte Entertainment übernimmt und kompromisslos umsetzt.",
+    "story_body_3": "Showdesigners ist unsere Antwort auf diesen Bedarf. Eine Beratungsebene, auf der der Kunde keine Einzelnummern kauft — sondern die Dramaturgie des gesamten Abends einem einzigen Show Designer anvertraut, der daraus ein unvergessliches Erlebnis macht.",
+
+    "values_label": "Unsere Werte",
+    "values_headline": "WIE WIR DENKEN",
+    "value_1_title": "Berater, keine Lieferanten",
+    "value_1_body": "Wir verkaufen keine Positionen aus einem Katalog. Wir entwickeln die vollständige Dramaturgie Ihres Abends und übernehmen dafür die Verantwortung.",
+    "value_2_title": "Jeden Künstler persönlich geprüft",
+    "value_2_body": "Niemand in unserem Netzwerk ist dabei, ohne dass wir ihn persönlich bei der Arbeit erlebt haben. Keine Überraschungen am Veranstaltungstag.",
+    "value_3_title": "Ein Ansprechpartner für alles",
+    "value_3_body": "Ihr Show Designer kennt Sie, Ihr Event und alle Künstler. Sie kommunizieren mit einer einzigen Person — niemals mit einem Call-Center.",
+    "value_4_title": "Qualität vor Preis",
+    "value_4_body": "Wir arbeiten mit realistischen Budgets und suchen das beste Preis-Leistungs-Verhältnis — nicht die günstigste Option.",
+
+    "team_label": "Team",
+    "team_headline": "DIE MENSCHEN HINTER DEN PROJEKTEN",
+    "team_person_1_name": "Michal Halačka",
+    "team_person_1_role": "Founder",
+    "team_person_2_name": "Alžběta Grée",
+    "team_person_2_role": "Sales Extraordinaire",
+    "team_person_3_name": "Tereza Adamusová",
+    "team_person_3_role": "Creative Director",
+
+    "aliatrix_label": "Unser Hintergrund",
+    "aliatrix_body": "Showdesigners ist eine eigenständige Marke, die auf dem Fundament von Aliatrix aufgebaut ist — einer Visual-Entertainment-Agentur mit eigener Produktion und 15 Jahren Erfahrung. Wir teilen Team, Künstlernetzwerk und Produktionsinfrastruktur.",
+
+    "cta_headline": "MÖCHTEN SIE UNS KENNENLERNEN?",
+    "cta_button": "Schreiben Sie uns"
+  },
+
+  "references": {
+    "hero_label": "Referenzen",
+    "hero_headline_1": "UNSERE",
+    "hero_headline_2": "PROJEKTE.",
+    "hero_headline_sr_only": "Show Design für Firmenevents und exklusive Privatfeiern.",
+
+    "cta_headline": "IHR EVENT KÖNNTE DAS NÄCHSTE SEIN.",
+    "cta_sub": "Wir entwickeln ein Programm, das genau zu Ihnen passt.",
+    "cta_button": "Unverbindlich anfragen"
+  },
+
+  "contact": {
+    "ai_tab_label": "KI-Assistent",
+    "form_tab_label": "Kontaktformular",
+    "page_headline": "SPRECHEN WIR ÜBER IHR EVENT.",
+    "page_subheadline": "Erzählen Sie uns, was Sie planen — wir übernehmen den Rest."
+  },
+
+  "footer_extra": {
+    "role_sales": "Sales Extraordinaire",
+    "role_founder": "Founder",
+    "response_time": "Wir antworten innerhalb von 24 Stunden."
+  }
+}

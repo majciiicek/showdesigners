@@ -1,0 +1,138 @@
+{
+  "homepage": {
+    "intro_label": "Kdo jsme",
+    "intro_headline_1": "ENTERTAINMENT",
+    "intro_headline_2": "NA NEJVYŠŠÍ",
+    "intro_headline_3": "ÚROVNI.",
+    "intro_body_1": "Showdesigners není agentura, která vám nabídne jen katalog umělců. Je to partner, který vezme vaši vizi — a přetaví ji do dramaturgicky uceleného příběhu, který hosté prožijí naplno a budou o něm rádi mluvit.",
+    "intro_body_2": "Každé akci přidělíme show designera — jedinou kontaktní osobu, která rozumí vaší akci jako celku. Není to koordinátor. Je to dramaturg, poradce a producent v jednom.",
+    "intro_body_3": "Za Showdesigners stojí zázemí agentury Aliatrix — 15 let v oboru, vlastní produkce a umělci, kteří bavili diváky na třech kontinentech.",
+    "intro_diff_1": "Jeden kontakt pro celý projekt — nemusíte nic vysvětlovat dvakrát.",
+    "intro_diff_2": "Navrhujeme komplexní program na míru — s veškerým know-how přímo pro vaši akci.",
+    "intro_diff_3": "Stavíme večer s příběhem a spádem — každé číslo sedí přesně tam, kde má.",
+    "intro_diff_4": "Jen umělci, které jsme sami prověřili a s nimiž máme zkušenost.",
+
+    "stats_1_line_1": "NÁVRH",
+    "stats_1_line_2": "NA MÍRU.",
+    "stats_2_line_1": "PŘÍBĚH,",
+    "stats_2_line_2": "NE PROGRAM.",
+    "stats_3_line_1": "VÁŠ SHOW DESIGNER.",
+    "stats_3_line_2": "CELÁ AKCE.",
+    "stats_4_line_1": "SHOW",
+    "stats_4_line_2": "V KONTEXTU.",
+
+    "how_label": "Jak to funguje",
+    "how_headline_1": "OD VIZE",
+    "how_headline_2": "K PŘÍBĚHU.",
+    "step_01_title": "Vize",
+    "step_01_body": "Řeknete nám, co chcete, aby hosté cítili. Náš obchodní tým vás provede od prvního hovoru až po podpis — žádné formuláře, žádné katalogy.",
+    "step_02_title": "Příběh",
+    "step_02_body": "Kreativní tým sestaví dramaturgii celé akce — ne jen program za programem, ale příběh s napětím a vrcholy, které společně ladí.",
+    "step_03_title": "Den D",
+    "step_03_body": "Poprvé se potkáte se svým show designerem. Je fyzicky na místě, řídí celý program a řeší vše operativně. Vy si užíváte akci.",
+    "how_cta_button": "Začít první krok",
+    "how_cta_note": "Náš obchodní tým se ozve do 24 hodin.",
+
+    "cta_label": "Začněte dnes",
+    "cta_headline_1": "JEDEN PARTNER.",
+    "cta_headline_2": "KOMPLETNÍ",
+    "cta_headline_3": "PROGRAM.",
+    "cta_body": "Řekněte nám, jaký večer chcete vytvořit. Zbytek je naše práce.",
+    "cta_button": "Nezávazná poptávka"
+  },
+
+  "services": {
+    "hero_label": "Co děláme",
+    "hero_headline_1": "SHOW DESIGN",
+    "hero_headline_2": "OD A DO Z.",
+
+    "intro_body_1": "Každá akce je jiná — jiný prostor, jiné publikum, jiná energie. Proto nepracujeme se šablonou. Pracujeme s vaší vizí a navrhujeme program, který do ní přesně sedí.",
+    "intro_body_2": "Od první schůzky se vám věnuje náš obchodní a kreativní tým — společně navrhneme dramaturgii, vybereme umělce a doladíme každý detail. Na samotné akci pak program řídí show designer přímo na místě.",
+
+    "process_label": "Krok za krokem",
+    "process_headline": "PRŮBĚH SPOLUPRÁCE",
+    "step_01_title": "První kontakt",
+    "step_01_body": "Ozvete se s poptávkou — typ akce, datum, atmosféra, přibližný rozpočet. Nebo si nejdřív popovídejte s naším AI asistentem — příjemný způsob, jak nám o akci říct co nejvíc, bez formulářů.",
+    "step_02_title": "Návrh a příprava",
+    "step_02_body": "Náš kreativní tým navrhne dramaturgii, vybere umělce a doladí každý detail. Veškerá komunikace a koordinace je na nás — vy se nestaráte o nic.",
+    "step_03_title": "Den akce",
+    "step_03_body": "Váš show designer je na místě od přípravy po závěrečné číslo. Každý vstup proběhne přesně jak bylo naplánováno.",
+
+    "types_label": "Typy akcí",
+    "types_headline": "PRO KOHO PRACUJEME",
+    "type_1_title": "Korporátní akce",
+    "type_1_body": "Gala večeře, firemní večírky, team buildingy, produktové launche. Program, který odpovídá firemní kultuře a zanechá dojem.",
+    "type_2_title": "Luxusní soukromé akce",
+    "type_2_body": "Svatby, VIP narozeniny, soukromé oslavy. Každý detail choreografován pro ten správný moment.",
+    "type_3_title": "Festivaly a kulturní akce",
+    "type_3_body": "Doprovodné programy, dramaturgická spolupráce, scénografie prostoru. Víme, co drží pozornost velkého publika.",
+    "type_4_title": "Hotely a resorty",
+    "type_4_body": "Pravidelný nebo jednorázový entertainment pro hosty. Show, která se stane součástí zážitku pobytu. Zvládneme i doprovodný program pro konference a firemní setkání.",
+
+    "cta_headline": "CHYSTÁTE AKCI?",
+    "cta_note": "Odpovídáme do 24 hodin.",
+    "cta_button": "Nezávazná poptávka"
+  },
+
+  "about": {
+    "hero_label": "O nás",
+    "hero_headline_1": "PARTNER,",
+    "hero_headline_2": "NE DODAVATEL.",
+
+    "story_label": "Náš příběh",
+    "story_headline": "PROČ SHOWDESIGNERS VZNIKL",
+    "story_body_1": "Za Showdesigners stojí tým agentury Aliatrix — visual entertainment agentury s více než 15 lety na českém a středoevropském trhu. Za tu dobu jsme viděli stovky akcí. A naučili jsme se, co funguje.",
+    "story_body_2": "Opakoval se nám jeden vzorec: klienti, kteří hledají jistotu. Ne nejnižší cenu, ale partnera, který celý entertainment vezme do rukou a odvede ho beze zbytku.",
+    "story_body_3": "Showdesigners vznikl jako odpověď na tuto potřebu. Konzultační vrstva, kde klient nekupuje jednotlivá čísla — ale svěřuje celou dramaturgii večera jednomu show designerovi, který ji přetvoří v zážitek.",
+
+    "values_label": "Naše hodnoty",
+    "values_headline": "JAK PŘEMÝŠLÍME",
+    "value_1_title": "Konzultanti, ne dodavatelé",
+    "value_1_body": "Neprodáváme položky z katalogu. Navrhujeme dramaturgii celého večera a bereme za ni zodpovědnost.",
+    "value_2_title": "Osobní prověrka každého umělce",
+    "value_2_body": "V naší síti není nikdo, koho jsme osobně neviděli pracovat. Žádné překvapení na place.",
+    "value_3_title": "Jeden kontakt pro vše",
+    "value_3_body": "Váš show designer zná vás, vaši akci i všechny umělce. Komunikujete s jednou osobou — nikdy s call centrem.",
+    "value_4_title": "Kvalita nad cenou",
+    "value_4_body": "Pracujeme s realistickými rozpočty a hledáme nejlepší poměr kvality a ceny — ne nejlevnější variantu.",
+
+    "team_label": "Tým",
+    "team_headline": "LIDÉ ZA PROJEKTEM",
+    "team_person_1_name": "Michal Halačka",
+    "team_person_1_role": "Founder",
+    "team_person_2_name": "Alžběta Grée",
+    "team_person_2_role": "Obchodní mág",
+    "team_person_3_name": "Tereza Adamusová",
+    "team_person_3_role": "Kreativní ředitelka",
+
+    "aliatrix_label": "Zázemí",
+    "aliatrix_body": "Showdesigners je samostatný brand vycházející ze zázemí agentury Aliatrix — visual entertainment agentury s vlastní produkcí a 15 lety zkušeností. Sdílíme tým, sítě umělců a produkční infrastrukturu.",
+
+    "cta_headline": "CHCETE NÁS POZNAT?",
+    "cta_button": "Napište nám"
+  },
+
+  "references": {
+    "hero_label": "Reference",
+    "hero_headline_1": "NAŠE",
+    "hero_headline_2": "REALIZACE.",
+    "hero_headline_sr_only": "Show design pro firemní akce a soukromé oslavy.",
+
+    "cta_headline": "VÁŠE AKCE MŮŽE BÝT DALŠÍ.",
+    "cta_sub": "Připravíme program přesně pro vás.",
+    "cta_button": "Nezávazná poptávka"
+  },
+
+  "contact": {
+    "ai_tab_label": "AI asistent",
+    "form_tab_label": "Kontaktní formulář",
+    "page_headline": "ŘEKNETE NÁM, CO PLÁNUJETE.",
+    "page_subheadline": "Zbytek je naše práce."
+  },
+
+  "footer_extra": {
+    "role_sales": "Obchodní mág",
+    "role_founder": "Founder",
+    "response_time": "Náš obchodní tým se ozve do 24 hodin."
+  }
+}

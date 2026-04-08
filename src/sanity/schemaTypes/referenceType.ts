@@ -61,6 +61,30 @@ export const referenceType = defineType({
       type: "number",
     }),
 
+    // --- Překlady (EN / DE) ---
+    defineField({
+      name: "titleEn",
+      title: "Název akce (EN)",
+      type: "string",
+    }),
+    defineField({
+      name: "titleDe",
+      title: "Název akce (DE)",
+      type: "string",
+    }),
+    defineField({
+      name: "descriptionEn",
+      title: "Perex (EN)",
+      type: "text",
+      rows: 3,
+    }),
+    defineField({
+      name: "descriptionDe",
+      title: "Perex (DE)",
+      type: "text",
+      rows: 3,
+    }),
+
     // --- Detail sekce ---
     defineField({
       name: "detail",
