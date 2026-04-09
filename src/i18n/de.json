@@ -23,6 +23,10 @@
     "zasady": {
       "title": "Datenschutzerklärung — Showdesigners",
       "description": "Datenschutzerklärung von Showdesigners — Informationen zur Verarbeitung personenbezogener Daten, Cookies und Ihren Rechten gemäß DSGVO."
+    },
+    "impressum": {
+      "title": "Impressum — Showdesigners",
+      "description": "Pflichtangaben gemäß § 5 TMG für Showdesigners (Aliatrix s.r.o.)."
     }
   },
   "nav": {

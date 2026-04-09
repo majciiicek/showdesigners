@@ -23,6 +23,10 @@
     "zasady": {
       "title": "Privacy Policy | Show Designers",
       "description": "Privacy policy and personal data processing information for Showdesigners — theshowdesigners.com."
+    },
+    "impressum": {
+      "title": "Impressum | Show Designers",
+      "description": "Legal notice and company information for Showdesigners (Aliatrix s.r.o.)."
     }
   },
   "nav": {

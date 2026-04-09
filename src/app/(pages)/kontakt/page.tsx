@@ -39,6 +39,7 @@ export default async function KontaktPage() {
         formText={pt.contact}
         chatText={pt.ui}
         privacyHref={privacyHref}
+        locale={locale}
       />
     </Suspense>
   );

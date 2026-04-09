@@ -14,15 +14,27 @@ export type FloatingText = {
   floating_open_aria: string;
 };
 
-export default function FloatingChat({ text, chatText }: { text: FloatingText; chatText: ChatText }) {
+export default function FloatingChat({ text, chatText, locale = "cs" }: { text: FloatingText; chatText: ChatText; locale?: "cs" | "en" | "de" }) {
   const [isOpen, setIsOpen] = useState(false);
   const [cookieBannerVisible, setCookieBannerVisible] = useState(false);
+  const [footerVisible, setFooterVisible] = useState(false);
 
   useEffect(() => {
     if (!localStorage.getItem("sd-cookie-consent")) setCookieBannerVisible(true);
     const handler = (e: Event) => setCookieBannerVisible((e as CustomEvent<boolean>).detail);
     window.addEventListener("sd-cookie-banner", handler);
     return () => window.removeEventListener("sd-cookie-banner", handler);
+  }, []);
+
+  useEffect(() => {
+    const footer = document.querySelector("footer");
+    if (!footer) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setFooterVisible(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(footer);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -39,10 +51,11 @@ export default function FloatingChat({ text, chatText }: { text: FloatingText; c
     return () => clearTimeout(t);
   }, []);
 
-  const bottomOffset = cookieBannerVisible ? "bottom-44" : "bottom-6";
+  // Cookie banner takes priority; footer pushes button up by ~80px
+  const bottomOffset = cookieBannerVisible ? "bottom-44" : footerVisible ? "bottom-20" : "bottom-6";
 
   return (
-    <div className={`fixed ${bottomOffset} right-4 sm:right-6 sm:bottom-6 z-50 flex flex-col items-end gap-3 transition-all duration-300`}>
+    <div className={`fixed ${bottomOffset} right-4 sm:right-6 z-50 flex flex-col items-end gap-3 transition-all duration-300`}>
 
       {/* Chat panel */}
       <AnimatePresence>
@@ -86,7 +99,7 @@ export default function FloatingChat({ text, chatText }: { text: FloatingText; c
 
             {/* AiChat */}
             <div className="overflow-hidden px-5">
-              <AiChat hideLabel autoStartMessage="__AUTO_OPEN__" text={chatText} />
+              <AiChat hideLabel autoStartMessage="__AUTO_OPEN__" text={chatText} locale={locale} />
             </div>
           </m.div>
         )}

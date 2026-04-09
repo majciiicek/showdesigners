@@ -85,7 +85,7 @@ export default async function RootLayout({
           <main>{children}</main>
           <Footer />
           <CookieBanner text={pt.ui} privacyHref={privacyHref} />
-          <ConditionalFloatingChat text={pt.ui} chatText={pt.ui} />
+          <ConditionalFloatingChat text={pt.ui} chatText={pt.ui} locale={locale} />
           <Analytics />
         </MotionProvider>
       </body>

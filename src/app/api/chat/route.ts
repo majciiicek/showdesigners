@@ -137,6 +137,7 @@ const requestSchema = z.object({
     })
   ).min(1).max(30),
   sessionToken: z.string().uuid().optional(),
+  locale: z.enum(["cs", "en", "de"]).optional(),
 });
 
 // ---------------------------------------------------------------------------
@@ -239,7 +240,7 @@ export async function POST(request: NextRequest) {
   }
 
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-  const { messages, sessionToken } = parsed.data;
+  const { messages, sessionToken, locale: bodyLocale } = parsed.data;
 
   // Detect if client mentioned an email in their latest message — look up in DB
   let knownClientContext = "";
@@ -259,8 +260,8 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  // Detect locale from middleware header and build language instruction
-  const locale = (request.headers.get("x-locale") ?? "cs") as "cs" | "en" | "de";
+  // Detect locale — prefer body (client sends it directly), fall back to middleware header
+  const locale = (bodyLocale ?? request.headers.get("x-locale") ?? "cs") as "cs" | "en" | "de";
   const languageInstruction =
     locale === "en"
       ? "\n\nIMPORTANT: Always respond in English. The user is on the English-language website (theshowdesigners.com)."

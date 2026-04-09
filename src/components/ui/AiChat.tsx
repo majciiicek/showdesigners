@@ -53,10 +53,12 @@ export default function AiChat({
   hideLabel = false,
   autoStartMessage,
   text,
+  locale = "cs",
 }: {
   hideLabel?: boolean;
   autoStartMessage?: string;
   text: ChatText;
+  locale?: "cs" | "en" | "de";
 }) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -224,6 +226,7 @@ export default function AiChat({
         body: JSON.stringify({
           messages: newMessages,
           sessionToken: token ?? undefined,
+          locale,
         }),
       });
 

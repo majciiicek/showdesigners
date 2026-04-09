@@ -24,11 +24,13 @@ export default function KontaktClient({
   formText,
   chatText,
   privacyHref,
+  locale = "cs",
 }: {
   text: KontaktText;
   formText: FormText;
   chatText: ChatText;
   privacyHref: string;
+  locale?: "cs" | "en" | "de";
 }) {
   const searchParams = useSearchParams();
   const [mode, setMode] = useState<Mode>(
@@ -109,7 +111,7 @@ export default function KontaktClient({
 
             {/* Content */}
             {mode === "ai" ? (
-              <AiChat text={chatText} />
+              <AiChat text={chatText} locale={locale} />
             ) : (
               <ContactForm text={formText} privacyHref={privacyHref} />
             )}
