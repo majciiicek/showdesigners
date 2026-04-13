@@ -80,8 +80,16 @@ export const referenceType = defineType({
         defineField({ name: "subtitleDe", title: "Podnadpis (DE)", type: "string" }),
 
         defineField({ name: "date", title: "Datum", type: "string" }),
+        defineField({ name: "dateEn", title: "Datum (EN)", type: "string" }),
+        defineField({ name: "dateDe", title: "Datum (DE)", type: "string" }),
+
         defineField({ name: "guests", title: "Počet hostů", type: "string" }),
+        defineField({ name: "guestsEn", title: "Počet hostů (EN)", type: "string" }),
+        defineField({ name: "guestsDe", title: "Počet hostů (DE)", type: "string" }),
+
         defineField({ name: "venue", title: "Místo konání", type: "string" }),
+        defineField({ name: "venueEn", title: "Místo konání (EN)", type: "string" }),
+        defineField({ name: "venueDe", title: "Místo konání (DE)", type: "string" }),
 
         defineField({ name: "brief", title: "Zadání", type: "text", rows: 4 }),
         defineField({ name: "briefEn", title: "Zadání (EN)", type: "text", rows: 4 }),

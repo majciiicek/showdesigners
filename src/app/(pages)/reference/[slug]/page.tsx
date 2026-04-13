@@ -76,6 +76,9 @@ export default async function ReferenceDetailPage({ params }: Props) {
 
   // Localized detail fields
   const localSubtitle  = loc(dl, "subtitle");
+  const localDate      = loc(dl, "date");
+  const localGuests    = loc(dl, "guests");
+  const localVenue     = loc(dl, "venue");
   const localBrief     = loc(dl, "brief");
   const localSolution  = loc(dl, "solution");
   const localQuote     = loc(dl, "quote");
@@ -141,15 +144,15 @@ export default async function ReferenceDetailPage({ params }: Props) {
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/5">
             <div className="py-8 lg:py-10 pr-8">
               <p className="text-white/30 text-xs uppercase tracking-widest mb-2">{r.stat_guests}</p>
-              <p className="font-display text-3xl lg:text-4xl text-white leading-none">{d.guests}</p>
+              <p className="font-display text-3xl lg:text-4xl text-white leading-none">{localGuests}</p>
             </div>
             <div className="py-8 lg:py-10 px-8">
               <p className="text-white/30 text-xs uppercase tracking-widest mb-2">{r.stat_date}</p>
-              <p className="font-display text-3xl lg:text-4xl text-white leading-none">{d.date}</p>
+              <p className="font-display text-3xl lg:text-4xl text-white leading-none">{localDate}</p>
             </div>
             <div className="py-8 lg:py-10 px-8 col-span-2 lg:col-span-1">
               <p className="text-white/30 text-xs uppercase tracking-widest mb-2">{r.stat_venue}</p>
-              <p className="font-display text-3xl lg:text-4xl text-white leading-none">{d.venue}</p>
+              <p className="font-display text-3xl lg:text-4xl text-white leading-none">{localVenue}</p>
             </div>
             <div className="py-8 lg:py-10 pl-8 col-span-2 lg:col-span-1 border-t border-white/5 lg:border-t-0">
               <p className="text-white/30 text-xs uppercase tracking-widest mb-3">{r.stat_program}</p>

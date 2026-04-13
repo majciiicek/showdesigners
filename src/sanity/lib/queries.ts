@@ -31,8 +31,14 @@ export interface SanityReferenceDetail extends SanityReference {
     subtitleEn?: string;
     subtitleDe?: string;
     date: string;
+    dateEn?: string;
+    dateDe?: string;
     guests: string;
+    guestsEn?: string;
+    guestsDe?: string;
     venue: string;
+    venueEn?: string;
+    venueDe?: string;
     brief: string;
     briefEn?: string;
     briefDe?: string;
@@ -103,8 +109,14 @@ export async function getReferenceBySlug(slug: string): Promise<SanityReferenceD
         subtitleEn,
         subtitleDe,
         date,
+        dateEn,
+        dateDe,
         guests,
+        guestsEn,
+        guestsDe,
         venue,
+        venueEn,
+        venueDe,
         brief,
         briefEn,
         briefDe,
