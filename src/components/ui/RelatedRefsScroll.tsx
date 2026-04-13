@@ -2,10 +2,14 @@
 
 import { useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { getLocalizedSlug } from "@/sanity/lib/queries";
+import type { Locale } from "@/lib/i18n";
 
 interface Ref {
   _id: string;
   slug: { current: string };
+  slugEn?: { current: string };
+  slugDe?: { current: string };
   title: string;
   type: string;
 }
@@ -13,7 +17,7 @@ interface Ref {
 // Card width (w-72 = 288px) + gap (gap-4 = 16px)
 const CARD_STEP = 288 + 16;
 
-export default function RelatedRefsScroll({ refs }: { refs: Ref[] }) {
+export default function RelatedRefsScroll({ refs, locale }: { refs: Ref[]; locale: Locale }) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // Total width of one full copy of the list
@@ -77,7 +81,7 @@ export default function RelatedRefsScroll({ refs }: { refs: Ref[] }) {
         {items.map((r) => (
           <Link
             key={r.key}
-            href={`/reference/${r.slug.current}`}
+            href={`/reference/${getLocalizedSlug(r, locale)}`}
             className="group flex-shrink-0 w-72 bg-black/40 border border-white/5 rounded-sm p-6 hover:border-[#C8D400]/30 transition-colors duration-200"
           >
             <p className="text-white/30 text-xs uppercase tracking-widest mb-2">{r.type}</p>

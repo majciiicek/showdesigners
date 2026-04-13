@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getReferenceBySlug, getReferencesSlugs, getAllReferences } from "@/sanity/lib/queries";
+import { getReferenceBySlug, getReferencesSlugs, getAllReferences, getLocalizedSlug } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import RelatedRefsScroll from "@/components/ui/RelatedRefsScroll";
 import { getLocale } from "@/lib/locale";
@@ -95,7 +95,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": r.breadcrumb_home, "item": siteUrl },
       { "@type": "ListItem", "position": 2, "name": r.breadcrumb_refs, "item": `${siteUrl}/${SLUG_MAP.reference[locale]}` },
-      { "@type": "ListItem", "position": 3, "name": localTitle, "item": `${siteUrl}/${SLUG_MAP.reference[locale]}/${slug}` },
+      { "@type": "ListItem", "position": 3, "name": localTitle, "item": `${siteUrl}/${SLUG_MAP.reference[locale]}/${getLocalizedSlug(ref, locale)}` },
     ],
   };
 
@@ -254,7 +254,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-8">{r.related_label}</p>
           </div>
-          <RelatedRefsScroll refs={relatedRefs} />
+          <RelatedRefsScroll refs={relatedRefs} locale={locale} />
         </section>
       )}
 

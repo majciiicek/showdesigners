@@ -7,10 +7,22 @@ export const referenceType = defineType({
   fields: [
     defineField({
       name: "slug",
-      title: "Slug (URL)",
+      title: "Slug (URL — česky)",
       type: "slug",
       options: { source: "title" },
       validation: (r) => r.required(),
+    }),
+    defineField({
+      name: "slugEn",
+      title: "Slug (URL — EN)",
+      type: "slug",
+      options: { source: "titleEn" },
+    }),
+    defineField({
+      name: "slugDe",
+      title: "Slug (URL — DE)",
+      type: "slug",
+      options: { source: "titleDe" },
     }),
     defineField({
       name: "title",

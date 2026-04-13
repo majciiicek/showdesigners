@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { SanityReference } from "@/sanity/lib/queries";
+import { getLocalizedSlug } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { translateTag, type Locale } from "@/lib/i18n";
 
@@ -110,7 +111,7 @@ export default function ReferencesGrid({ references, text, locale }: Props) {
           );
 
           return cs.hasDetail ? (
-            <Link key={cs._id} href={`/reference/${cs.slug.current}`} className="block">
+            <Link key={cs._id} href={`/reference/${getLocalizedSlug(cs, locale)}`} className="block">
               {card}
             </Link>
           ) : (
