@@ -61,29 +61,13 @@ export const referenceType = defineType({
       type: "number",
     }),
 
-    // --- Překlady (EN / DE) ---
-    defineField({
-      name: "titleEn",
-      title: "Název akce (EN)",
-      type: "string",
-    }),
-    defineField({
-      name: "titleDe",
-      title: "Název akce (DE)",
-      type: "string",
-    }),
-    defineField({
-      name: "descriptionEn",
-      title: "Perex (EN)",
-      type: "text",
-      rows: 3,
-    }),
-    defineField({
-      name: "descriptionDe",
-      title: "Perex (DE)",
-      type: "text",
-      rows: 3,
-    }),
+    // --- Překlady EN ---
+    defineField({ name: "titleEn", title: "Název akce (EN)", type: "string" }),
+    defineField({ name: "descriptionEn", title: "Perex (EN)", type: "text", rows: 3 }),
+
+    // --- Překlady DE ---
+    defineField({ name: "titleDe", title: "Název akce (DE)", type: "string" }),
+    defineField({ name: "descriptionDe", title: "Perex (DE)", type: "text", rows: 3 }),
 
     // --- Detail sekce ---
     defineField({
@@ -91,56 +75,36 @@ export const referenceType = defineType({
       title: "Detail reference (volitelné)",
       type: "object",
       fields: [
-        defineField({
-          name: "subtitle",
-          title: "Podnadpis (pod hero)",
-          type: "string",
-        }),
-        defineField({
-          name: "date",
-          title: "Datum",
-          type: "string",
-        }),
-        defineField({
-          name: "guests",
-          title: "Počet hostů",
-          type: "string",
-        }),
-        defineField({
-          name: "venue",
-          title: "Místo konání",
-          type: "string",
-        }),
-        defineField({
-          name: "brief",
-          title: "Zadání",
-          type: "text",
-          rows: 4,
-        }),
-        defineField({
-          name: "solution",
-          title: "Naše řešení",
-          type: "text",
-          rows: 6,
-        }),
-        defineField({
-          name: "quote",
-          title: "Citát / pull quote (volitelné)",
-          type: "string",
-        }),
+        defineField({ name: "subtitle", title: "Podnadpis (pod hero)", type: "string" }),
+        defineField({ name: "subtitleEn", title: "Podnadpis (EN)", type: "string" }),
+        defineField({ name: "subtitleDe", title: "Podnadpis (DE)", type: "string" }),
+
+        defineField({ name: "date", title: "Datum", type: "string" }),
+        defineField({ name: "guests", title: "Počet hostů", type: "string" }),
+        defineField({ name: "venue", title: "Místo konání", type: "string" }),
+
+        defineField({ name: "brief", title: "Zadání", type: "text", rows: 4 }),
+        defineField({ name: "briefEn", title: "Zadání (EN)", type: "text", rows: 4 }),
+        defineField({ name: "briefDe", title: "Zadání (DE)", type: "text", rows: 4 }),
+
+        defineField({ name: "solution", title: "Naše řešení", type: "text", rows: 6 }),
+        defineField({ name: "solutionEn", title: "Naše řešení (EN)", type: "text", rows: 6 }),
+        defineField({ name: "solutionDe", title: "Naše řešení (DE)", type: "text", rows: 6 }),
+
+        defineField({ name: "quote", title: "Citát / pull quote (volitelné)", type: "string" }),
+        defineField({ name: "quoteEn", title: "Citát (EN)", type: "string" }),
+        defineField({ name: "quoteDe", title: "Citát (DE)", type: "string" }),
+
         defineField({
           name: "showDesigner",
           title: "Show designer na akci (volitelné)",
           type: "object",
           fields: [
             defineField({ name: "name", title: "Jméno", type: "string" }),
-            defineField({
-              name: "photo",
-              title: "Fotografie",
-              type: "image",
-              options: { hotspot: true },
-            }),
+            defineField({ name: "photo", title: "Fotografie", type: "image", options: { hotspot: true } }),
             defineField({ name: "bio", title: "Bio (role na akci)", type: "text", rows: 3 }),
+            defineField({ name: "bioEn", title: "Bio (EN)", type: "text", rows: 3 }),
+            defineField({ name: "bioDe", title: "Bio (DE)", type: "text", rows: 3 }),
           ],
         }),
         defineField({

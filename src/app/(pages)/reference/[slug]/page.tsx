@@ -56,18 +56,32 @@ export default async function ReferenceDetailPage({ params }: Props) {
   const contactHref = `/${SLUG_MAP.kontakt[locale]}`;
   const refsHref = `/${SLUG_MAP.reference[locale]}`;
 
-  // Localized title and description — falls back to Czech if translation missing
-  const localTitle = getLocalizedField(ref as unknown as Record<string, string | undefined>, "title", locale);
-  const localDesc = getLocalizedField(ref as unknown as Record<string, string | undefined>, "description", locale);
+  // Helper — picks the right language field, falls back to Czech
+  function loc(obj: Record<string, string | undefined>, field: string) {
+    return getLocalizedField(obj, field, locale);
+  }
+
+  const localTitle = loc(ref as unknown as Record<string, string | undefined>, "title");
+  const localDesc  = loc(ref as unknown as Record<string, string | undefined>, "description");
 
   const relatedRefs = allReferences
     .filter((ref2) => ref2.slug.current !== slug && ref2.hasDetail)
     .map((ref2) => ({
       ...ref2,
-      title: getLocalizedField(ref2 as unknown as Record<string, string | undefined>, "title", locale),
+      title: loc(ref2 as unknown as Record<string, string | undefined>, "title"),
     }));
 
   const d = ref.detail;
+  const dl = d as unknown as Record<string, string | undefined>;
+
+  // Localized detail fields
+  const localSubtitle  = loc(dl, "subtitle");
+  const localBrief     = loc(dl, "brief");
+  const localSolution  = loc(dl, "solution");
+  const localQuote     = loc(dl, "quote");
+  const localBio       = d.showDesigner
+    ? loc(d.showDesigner as unknown as Record<string, string | undefined>, "bio")
+    : undefined;
   const heroUrl = urlFor(ref.image).width(1600).format("webp").url();
 
   const siteUrl = DOMAIN_MAP[locale];
@@ -117,7 +131,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
           <h1 className="font-display text-white leading-none mb-4" style={{ fontSize: "clamp(2.8rem, 7vw, 6.5rem)" }}>
             {localTitle.toUpperCase()}
           </h1>
-          <p className="text-white/60 text-base lg:text-lg max-w-2xl">{d.subtitle}</p>
+          <p className="text-white/60 text-base lg:text-lg max-w-2xl">{localSubtitle}</p>
         </div>
       </section>
 
@@ -157,22 +171,22 @@ export default async function ReferenceDetailPage({ params }: Props) {
           <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-12 lg:gap-16 items-start">
             <div>
               <p className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase mb-4">{r.brief_label}</p>
-              <p className="text-white/45 text-sm leading-relaxed">{d.brief}</p>
+              <p className="text-white/45 text-sm leading-relaxed">{localBrief}</p>
             </div>
             <div className="border-l-2 border-[#C8D400]/40 pl-8 lg:pl-10">
               <p className="text-[#C8D400] text-xs font-semibold tracking-[0.2em] uppercase mb-4">{r.solution_label}</p>
-              <p className="text-white/85 text-lg leading-relaxed">{d.solution}</p>
+              <p className="text-white/85 text-lg leading-relaxed">{localSolution}</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Pull quote */}
-      {d.quote && (
+      {localQuote && (
         <section className="py-20 lg:py-28 bg-[#0a0a0a] overflow-hidden">
           <div className="mx-auto max-w-7xl px-6 lg:px-8 relative">
             <span aria-hidden="true" className="absolute -top-8 left-4 font-display text-[180px] lg:text-[240px] leading-none text-white/[0.03] select-none pointer-events-none">„</span>
-            <p className="font-display text-3xl lg:text-5xl text-white leading-tight max-w-4xl relative z-10">{d.quote}</p>
+            <p className="font-display text-3xl lg:text-5xl text-white leading-tight max-w-4xl relative z-10">{localQuote}</p>
             <div className="mt-8 w-12 h-px bg-[#C8D400]" />
           </div>
         </section>
@@ -224,7 +238,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
               <div>
                 <p className="text-white font-semibold text-lg leading-none mb-1">{d.showDesigner.name}</p>
                 <p className="text-white/30 text-xs uppercase tracking-widest mb-3">{r.show_designer_role}</p>
-                <p className="text-white/50 text-sm leading-relaxed max-w-lg">{d.showDesigner.bio}</p>
+                <p className="text-white/50 text-sm leading-relaxed max-w-lg">{localBio}</p>
               </div>
             </div>
           </div>

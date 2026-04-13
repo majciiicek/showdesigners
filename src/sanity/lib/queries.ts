@@ -28,16 +28,26 @@ export interface SanityReference {
 export interface SanityReferenceDetail extends SanityReference {
   detail: {
     subtitle: string;
+    subtitleEn?: string;
+    subtitleDe?: string;
     date: string;
     guests: string;
     venue: string;
     brief: string;
+    briefEn?: string;
+    briefDe?: string;
     solution: string;
+    solutionEn?: string;
+    solutionDe?: string;
     quote?: string;
+    quoteEn?: string;
+    quoteDe?: string;
     gallery: SanityImage[];
     showDesigner?: {
       name: string;
       bio: string;
+      bioEn?: string;
+      bioDe?: string;
       photo?: SanityImage;
     };
   };
@@ -90,16 +100,26 @@ export async function getReferenceBySlug(slug: string): Promise<SanityReferenceD
       "hasDetail": defined(detail),
       detail {
         subtitle,
+        subtitleEn,
+        subtitleDe,
         date,
         guests,
         venue,
         brief,
+        briefEn,
+        briefDe,
         solution,
+        solutionEn,
+        solutionDe,
         quote,
+        quoteEn,
+        quoteDe,
         gallery,
         showDesigner {
           name,
           bio,
+          bioEn,
+          bioDe,
           photo
         }
       }
