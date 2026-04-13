@@ -13,8 +13,12 @@ export interface SanityReference {
   _id: string;
   slug: { current: string };
   title: string;
+  titleEn?: string;
+  titleDe?: string;
   type: string;
   description: string;
+  descriptionEn?: string;
+  descriptionDe?: string;
   image: SanityImage;
   tags: string[];
   order: number;
@@ -52,8 +56,12 @@ export async function getAllReferences(): Promise<SanityReference[]> {
       _id,
       slug,
       title,
+      titleEn,
+      titleDe,
       type,
       description,
+      descriptionEn,
+      descriptionDe,
       image,
       tags,
       order,
@@ -71,8 +79,12 @@ export async function getReferenceBySlug(slug: string): Promise<SanityReferenceD
       _id,
       slug,
       title,
+      titleEn,
+      titleDe,
       type,
       description,
+      descriptionEn,
+      descriptionDe,
       image,
       tags,
       "hasDetail": defined(detail),

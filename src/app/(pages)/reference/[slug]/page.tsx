@@ -8,7 +8,7 @@ import RelatedRefsScroll from "@/components/ui/RelatedRefsScroll";
 import { getLocale } from "@/lib/locale";
 import { getPageTranslations } from "@/lib/page-translations";
 import { SLUG_MAP } from "@/lib/slugs";
-import { DOMAIN_MAP } from "@/lib/i18n";
+import { DOMAIN_MAP, getLocalizedField } from "@/lib/i18n";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -21,11 +21,13 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const ref = await getReferenceBySlug(slug);
+  const [ref, locale] = await Promise.all([getReferenceBySlug(slug), getLocale()]);
   if (!ref) return {};
+  const localTitle = getLocalizedField(ref as unknown as Record<string, string | undefined>, "title", locale);
+  const localDesc = getLocalizedField(ref as unknown as Record<string, string | undefined>, "description", locale);
   return {
-    title: `${ref.title} — Reference Showdesigners`,
-    description: ref.description,
+    title: `${localTitle} — Reference Showdesigners`,
+    description: localDesc,
   };
 }
 
@@ -54,7 +56,16 @@ export default async function ReferenceDetailPage({ params }: Props) {
   const contactHref = `/${SLUG_MAP.kontakt[locale]}`;
   const refsHref = `/${SLUG_MAP.reference[locale]}`;
 
-  const relatedRefs = allReferences.filter((ref2) => ref2.slug.current !== slug && ref2.hasDetail);
+  // Localized title and description — falls back to Czech if translation missing
+  const localTitle = getLocalizedField(ref as unknown as Record<string, string | undefined>, "title", locale);
+  const localDesc = getLocalizedField(ref as unknown as Record<string, string | undefined>, "description", locale);
+
+  const relatedRefs = allReferences
+    .filter((ref2) => ref2.slug.current !== slug && ref2.hasDetail)
+    .map((ref2) => ({
+      ...ref2,
+      title: getLocalizedField(ref2 as unknown as Record<string, string | undefined>, "title", locale),
+    }));
 
   const d = ref.detail;
   const heroUrl = urlFor(ref.image).width(1600).format("webp").url();
@@ -67,7 +78,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": r.breadcrumb_home, "item": siteUrl },
       { "@type": "ListItem", "position": 2, "name": r.breadcrumb_refs, "item": `${siteUrl}/${SLUG_MAP.reference[locale]}` },
-      { "@type": "ListItem", "position": 3, "name": ref.title, "item": `${siteUrl}/${SLUG_MAP.reference[locale]}/${slug}` },
+      { "@type": "ListItem", "position": 3, "name": localTitle, "item": `${siteUrl}/${SLUG_MAP.reference[locale]}/${slug}` },
     ],
   };
 
@@ -96,7 +107,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
               {r.breadcrumb_refs}
             </Link>
             <span>/</span>
-            <span className="text-white/60">{ref.title}</span>
+            <span className="text-white/60">{localTitle}</span>
           </div>
           <div className="flex flex-wrap items-end gap-4 mb-4">
             <span className={`text-xs font-semibold px-3 py-1 rounded-full ${typeColors[ref.type] ?? "bg-black/70 text-white/70"}`}>
@@ -104,7 +115,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
             </span>
           </div>
           <h1 className="font-display text-white leading-none mb-4" style={{ fontSize: "clamp(2.8rem, 7vw, 6.5rem)" }}>
-            {ref.title.toUpperCase()}
+            {localTitle.toUpperCase()}
           </h1>
           <p className="text-white/60 text-base lg:text-lg max-w-2xl">{d.subtitle}</p>
         </div>

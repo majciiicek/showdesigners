@@ -4,7 +4,7 @@ import Link from "next/link";
 import ReferencesGrid from "./ReferencesGrid";
 import { getAllReferences } from "@/sanity/lib/queries";
 import { getLocale } from "@/lib/locale";
-import { getTranslations, OG_LOCALE_MAP } from "@/lib/i18n";
+import { getTranslations, OG_LOCALE_MAP, getLocalizedField } from "@/lib/i18n";
 import { getPageTranslations } from "@/lib/page-translations";
 import { getAlternateUrls, SLUG_MAP } from "@/lib/slugs";
 
@@ -35,6 +35,13 @@ export default async function ReferencePage() {
   const r = pt.references;
   const contactHref = `/${SLUG_MAP.kontakt[locale]}`;
   const refsText = pt.references;
+
+  // Apply locale-specific title and description — falls back to Czech if translation is missing
+  const localizedReferences = references.map((ref) => ({
+    ...ref,
+    title: getLocalizedField(ref as unknown as Record<string, string | undefined>, "title", locale),
+    description: getLocalizedField(ref as unknown as Record<string, string | undefined>, "description", locale),
+  }));
 
   return (
     <>
@@ -69,7 +76,7 @@ export default async function ReferencePage() {
       {/* Case studies grid */}
       <section className="py-16 bg-black">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <ReferencesGrid references={references} text={refsText} />
+          <ReferencesGrid references={localizedReferences} text={refsText} />
         </div>
       </section>
 
