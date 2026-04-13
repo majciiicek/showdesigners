@@ -32,6 +32,13 @@ export const OG_LOCALE_MAP: Record<Locale, string> = {
   de: 'de_DE',
 }
 
+// Translates a Sanity tag (stored in Czech) to the current locale.
+// Falls back to the original value if the tag is not in the dictionary.
+export function translateTag(tag: string, locale: Locale): string {
+  const dict = translations[locale].tags as Record<string, string>
+  return dict[tag] ?? tag
+}
+
 // Returns the localized value of a Sanity document field.
 // Falls back to the base CS field if no translation exists yet.
 // Usage: getLocalizedField(doc, 'title', locale) → reads titleEn / titleDe / title

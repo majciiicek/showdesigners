@@ -76,7 +76,7 @@ export default async function ReferencePage() {
       {/* Case studies grid */}
       <section className="py-16 bg-black">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <ReferencesGrid references={localizedReferences} text={refsText} />
+          <ReferencesGrid references={localizedReferences} text={refsText} locale={locale} />
         </div>
       </section>
 

@@ -8,7 +8,7 @@ import RelatedRefsScroll from "@/components/ui/RelatedRefsScroll";
 import { getLocale } from "@/lib/locale";
 import { getPageTranslations } from "@/lib/page-translations";
 import { SLUG_MAP } from "@/lib/slugs";
-import { DOMAIN_MAP, getLocalizedField } from "@/lib/i18n";
+import { DOMAIN_MAP, getLocalizedField, translateTag } from "@/lib/i18n";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -159,7 +159,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
               <div className="flex flex-wrap gap-1.5">
                 {ref.tags.map((tag) => (
                   <span key={tag} className="text-[#C8D400]/70 text-xs border border-[#C8D400]/20 px-2 py-0.5 rounded-full">
-                    {tag}
+                    {translateTag(tag, locale)}
                   </span>
                 ))}
               </div>

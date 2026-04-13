@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { SanityReference } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
+import { translateTag, type Locale } from "@/lib/i18n";
 
 const typeColors: Record<string, string> = {
   "Korporátní akce": "bg-blue-700/75 text-white backdrop-blur-sm",
@@ -27,9 +28,10 @@ type RefsText = {
 interface Props {
   references: SanityReference[];
   text: RefsText;
+  locale: Locale;
 }
 
-export default function ReferencesGrid({ references, text }: Props) {
+export default function ReferencesGrid({ references, text, locale }: Props) {
   const allTypes = [text.filter_all, ...Array.from(new Set(references.map((r) => r.type)))];
   const [active, setActive] = useState(text.filter_all);
   const [showAll, setShowAll] = useState(false);
@@ -99,7 +101,7 @@ export default function ReferencesGrid({ references, text }: Props) {
                       key={tag}
                       className="text-[#C8D400]/70 text-xs border border-[#C8D400]/20 px-2.5 py-1 rounded-full"
                     >
-                      {tag}
+                      {translateTag(tag, locale)}
                     </span>
                   ))}
                 </div>
