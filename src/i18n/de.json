@@ -44,6 +44,15 @@
     "zasady": "datenschutz",
     "impressum": "impressum"
   },
+  "types": {
+    "Korporátní akce": "Firmenveranstaltung",
+    "Soukromá akce": "Private Feier",
+    "Kulturní akce": "Kulturveranstaltung",
+    "Hotel / resort": "Hotel / Resort",
+    "Festival": "Festival",
+    "Family day": "Family Day",
+    "Městská akce": "Stadtveranstaltung"
+  },
   "tags": {
     "Walking acts": "Walking Acts",
     "Brass band": "Brass Band",

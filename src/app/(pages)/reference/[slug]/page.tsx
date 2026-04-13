@@ -8,7 +8,7 @@ import RelatedRefsScroll from "@/components/ui/RelatedRefsScroll";
 import { getLocale } from "@/lib/locale";
 import { getPageTranslations } from "@/lib/page-translations";
 import { SLUG_MAP } from "@/lib/slugs";
-import { DOMAIN_MAP, getLocalizedField, translateTag } from "@/lib/i18n";
+import { DOMAIN_MAP, getLocalizedField, translateTag, translateType } from "@/lib/i18n";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -128,7 +128,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
           </div>
           <div className="flex flex-wrap items-end gap-4 mb-4">
             <span className={`text-xs font-semibold px-3 py-1 rounded-full ${typeColors[ref.type] ?? "bg-black/70 text-white/70"}`}>
-              {ref.type}
+              {translateType(ref.type, locale)}
             </span>
           </div>
           <h1 className="font-display text-white leading-none mb-4" style={{ fontSize: "clamp(2.8rem, 7vw, 6.5rem)" }}>

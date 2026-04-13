@@ -6,7 +6,7 @@ import Link from "next/link";
 import type { SanityReference } from "@/sanity/lib/queries";
 import { getLocalizedSlug } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
-import { translateTag, type Locale } from "@/lib/i18n";
+import { translateTag, translateType, type Locale } from "@/lib/i18n";
 
 const typeColors: Record<string, string> = {
   "Korporátní akce": "bg-blue-700/75 text-white backdrop-blur-sm",
@@ -55,7 +55,7 @@ export default function ReferencesGrid({ references, text, locale }: Props) {
                 : "border-white/15 text-white/50 hover:text-white hover:border-white/30"
             }`}
           >
-            {type}
+            {type === text.filter_all ? type : translateType(type, locale)}
           </button>
         ))}
       </div>
@@ -82,7 +82,7 @@ export default function ReferencesGrid({ references, text, locale }: Props) {
                       typeColors[cs.type] ?? "bg-black/70 text-white/70 border border-white/20"
                     }`}
                   >
-                    {cs.type}
+                    {translateType(cs.type, locale)}
                   </span>
                 </div>
                 {cs.hasDetail && (

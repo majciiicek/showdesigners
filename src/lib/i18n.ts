@@ -32,6 +32,12 @@ export const OG_LOCALE_MAP: Record<Locale, string> = {
   de: 'de_DE',
 }
 
+// Translates a Sanity reference type (stored in Czech) to the current locale.
+export function translateType(type: string, locale: Locale): string {
+  const dict = translations[locale].types as Record<string, string>
+  return dict[type] ?? type
+}
+
 // Translates a Sanity tag (stored in Czech) to the current locale.
 // Falls back to the original value if the tag is not in the dictionary.
 export function translateTag(tag: string, locale: Locale): string {
