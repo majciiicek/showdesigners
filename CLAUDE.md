@@ -30,7 +30,7 @@ src/
     (pages)/
       reference/
         page.tsx              # Server component (metadata)
-        ReferencesGrid.tsx    # Client component — filterable grid
+        ReferencesGrid.tsx    # Client component — filterable grid (props: references, text, locale)
         [slug]/page.tsx       # Reference detail page (with JSON-LD breadcrumbs)
       kontakt/
         page.tsx              # Server component (metadata)
@@ -41,25 +41,58 @@ src/
       chat/session/  # GET/POST/PATCH — Supabase session management
       contact/       # POST /api/contact — contact form (Resend)
       inquiry/       # POST /api/inquiry — direct inquiry form
-    layout.tsx       # Nav, Footer, CookieBanner, FloatingChatLazy
+    layout.tsx       # Nav, Footer, CookieBanner, FloatingChatLazy, hreflang tags
     page.tsx         # Homepage
   components/
     sections/        # Homepage sections (Hero, Intro, Projects, AdvisorSection, etc.)
     ui/              # Nav, Footer, AiChat, CookieBanner, ContactForm, FloatingChat, FloatingChatLazy
+                     # RelatedRefsScroll (props: refs, locale)
   lib/
+    i18n.ts          # Locale detection, getTranslations, getLocalizedField, translateTag, translateType
+    locale.ts        # getLocale() — reads x-locale header set by middleware
+    page-translations.ts  # getPageTranslations(locale) — reads pages-*.json
+    slugs.ts         # SLUG_MAP, getAlternateUrls
     supabase.ts      # Supabase client + Conversation/Message interfaces
     references.ts    # LEGACY — již se nepoužívá pro web, zachováno pro referenci
+  i18n/
+    cs.json / en.json / de.json         # UI strings + tag/type dictionaries
+    pages-cs.json / pages-en.json / pages-de.json  # Page-level copy
   sanity/
     lib/
       client.ts      # Sanity client (next-sanity, projectId: 6i1t4r1j, dataset: production)
       image.ts       # urlFor() helper — automaticky vrací WebP
-      queries.ts     # GROQ dotazy + TypeScript typy (getAllReferences, getReferenceBySlug)
+      queries.ts     # GROQ dotazy + TypeScript typy + getLocalizedSlug()
     schemaTypes/
       referenceType.ts  # Sanity schema pro typ "caseStudy"
       index.ts
+  middleware.ts      # Detects locale from hostname → sets x-locale header
   app/
     studio/[[...tool]]/page.tsx  # Embedded Sanity Studio
 ```
+
+## Multi-language Architecture (CS / EN / DE)
+
+Tři domény, každá slouží jiný jazyk:
+- `showdesigners.cz` → CS
+- `theshowdesigners.com` → EN
+- `showdesigners.de` → DE
+
+**Jak locale funguje:**
+1. `middleware.ts` detekuje locale z hostname → nastaví header `x-locale`
+2. Server komponenty čtou locale přes `getLocale()` z `src/lib/locale.ts`
+3. Překlady UI jsou v `src/i18n/*.json`, page copy v `src/i18n/pages-*.json`
+4. `layout.tsx` obsahuje hreflang tagy pro všechny tři domény
+
+**Překlad Sanity dat** (reference):
+- Pole v Sanity mají varianty: `titleEn`, `titleDe`, `descriptionEn`, `descriptionDe` atd.
+- Na serveru se aplikuje `getLocalizedField(doc, field, locale)` z `src/lib/i18n.ts` — fallback na CS
+- `getLocalizedSlug(ref, locale)` vrátí `slugEn`/`slugDe` nebo fallback na `slug`
+- Štítky (`tags`) a typy akcí (`type`) se překládají slovníkem v `i18n/*.json` přes `translateTag()` / `translateType()`
+- Nové štítky ze Sanity, které nejsou ve slovníku, se zobrazí v originále — stačí přidat do všech tří JSON souborů
+
+**URL rewrites** (`next.config.ts`):
+- EN slugy (`/about`, `/services`, `/references`, `/contact`, `/privacy`) → CS file-system paths
+- DE slugy (`/ueber-uns`, `/leistungen`, `/referenzen`, `/kontakt`, `/datenschutz`) → CS file-system paths
 
 ## References Architecture
 
@@ -68,23 +101,36 @@ src/
 - Sanity Studio: `localhost:3000/studio` (dev) / `showdesigners.cz/studio` (prod)
 - Obrázky: nahrávány přes Studio, automaticky konvertovány do WebP přes `urlFor(img).format("webp")`
 - Revalidace: 60 sekund (`{ next: { revalidate: 60 } }` v queries.ts)
-- Migrace: `scripts/migrate-to-sanity.mts` (jednorázový skript, vyžaduje `SANITY_MIGRATION_TOKEN`)
 
 ### Schema dokumentu `caseStudy`
 
-Každý dokument má:
-- `slug`, `title`, `type`, `description`, `image`, `tags`, `order` — karta ve výpisu
-- `detail?: { subtitle, date, guests, venue, brief, solution, quote?, gallery[], showDesigner? }` — detail stránka
+Základní pole (karta ve výpisu):
+- `slug` (CS, required), `slugEn?`, `slugDe?` — Generate button se vyplní z přeloženého názvu
+- `title` (CS, required), `titleEn?`, `titleDe?`
+- `type` — dropdown (pevný seznam CS hodnot, překládá se slovníkem v kódu)
+- `description` (CS), `descriptionEn?`, `descriptionDe?`
+- `image`, `tags[]`, `order`
 
-Přidání nové reference: v Sanity Studiu → Reference → nový dokument. Pokud má `detail`, automaticky se zobrazí "Case study →" badge a stránka je dostupná na `/reference/[slug]`.
+Detail pole (volitelné, aktivuje detail stránku):
+- `subtitle` / `subtitleEn?` / `subtitleDe?`
+- `date` / `dateEn?` / `dateDe?`
+- `guests` / `guestsEn?` / `guestsDe?`
+- `venue` / `venueEn?` / `venueDe?`
+- `brief` / `briefEn?` / `briefDe?`
+- `solution` / `solutionEn?` / `solutionDe?`
+- `quote?` / `quoteEn?` / `quoteDe?`
+- `gallery[]`
+- `showDesigner?: { name, photo, bio, bioEn?, bioDe? }`
 
-Detail page (`/reference/[slug]`) includes `schema.org/BreadcrumbList` JSON-LD for SEO.
+Pokud pole překladu není vyplněno, web automaticky použije CS jako fallback.
+
+`getReferenceBySlug()` hledá podle všech slug variant (CS + EN + DE).
+`getReferencesSlugs()` vrátí všechny varianty pro `generateStaticParams`.
 
 ### Pravidla pro obsah referencí
 
 - **`showDesigner`** = člověk fyzicky přítomný na akci (koordinuje umělce, průběh večera na místě). Bio popisuje jeho roli *na akci*, ne v přípravě.
 - **Program a dramaturgie** připravuje interní kreativní tým — show designer je přiřazen až na samotnou akci. Nikdy nepsat v bio show designera, že "připravil program" nebo "navrhl dramaturgii".
-- **`program: []`** — harmonogram večera vyplňovat jen pokud máme reálná data. Prázdné pole sekci skryje.
 - **`quote`** — jedna silná věta, ideálně s číslem nebo konkrétním momentem. Slouží jako vizuální "hrdina" stránky mezi Brief/Řešením a galerií.
 
 ## AI Assistant Architecture
@@ -167,6 +213,7 @@ Toto rozlišení je důležité pro texty na webu, v referencích i v AI asisten
 - **`dynamic()` with `ssr: false`** cannot be used in Server Components — wrap in a `"use client"` component first (see `FloatingChatLazy.tsx`)
 - **`urlFor()` from Sanity** — never chain `.width()` or `.height()` when passing to Next.js `<Image src>`. Next.js adds its own `w=` param which conflicts with Sanity CDN params → 400 errors. Use only `.format("webp").url()`
 - **Framer Motion `repeat: Infinity`** — avoid on page-level components, causes continuous main-thread work and high TBT. Use CSS animations for looping effects instead.
+- **`getLocalizedField` cast** — `SanityReference` nelze přímo castovat na `Record<string, string | undefined>`, použij `as unknown as Record<string, string | undefined>`
 - Deploy: Vercel via GitHub push to `main`
 - Reference data jsou v Sanity, **ne** v `references.ts` — ten soubor je legacy
 - Sanity Studio CORS: `localhost:3000` a `showdesigners.cz` musí být povoleny v sanity.io/manage → API → CORS Origins
