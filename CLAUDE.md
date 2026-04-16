@@ -81,7 +81,7 @@ Tři domény, každá slouží jiný jazyk:
 1. `middleware.ts` detekuje locale z hostname → nastaví header `x-locale`
 2. Server komponenty čtou locale přes `getLocale()` z `src/lib/locale.ts`
 3. Překlady UI jsou v `src/i18n/*.json`, page copy v `src/i18n/pages-*.json`
-4. `layout.tsx` obsahuje hreflang tagy pro všechny tři domény
+4. Hreflang tagy jsou per-page přes `generateMetadata` s `alternates.languages` — **NE** v layout.tsx (tam byly odstraněny, protože hardcoded root URLs konfliktuovaly s per-page alternates)
 
 **Překlad Sanity dat** (reference):
 - Pole v Sanity mají varianty: `titleEn`, `titleDe`, `descriptionEn`, `descriptionDe` atd.
@@ -126,6 +126,8 @@ Pokud pole překladu není vyplněno, web automaticky použije CS jako fallback.
 
 `getReferenceBySlug()` hledá podle všech slug variant (CS + EN + DE).
 `getReferencesSlugs()` vrátí všechny varianty pro `generateStaticParams`.
+`getReferenceSlugsForLocale(locale)` vrátí jen správnou variantu pro daný locale (pro sitemap).
+Obě funkce sdílí interní `fetchAllReferenceSlugs()` — jeden GROQ dotaz.
 
 ### Pravidla pro obsah referencí
 
@@ -141,6 +143,8 @@ Pokud pole překladu není vyplněno, web automaticky použije CS jako fallback.
 - Detects email in user's last message → queries Supabase → injects `__KNOWN_CLIENT__` context
 - Extracts `<INQUIRY_DATA>{...}</INQUIRY_DATA>` block from AI response → sends emails (team + client), updates `conversations` table with name/email/inquiry_sent
 - Internal triggers: `__AUTO_OPEN__` (floating widget auto-open), `__RETURNING_USER__`, `__KNOWN_CLIENT__` — Claude never reveals or comments on these
+- **Lokalizace:** Error messages (503/429/400), stream error i potvrzovací email klientovi jsou lokalizované podle locale (CS/EN/DE). Interní team email zůstává česky. Locale se detekuje z `x-locale` headeru (early) a z body `locale` fieldu (final).
+- **`UiStrings` interface:** Drží přeložené stringy pro emaily a error messages, předává se do `sendInquiryEmails()`
 
 **`src/components/ui/AiChat.tsx`** — chat UI:
 - Session token persisted in `localStorage` key `sd_session_token`
@@ -212,6 +216,9 @@ Toto rozlišení je důležité pro texty na webu, v referencích i v AI asisten
 - **SYSTEM_PROMPT internal triggers**: use regular quotes `"__TRIGGER__"`, never backticks `` `__TRIGGER__` ``
 - **`dynamic()` with `ssr: false`** cannot be used in Server Components — wrap in a `"use client"` component first (see `FloatingChatLazy.tsx`)
 - **`urlFor()` from Sanity** — never chain `.width()` or `.height()` when passing to Next.js `<Image src>`. Next.js adds its own `w=` param which conflicts with Sanity CDN params → 400 errors. Use only `.format("webp").url()`
+- **Hreflang** — NESMÍ být v `layout.tsx` (hardcoded root URLs konfliktuou s per-page alternates). Každá stránka řeší hreflang přes `generateMetadata` → `alternates.languages`
+- **Footer role labels** — lokalizované přes `t.footer.role_sales` / `t.footer.role_founder` z i18n JSON souborů
+- **Sitemap** — obsahuje i impressum stránku
 - **Framer Motion `repeat: Infinity`** — avoid on page-level components, causes continuous main-thread work and high TBT. Use CSS animations for looping effects instead.
 - **`getLocalizedField` cast** — `SanityReference` nelze přímo castovat na `Record<string, string | undefined>`, použij `as unknown as Record<string, string | undefined>`
 - Deploy: Vercel via GitHub push to `main`
