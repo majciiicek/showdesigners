@@ -166,3 +166,23 @@ export async function getReferencesSlugs(): Promise<{ slug: string }[]> {
   }
   return Array.from(all).map((slug) => ({ slug }));
 }
+
+// Slugy referencí pro sitemap — vrátí jen správnou variantu pro daný locale
+// Na EN doméně vrátí slugEn (nebo CS fallback), na DE doméně slugDe atd.
+export async function getReferenceSlugsForLocale(locale: Locale): Promise<string[]> {
+  const refs = await client.fetch<{ slug: string; slugEn?: string; slugDe?: string }[]>(
+    `*[_type == "caseStudy" && defined(detail)] {
+      "slug": slug.current,
+      "slugEn": slugEn.current,
+      "slugDe": slugDe.current
+    }`,
+    {},
+    revalidate
+  );
+
+  return refs.map((r) => {
+    if (locale === 'en' && r.slugEn) return r.slugEn;
+    if (locale === 'de' && r.slugDe) return r.slugDe;
+    return r.slug;
+  });
+}

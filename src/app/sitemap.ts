@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { headers } from 'next/headers'
 import { getLocaleFromHostname, DOMAIN_MAP } from '@/lib/i18n'
 import { SLUG_MAP } from '@/lib/slugs'
-import { getReferencesSlugs } from '@/sanity/lib/queries'
+import { getReferenceSlugsForLocale } from '@/sanity/lib/queries'
 
 const PAGE_CONFIG = [
   { key: null,        priority: 1.0, changeFreq: 'monthly'  as const },
@@ -27,10 +27,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority,
   }))
 
-  // Reference detail pages — same slug across all locales (Sanity content)
-  const referenceSlugs = await getReferencesSlugs()
+  // Reference detail pages — locale-specific slugs from Sanity
+  const referenceSlugs = await getReferenceSlugsForLocale(locale)
   const referenceSlug = SLUG_MAP.reference[locale]
-  const referencePages: MetadataRoute.Sitemap = referenceSlugs.map(({ slug }) => ({
+  const referencePages: MetadataRoute.Sitemap = referenceSlugs.map((slug) => ({
     url: `${domain}/${referenceSlug}/${slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
