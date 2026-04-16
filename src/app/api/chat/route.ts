@@ -37,7 +37,7 @@ const SYSTEM_PROMPT = `Jsi první kontakt Showdesigners, prémiové české konz
 - Odpovědi krátké — max 2–3 věty + jedna otázka
 
 ## Automatické otevření widgetu
-DŮLEŽITÉ: Pokud je první zpráva uživatele "__AUTO_OPEN__", toto je interní systémový signál — NE zpráva od uživatele. Nikdy ho nekomentuj, nezmiňuj, nereaguj na něj jako na text. Pouze pozdrav krátce a přátelsky (1–2 věty) a přidej: "Pokud mě teď nepotřebuješ, klidně mě zavři — vrátit se ke mně můžeš kdykoliv." Chovej se, jako by žádná zpráva nepřišla — ty jen otevíráš konverzaci.
+DŮLEŽITÉ: Pokud je první zpráva uživatele "__AUTO_OPEN__", toto je interní systémový signál — NE zpráva od uživatele. Nikdy ho nekomentuj, nezmiňuj, nereaguj na něj jako na text. Pouze pozdrav krátce a přátelsky (1–2 věty) a přidej nabídku zavřít widget (v jazyce klienta). Chovej se, jako by žádná zpráva nepřišla — ty jen otevíráš konverzaci.
 
 ## Jak začít konverzaci
 Nezačínáš hned dotazem na jméno — to je studené. Nejdřív krátce a přátelsky uvítej, nastav atmosféru. Klidně s lehkou dávkou osobnosti. Teprve pak se přirozeně zeptej co klient řeší nebo plánuje. Jméno zjistíš až v průběhu rozhovoru, ne hned na začátku.
@@ -154,13 +154,26 @@ function extractInquiryData(text: string): Record<string, string> | null {
 }
 
 // ---------------------------------------------------------------------------
+// UI strings type for localized emails
+// ---------------------------------------------------------------------------
+interface UiStrings {
+  rateLimited: string;
+  streamError: string;
+  emailSubject: string;
+  emailGreeting: (name?: string) => string;
+  emailBody: string;
+  emailFooter: string;
+  emailSummaryLabel: string;
+}
+
+// ---------------------------------------------------------------------------
 // Odeslání emailu po dokončení poptávky
 // ---------------------------------------------------------------------------
-async function sendInquiryEmails(data: Record<string, string>, aiSummary: string) {
+async function sendInquiryEmails(data: Record<string, string>, aiSummary: string, ui: UiStrings) {
   if (!process.env.RESEND_API_KEY) return;
   const resend = new Resend(process.env.RESEND_API_KEY);
 
-  // Email pro tým — obsahuje AI brief
+  // Email pro tým — vždy česky (interní komunikace)
   await resend.emails.send({
     from: "Showdesigners web <noreply@showdesigners.cz>",
     to: ["booking@showdesigners.cz"],
@@ -187,23 +200,21 @@ ${data.summary ?? aiSummary}
     `.trim(),
   });
 
-  // Potvrzovací email pro klienta
+  // Potvrzovací email pro klienta — v jazyce klienta
   if (data.email) {
     await resend.emails.send({
       from: "Showdesigners <noreply@showdesigners.cz>",
       to: [data.email],
-      subject: "Přijali jsme vaši poptávku — Showdesigners",
+      subject: ui.emailSubject,
       text: `
-Dobrý den${data.name ? `, ${data.name}` : ""},
+${ui.emailGreeting(data.name)},
 
-děkujeme za vaši poptávku. Váš show designer se vám ozve do 24 hodin.
+${ui.emailBody}
 
-Shrnutí vaší poptávky:
+${ui.emailSummaryLabel}
 ${data.summary ?? "—"}
 
-V případě dotazů nás kontaktujte na booking@showdesigners.cz
-
-Tým Showdesigners
+${ui.emailFooter}
       `.trim(),
     });
   }
@@ -213,11 +224,12 @@ Tým Showdesigners
 // POST /api/chat
 // ---------------------------------------------------------------------------
 export async function POST(request: NextRequest) {
+  // Early locale detection from header (available before body parsing)
+  const headerLocale = (request.headers.get("x-locale") ?? "cs") as "cs" | "en" | "de";
+
   if (!process.env.ANTHROPIC_API_KEY) {
-    return NextResponse.json(
-      { error: "AI asistent není momentálně dostupný." },
-      { status: 503 }
-    );
+    const msg = { cs: "AI asistent není momentálně dostupný.", en: "AI assistant is currently unavailable.", de: "Der KI-Assistent ist derzeit nicht verfügbar." };
+    return NextResponse.json({ error: msg[headerLocale] }, { status: 503 });
   }
 
   const ip =
@@ -226,17 +238,16 @@ export async function POST(request: NextRequest) {
     "unknown";
 
   if (isRateLimited(ip)) {
-    return NextResponse.json(
-      { error: "Příliš mnoho zpráv. Zkuste to prosím za hodinu." },
-      { status: 429 }
-    );
+    const msg = { cs: "Příliš mnoho zpráv. Zkuste to prosím za hodinu.", en: "Too many messages. Please try again in an hour.", de: "Zu viele Nachrichten. Bitte versuchen Sie es in einer Stunde erneut." };
+    return NextResponse.json({ error: msg[headerLocale] }, { status: 429 });
   }
 
   const body = await request.json() as unknown;
   const parsed = requestSchema.safeParse(body);
 
   if (!parsed.success) {
-    return NextResponse.json({ error: "Neplatná data." }, { status: 400 });
+    const msg = { cs: "Neplatná data.", en: "Invalid data.", de: "Ungültige Daten." };
+    return NextResponse.json({ error: msg[headerLocale] }, { status: 400 });
   }
 
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
@@ -261,7 +272,39 @@ export async function POST(request: NextRequest) {
   }
 
   // Detect locale — prefer body (client sends it directly), fall back to middleware header
-  const locale = (bodyLocale ?? request.headers.get("x-locale") ?? "cs") as "cs" | "en" | "de";
+  const locale = (bodyLocale ?? headerLocale) as "cs" | "en" | "de";
+
+  // Localized error/UI strings for API responses and emails
+  const uiStrings = {
+    cs: {
+      rateLimited: "Příliš mnoho zpráv. Zkuste to prosím za hodinu.",
+      streamError: "\n\nOmlouváme se, nastala chyba. Zkuste to prosím znovu.",
+      emailSubject: "Přijali jsme vaši poptávku — Showdesigners",
+      emailGreeting: (name?: string) => `Dobrý den${name ? `, ${name}` : ""}`,
+      emailBody: "děkujeme za vaši poptávku. Váš show designer se vám ozve do 24 hodin.",
+      emailFooter: "V případě dotazů nás kontaktujte na booking@showdesigners.cz\n\nTým Showdesigners",
+      emailSummaryLabel: "Shrnutí vaší poptávky:",
+    },
+    en: {
+      rateLimited: "Too many messages. Please try again in an hour.",
+      streamError: "\n\nWe apologize, an error occurred. Please try again.",
+      emailSubject: "We received your inquiry — Showdesigners",
+      emailGreeting: (name?: string) => `Hello${name ? ` ${name}` : ""}`,
+      emailBody: "thank you for your inquiry. Your show designer will get back to you within 24 hours.",
+      emailFooter: "For any questions, contact us at booking@showdesigners.cz\n\nTeam Showdesigners",
+      emailSummaryLabel: "Summary of your inquiry:",
+    },
+    de: {
+      rateLimited: "Zu viele Nachrichten. Bitte versuchen Sie es in einer Stunde erneut.",
+      streamError: "\n\nWir entschuldigen uns, ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+      emailSubject: "Wir haben Ihre Anfrage erhalten — Showdesigners",
+      emailGreeting: (name?: string) => `Guten Tag${name ? ` ${name}` : ""}`,
+      emailBody: "vielen Dank für Ihre Anfrage. Ihr Show Designer wird sich innerhalb von 24 Stunden bei Ihnen melden.",
+      emailFooter: "Bei Fragen kontaktieren Sie uns unter booking@showdesigners.cz\n\nTeam Showdesigners",
+      emailSummaryLabel: "Zusammenfassung Ihrer Anfrage:",
+    },
+  } as const;
+  const ui = uiStrings[locale];
   const languageInstruction =
     locale === "en"
       ? "\n\nIMPORTANT: Always respond in English. The user is on the English-language website (theshowdesigners.com)."
@@ -326,7 +369,7 @@ export async function POST(request: NextRequest) {
         // Po dokončení zkontroluj, zda odpověď obsahuje data poptávky
         const inquiryData = extractInquiryData(fullText);
         if (inquiryData) {
-          await sendInquiryEmails(inquiryData, inquiryData.summary ?? "");
+          await sendInquiryEmails(inquiryData, inquiryData.summary ?? "", ui);
 
           // Update conversation with name/email/inquiry_sent
           if (conversationId) {
@@ -341,7 +384,7 @@ export async function POST(request: NextRequest) {
         }
       } catch (err) {
         console.error("[chat] Anthropic error:", err);
-        controller.enqueue(encoder.encode("\n\nOmlouváme se, nastala chyba. Zkuste to prosím znovu."));
+        controller.enqueue(encoder.encode(ui.streamError));
       } finally {
         controller.close();
       }

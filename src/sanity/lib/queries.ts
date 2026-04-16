@@ -145,10 +145,9 @@ export async function getReferenceBySlug(slug: string): Promise<SanityReferenceD
   );
 }
 
-// Slugy všech referencí s detailem (pro generateStaticParams)
-// Vrátí všechny jazykové varianty, aby Next.js předgeneroval stránky pro každý slug
-export async function getReferencesSlugs(): Promise<{ slug: string }[]> {
-  const refs = await client.fetch<{ slug: string; slugEn?: string; slugDe?: string }[]>(
+// Shared query — fetches all slug variants for references with detail
+async function fetchAllReferenceSlugs(): Promise<{ slug: string; slugEn?: string; slugDe?: string }[]> {
+  return client.fetch<{ slug: string; slugEn?: string; slugDe?: string }[]>(
     `*[_type == "caseStudy" && defined(detail)] {
       "slug": slug.current,
       "slugEn": slugEn.current,
@@ -157,6 +156,12 @@ export async function getReferencesSlugs(): Promise<{ slug: string }[]> {
     {},
     revalidate
   );
+}
+
+// Slugy všech referencí s detailem (pro generateStaticParams)
+// Vrátí všechny jazykové varianty, aby Next.js předgeneroval stránky pro každý slug
+export async function getReferencesSlugs(): Promise<{ slug: string }[]> {
+  const refs = await fetchAllReferenceSlugs();
 
   const all = new Set<string>();
   for (const r of refs) {
@@ -170,15 +175,7 @@ export async function getReferencesSlugs(): Promise<{ slug: string }[]> {
 // Slugy referencí pro sitemap — vrátí jen správnou variantu pro daný locale
 // Na EN doméně vrátí slugEn (nebo CS fallback), na DE doméně slugDe atd.
 export async function getReferenceSlugsForLocale(locale: Locale): Promise<string[]> {
-  const refs = await client.fetch<{ slug: string; slugEn?: string; slugDe?: string }[]>(
-    `*[_type == "caseStudy" && defined(detail)] {
-      "slug": slug.current,
-      "slugEn": slugEn.current,
-      "slugDe": slugDe.current
-    }`,
-    {},
-    revalidate
-  );
+  const refs = await fetchAllReferenceSlugs();
 
   return refs.map((r) => {
     if (locale === 'en' && r.slugEn) return r.slugEn;

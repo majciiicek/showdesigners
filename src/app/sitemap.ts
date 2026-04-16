@@ -11,6 +11,7 @@ const PAGE_CONFIG = [
   { key: 'reference', priority: 0.8, changeFreq: 'weekly'   as const },
   { key: 'kontakt',   priority: 0.9, changeFreq: 'yearly'   as const },
   { key: 'zasady',    priority: 0.3, changeFreq: 'yearly'   as const },
+  { key: 'impressum', priority: 0.3, changeFreq: 'yearly'   as const },
 ]
 
 // Domain-aware sitemap — each domain gets its own sitemap with localized slugs

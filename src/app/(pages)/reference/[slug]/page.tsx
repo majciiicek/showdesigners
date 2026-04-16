@@ -67,7 +67,6 @@ export default async function ReferenceDetailPage({ params }: Props) {
   }
 
   const localTitle = loc(ref as unknown as Record<string, string | undefined>, "title");
-  const localDesc  = loc(ref as unknown as Record<string, string | undefined>, "description");
 
   const relatedRefs = allReferences
     .filter((ref2) => ref2.slug.current !== slug && ref2.hasDetail)
@@ -210,7 +209,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
                 <div key={i} className="relative break-inside-avoid overflow-hidden rounded-sm">
                   <Image
                     src={urlFor(img).width(900).format("webp").url()}
-                    alt={`${ref.title} — foto ${i + 1}`}
+                    alt={`${localTitle} — ${i + 1}`}
                     width={800}
                     height={600}
                     className="w-full object-cover hover:scale-[1.02] transition-transform duration-500"

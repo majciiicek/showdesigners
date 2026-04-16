@@ -124,7 +124,7 @@ export default async function Footer() {
                 </a>
               </li>
               <li className="text-white/60">
-                <span className="text-white/30 text-xs uppercase tracking-widest block mb-0.5">Obchodní mág</span>
+                <span className="text-white/30 text-xs uppercase tracking-widest block mb-0.5">{t.footer.role_sales}</span>
                 Alžběta Grée{" "}
                 <a
                   href="tel:+420777668694"
@@ -134,7 +134,7 @@ export default async function Footer() {
                 </a>
               </li>
               <li className="text-white/60">
-                <span className="text-white/30 text-xs uppercase tracking-widest block mb-0.5">Founder</span>
+                <span className="text-white/30 text-xs uppercase tracking-widest block mb-0.5">{t.footer.role_founder}</span>
                 Michal Halačka{" "}
                 <a
                   href="tel:+420774297349"

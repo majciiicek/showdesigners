@@ -69,11 +69,6 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <head>
-        {/* hreflang — reciprocal across all three domains */}
-        <link rel="alternate" hrefLang="cs" href="https://showdesigners.cz" />
-        <link rel="alternate" hrefLang="en" href="https://theshowdesigners.com" />
-        <link rel="alternate" hrefLang="de" href="https://showdesigners.de" />
-        <link rel="alternate" hrefLang="x-default" href="https://theshowdesigners.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
