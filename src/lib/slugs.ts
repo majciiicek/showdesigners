@@ -30,6 +30,33 @@ export function getAlternateUrls(pageKey: string, locale: Locale) {
   }
 }
 
+// Returns the canonical URL and hreflang alternates for a reference detail page.
+// Uses locale-specific slug variants from the Sanity document.
+export function getReferenceAlternateUrls(
+  ref: { slug: { current: string }; slugEn?: { current: string }; slugDe?: { current: string } },
+  locale: Locale
+) {
+  const csSlug  = ref.slug.current
+  const enSlug  = ref.slugEn?.current ?? csSlug
+  const deSlug  = ref.slugDe?.current ?? csSlug
+
+  const csUrl = `${DOMAIN_MAP.cs}/${SLUG_MAP.reference.cs}/${csSlug}`
+  const enUrl = `${DOMAIN_MAP.en}/${SLUG_MAP.reference.en}/${enSlug}`
+  const deUrl = `${DOMAIN_MAP.de}/${SLUG_MAP.reference.de}/${deSlug}`
+
+  const canonical = locale === 'en' ? enUrl : locale === 'de' ? deUrl : csUrl
+
+  return {
+    canonical,
+    languages: {
+      cs:          csUrl,
+      en:          enUrl,
+      de:          deUrl,
+      'x-default': enUrl,
+    },
+  }
+}
+
 // Returns the canonical URL and hreflang alternates for the homepage.
 export function getHomeAlternateUrls(locale: Locale) {
   return {
