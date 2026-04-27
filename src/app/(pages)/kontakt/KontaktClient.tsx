@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import ContactForm, { type FormText } from "@/components/sections/ContactForm";
 import AiChat, { type ChatText } from "@/components/ui/AiChat";
+import { trackEvent } from "@/lib/gtm";
 
 type Mode = "form" | "ai";
 
@@ -88,7 +89,7 @@ export default function KontaktClient({
             {/* Toggle */}
             <div className="flex items-center gap-1 bg-white/5 rounded-sm p-1 self-start">
               <button
-                onClick={() => setMode("ai")}
+                onClick={() => { setMode("ai"); trackEvent("contact_mode_toggle", { contact_mode: "ai" }); }}
                 className={`px-5 py-2 text-sm font-medium rounded-sm transition-all duration-200 ${
                   mode === "ai"
                     ? "bg-[#C8D400] text-black"
@@ -98,7 +99,7 @@ export default function KontaktClient({
                 {text.kontakt_tab_ai}
               </button>
               <button
-                onClick={() => setMode("form")}
+                onClick={() => { setMode("form"); trackEvent("contact_mode_toggle", { contact_mode: "form" }); }}
                 className={`px-5 py-2 text-sm font-medium rounded-sm transition-all duration-200 ${
                   mode === "form"
                     ? "bg-[#C8D400] text-black"

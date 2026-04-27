@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { m, AnimatePresence } from "framer-motion";
+import { trackEvent } from "@/lib/gtm";
 
 export type FormText = {
   form_name_label: string;
@@ -91,6 +92,10 @@ export default function ContactForm({ text, privacyHref }: { text: FormText; pri
         body: JSON.stringify(data),
       });
       if (res.ok) {
+        trackEvent("contact_form_submit", {
+          form_event_type: data.eventType,
+          form_budget: data.budget || "not_specified",
+        });
         setStatus("success");
         reset();
       } else {

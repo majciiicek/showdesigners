@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { m, AnimatePresence } from "framer-motion";
+import { trackEvent } from "@/lib/gtm";
 
 // ---------------------------------------------------------------------------
 // Data
@@ -141,6 +142,7 @@ export default function HeroSection({ text, ctaHref }: { text: HeroText; ctaHref
 
   useEffect(() => {
     if (isComplete) {
+      trackEvent("hero_puzzle_complete");
       const t = setTimeout(() => setShowCompletion(true), 750);
       return () => clearTimeout(t);
     }
@@ -275,7 +277,7 @@ export default function HeroSection({ text, ctaHref }: { text: HeroText; ctaHref
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 2.2 }}
-                onClick={() => setShowCompletion(true)}
+                onClick={() => { trackEvent("hero_puzzle_skipped"); setShowCompletion(true); }}
                 className="mt-5 px-5 py-2 rounded-sm border border-white/20 text-white/60 text-xs font-medium hover:border-white/50 hover:text-white/90 transition-all duration-200 pointer-events-auto"
               >
                 {text.hero_skip}

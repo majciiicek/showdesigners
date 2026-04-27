@@ -7,6 +7,7 @@ import type { SanityReference } from "@/sanity/lib/queries";
 import { getLocalizedSlug } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { translateTag, translateType, type Locale } from "@/lib/i18n";
+import { trackEvent } from "@/lib/gtm";
 
 const typeColors: Record<string, string> = {
   "Korporátní akce": "bg-blue-700/75 text-white backdrop-blur-sm",
@@ -48,7 +49,7 @@ export default function ReferencesGrid({ references, text, locale }: Props) {
         {allTypes.map((type) => (
           <button
             key={type}
-            onClick={() => { setActive(type); setShowAll(false); }}
+            onClick={() => { setActive(type); setShowAll(false); trackEvent("reference_filter_click", { filter_value: type }); }}
             className={`text-sm px-4 py-2 rounded-full border transition-all duration-200 ${
               active === type
                 ? "bg-[#C8D400] text-black border-[#C8D400] font-semibold"
@@ -124,7 +125,7 @@ export default function ReferencesGrid({ references, text, locale }: Props) {
       {hasMore && (
         <div className="mt-12 flex justify-center">
           <button
-            onClick={() => setShowAll(true)}
+            onClick={() => { setShowAll(true); trackEvent("reference_load_more"); }}
             className="border border-white/15 text-white/60 hover:text-white hover:border-white/30 text-sm px-8 py-3 rounded-full transition-all duration-200"
           >
             {text.load_more}

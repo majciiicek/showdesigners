@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { trackEvent } from "@/lib/gtm";
 
 interface NavLink {
   href: string;
@@ -100,7 +101,7 @@ export default function Nav({ links, ctaLabel, ctaHref }: NavProps) {
           <button
             aria-label={menuOpen ? "Zavřít menu" : "Otevřít menu"}
             aria-expanded={menuOpen}
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => { trackEvent("mobile_menu_toggle", { menu_state: menuOpen ? "closed" : "opened" }); setMenuOpen(!menuOpen); }}
             className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5"
           >
             <span

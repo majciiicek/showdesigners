@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { getReferenceBySlug, getReferencesSlugs, getAllReferences, getLocalizedSlug } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import RelatedRefsScroll from "@/components/ui/RelatedRefsScroll";
+import ReferenceViewTracker from "@/components/ui/ReferenceViewTracker";
 import { getLocale } from "@/lib/locale";
 import { getPageTranslations } from "@/lib/page-translations";
 import { SLUG_MAP, getReferenceAlternateUrls } from "@/lib/slugs";
@@ -67,6 +68,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
   }
 
   const localTitle = loc(ref as unknown as Record<string, string | undefined>, "title");
+  const localType = translateType(ref.type, locale);
 
   const relatedRefs = allReferences
     .filter((ref2) => ref2.slug.current !== slug && ref2.hasDetail)
@@ -105,6 +107,7 @@ export default async function ReferenceDetailPage({ params }: Props) {
 
   return (
     <>
+      <ReferenceViewTracker title={localTitle} type={localType} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
