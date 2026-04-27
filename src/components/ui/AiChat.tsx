@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { m, AnimatePresence } from "framer-motion";
+import { trackEvent } from "@/lib/gtm";
 
 interface Message {
   role: "user" | "assistant";
@@ -151,6 +152,7 @@ export default function AiChat({
     setIsLoading(true);
     setError(null);
     scrollToChat();
+    trackEvent("ai_chat_session_started", { chat_type: "new" });
 
     try {
       await streamMessage([], "Ahoj", token);
@@ -165,6 +167,7 @@ export default function AiChat({
     setIsLoading(true);
     setError(null);
     scrollToChat();
+    trackEvent("ai_chat_session_started", { chat_type: "returning" });
 
     const completedMessages = messages.filter((m) => m.content !== "");
     const nameHint = knownName ? ` Klient se jmenuje ${knownName}.` : "";
@@ -263,6 +266,7 @@ export default function AiChat({
 
       if (inquirySignalReceived) {
         setInquirySent(true);
+        trackEvent("ai_chat_inquiry_sent");
       }
     } catch (err) {
       const message = err instanceof Error ? err.message : "Unexpected error.";
@@ -277,6 +281,9 @@ export default function AiChat({
   async function handleSend() {
     const trimmed = input.trim();
     if (!trimmed || isLoading || inquirySent) return;
+
+    const userMsgCount = messages.filter((m) => m.role === "user").length + 1;
+    trackEvent("ai_chat_message_sent", { chat_message_count: userMsgCount });
 
     const currentMessages = messages.filter((m) => m.content !== "");
     setInput("");

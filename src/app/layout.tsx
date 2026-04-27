@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { GoogleTagManager } from "@next/third-parties/google";
+import GtmConsentInit from "@/components/ui/GtmConsentInit";
 import NavServer from "@/components/ui/NavServer";
 import Footer from "@/components/ui/Footer";
 import CookieBanner from "@/components/ui/CookieBanner";
@@ -75,6 +77,8 @@ export default async function RootLayout({
         />
       </head>
       <body className={`${bebasNeue.variable} ${inter.variable} antialiased`}>
+        <GtmConsentInit locale={locale} />
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
         <MotionProvider>
           <NavServer />
           <main>{children}</main>

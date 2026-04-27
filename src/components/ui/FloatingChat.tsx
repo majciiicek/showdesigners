@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import AiChat, { type ChatText } from "./AiChat";
+import { trackEvent } from "@/lib/gtm";
 
 const AUTO_OPEN_KEY = "sd_chat_auto_opened";
 
@@ -45,6 +46,7 @@ export default function FloatingChat({ text, chatText, locale = "cs" }: { text: 
 
     const t = setTimeout(() => {
       setIsOpen(true);
+      trackEvent("ai_chat_opened", { chat_trigger: "auto_open" });
       try { sessionStorage.setItem(AUTO_OPEN_KEY, "1"); } catch { /* ignore */ }
     }, 20000);
 
@@ -107,7 +109,12 @@ export default function FloatingChat({ text, chatText, locale = "cs" }: { text: 
 
       {/* FAB toggle button */}
       <m.button
-        onClick={() => setIsOpen((v) => !v)}
+        onClick={() => {
+          setIsOpen((v) => {
+            if (!v) trackEvent("ai_chat_opened", { chat_trigger: "fab_click" });
+            return !v;
+          });
+        }}
         aria-label={isOpen ? text.floating_close_aria : text.floating_open_aria}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}

@@ -28,6 +28,7 @@ export default function CookieBanner({ text, privacyHref }: { text: CookieText; 
     localStorage.setItem(STORAGE_KEY, value);
     setVisible(false);
     window.dispatchEvent(new CustomEvent("sd-cookie-banner", { detail: false }));
+    window.dispatchEvent(new CustomEvent("sd-consent-update", { detail: value }));
   };
 
   const accept = () => dismiss("accepted");
